@@ -1,5 +1,4 @@
 #include "Size.h"
-#include "define.h"
 
 Size::Size()
 	:m_Width(0) , m_Height(0)

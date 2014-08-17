@@ -6,14 +6,19 @@ DataType >> Rect
 
 @작성자: 김연우
 @작성일: 14-8-17
-@최종 수정자:
-@최종 수정일:
-@최종 수정사유:
+@최종 수정자: 남현욱
+@최종 수정일: 14-8-17
+@최종 수정사유: 헤더 꼬임 문제 수정
 
 */
 
 #pragma once
+<<<<<<< HEAD
 #include "define.h"
+=======
+>>>>>>> origin/master
+#include "Point.h"
+#include "Size.h"
 
 class Rect
 {
