@@ -13,7 +13,7 @@ DataType >> Size
 */
 
 #pragma once
-#include "Rect.h"
+#include "define.h"
 
 class Size
 {

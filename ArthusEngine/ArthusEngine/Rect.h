@@ -13,8 +13,7 @@ DataType >> Rect
 */
 
 #pragma once
-#include "Point.h"
-#include "Size.h"
+#include "define.h"
 
 class Rect
 {
