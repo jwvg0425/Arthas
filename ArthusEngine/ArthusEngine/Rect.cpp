@@ -1,5 +1,4 @@
 #include "Rect.h"
-#include "define.h"
 
 Rect::Rect()
 	:m_Left(0.f) , m_Top(0.f) , m_Right(0.f) , m_Bottom(0.f)

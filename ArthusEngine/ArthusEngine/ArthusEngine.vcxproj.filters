@@ -1,45 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{d6fd58f3-15bf-403a-a4e3-a2c8a060aafb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="DataType">
+    <Filter Include="Framework\DataType">
       <UniqueIdentifier>{e4e9f4f1-e9f6-415f-908f-e65f6945e215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\DataType\Point">
+      <UniqueIdentifier>{6d002f25-ca4a-446c-9fab-60b66df434c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\DataType\Rect">
+      <UniqueIdentifier>{20c1c76d-2159-4e5c-8505-a3cdb250f6a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\DataType\Size">
+      <UniqueIdentifier>{b4365fa4-e650-4961-bf86-e2e7e7e4cf78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Point.cpp">
-      <Filter>DataType</Filter>
+      <Filter>Framework\DataType\Point</Filter>
     </ClCompile>
     <ClCompile Include="Rect.cpp">
-      <Filter>DataType</Filter>
+      <Filter>Framework\DataType\Rect</Filter>
     </ClCompile>
     <ClCompile Include="Size.cpp">
-      <Filter>DataType</Filter>
+      <Filter>Framework\DataType\Size</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">
-      <Filter>DataType</Filter>
+      <Filter>Framework\DataType\Point</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">
-      <Filter>DataType</Filter>
-    </ClInclude>
-    <ClInclude Include="define.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Framework\DataType\Rect</Filter>
     </ClInclude>
     <ClInclude Include="Size.h">
-      <Filter>DataType</Filter>
+      <Filter>Framework\DataType\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

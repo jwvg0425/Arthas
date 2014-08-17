@@ -1,5 +1,4 @@
 #include "Point.h"
-#include "define.h"
 
 Point::Point()
 	:m_PointX(0.f) , m_PointY(0.f)
