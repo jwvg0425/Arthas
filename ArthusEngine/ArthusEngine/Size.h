@@ -13,12 +13,8 @@ DataType >> Size
 */
 
 #pragma once
-<<<<<<< HEAD
 #include "define.h"
 class Rect;
-=======
-#include "Rect.h"
->>>>>>> origin/master
 
 class Size
 {

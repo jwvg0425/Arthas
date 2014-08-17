@@ -13,10 +13,7 @@ DataType >> Rect
 */
 
 #pragma once
-<<<<<<< HEAD
 #include "define.h"
-=======
->>>>>>> origin/master
 #include "Point.h"
 #include "Size.h"
 
