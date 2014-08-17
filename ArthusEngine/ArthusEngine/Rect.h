@@ -22,7 +22,7 @@ class Rect
 public:
 	Rect();
 	Rect( Point _head , Point _tail );
-	Rect( const Rect& that );
+	Rect( const Rect& rt );
 	~Rect();
 
 	Point GetHead() const { return m_Head; }
@@ -30,6 +30,9 @@ public:
 	void SetHead(const Point& pos) { m_Head = pos; }
 	void SetTail(const Point& pos) { m_Tail = pos; }
 	void SetRect( const Point& _head , const Point& _tail );
+
+	void operator=( const Rect& rt );
+	bool operator==( const Rect& rt );
 
 	//어떤 Point가 영역 안에 있는지를 확인
 	bool IsIn(const Point& pos);

@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <math.h>
-#include "Point.h"  // 여기 데이터 타입 그냥 인클루드해도되나??
+#include "Point.h"
+#include "Rect.h"
 
 /* 
 데이터 타입들은 헤더파일에서도 자유롭게 쓰고싶은데 그러면

@@ -27,6 +27,17 @@ void Rect::SetRect( const Point& _head , const Point& _tail )
 	SetTail( _tail );
 }
 
+
+void Rect::operator=( const Rect& rt )
+{
+	SetRect( rt.GetHead() , rt.GetTail() );
+}
+
+bool Rect::operator==( const Rect& rt )
+{
+	return ( m_Head == rt.GetHead() && m_Tail == rt.GetTail() );
+}
+
 Point Rect::GetCenter()
 {
 	return m_Head.GetCenter( m_Tail );
@@ -34,8 +45,10 @@ Point Rect::GetCenter()
 
 double Rect::GetSquare()
 {
-	return abs(( m_Tail.GetPosX() - m_Head.GetPosX() )
-				*( m_Tail.GetPosY() - m_Head.GetPosY() ));
+	return abs(
+		( m_Tail.GetPosX() - m_Head.GetPosX() )
+		*( m_Tail.GetPosY() - m_Head.GetPosY() )
+		);
 }
 
 bool Rect::IsIn( const Point& pos )
