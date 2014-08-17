@@ -26,7 +26,7 @@ Point::~Point()
 
 void Point::SetPosX( double _x )
 {
-	if( _x > 0 )
+	if( _x >= 0.f )
 	{
 		m_PosX = _x;
 	}
@@ -38,7 +38,7 @@ void Point::SetPosX( double _x )
 
 void Point::SetPosY( double _y )
 {
-	if( _y > 0 )
+	if( _y >= 0.f )
 	{
 		m_PosY = _y;
 	}
@@ -66,7 +66,7 @@ void Point::operator=( const Point& that )
 
 bool Point::operator==( const Point& that )
 {
-	return ( that.GetPosX == m_PosX && that.GetPosY() == m_PosY );
+	return ( m_PosX == that.GetPosX() && m_PosY == that.GetPosY() );
 }
 
 double Point::GetDistance( Point& that )
