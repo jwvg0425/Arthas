@@ -67,12 +67,10 @@ bool Rect::Contains( const Rect& _rect )
 			 m_Right >= _rect.GetRight() && m_Bottom >= _rect.GetBottom() );
 }
 
-
-bool Rect::operator=( const Rect& _rect )
+void Rect::operator=( const Rect& _rect )
 {
 	SetRect( _rect );
 }
-
 
 bool Rect::operator==( const Rect& _rect )
 {

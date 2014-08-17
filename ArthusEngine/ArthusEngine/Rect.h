@@ -45,14 +45,11 @@ public:
 	void	SetRect( const Point& _point , const Size& _size );
 	void	SetRect( const Rect& _rect );
 
-	//공간 없는 Empty체크
 	bool	IsEmpty() { return (GetWidth() == 0 && GetHeight() == 0); }
-	//인자들이 사각형 안에 있는지 체크
 	bool	Contains( double _pointX , double _pointY );
 	bool	Contains( const Point& _point );
 	bool	Contains( const Rect& _rect );
-	//연산자 = 대입 == 같은지 체크
-	void	operator=( const Rect& _rect ){ SetRect(_rect); }
+	void	operator=( const Rect& _rect );
 	bool	operator==( const Rect& _rect );
 
 private:

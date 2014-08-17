@@ -34,12 +34,12 @@ void Size::operator=( const Size& _size )
 
 bool Size::operator>( const Size& _size )
 {
-	return (SquareBySize() > _size.SquareBySize());
+	return ( GetSquare() > _size.GetSquare() );
 }
 
 bool Size::operator<( const Size& _size )
 {
-	return ( SquareBySize() < _size.SquareBySize() );
+	return ( GetSquare() < _size.GetSquare() );
 }
 
 bool Size::operator==( const Size& _size )

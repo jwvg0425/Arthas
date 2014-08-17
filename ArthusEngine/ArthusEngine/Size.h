@@ -11,6 +11,7 @@ DataType >> Size
 @최종 수정사유:
 
 */
+
 #pragma once
 #include "define.h"
 

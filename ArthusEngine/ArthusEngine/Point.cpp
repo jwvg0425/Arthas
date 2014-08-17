@@ -100,5 +100,5 @@ double Point::GetAngleRadian( const Point& _point )
 
 double Point::GetAngleDegree( const Point& _point )
 {
-	return GetAngleRadian( _point ) * 180 / M_PI;
+	return GetAngleRadian( _point ) * 180 / PI;
 }
