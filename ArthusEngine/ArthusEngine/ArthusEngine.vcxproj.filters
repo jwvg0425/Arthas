@@ -24,6 +24,9 @@
     <ClCompile Include="Rect.cpp">
       <Filter>DataType</Filter>
     </ClCompile>
+    <ClCompile Include="Size.cpp">
+      <Filter>DataType</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="define.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>DataType</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

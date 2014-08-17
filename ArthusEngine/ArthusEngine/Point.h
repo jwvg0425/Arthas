@@ -20,27 +20,31 @@ class Point
 public:
 	Point();
 	Point(double _x, double _y);
-	Point( const Point& that );
+	Point( const Point& _point );
 	~Point();
 	
-	double	GetPosX() const {return m_PosX;}
-	double	GetPosY() const {return m_PosY;}
+	double	GetPosX() const {return m_PointX;}
+	double	GetPosY() const {return m_PointY;}
 	void	SetPosX( double _x );
 	void	SetPosY( double _y );
 	void	SetPoint( double _x , double _y );
 
-	Point	operator+( const Point& that );
-	void	operator=( const Point& that );
-	bool	operator==( const Point& that );
+	Point	operator+( const Point& _point );
+	void	operator=( const Point& _point );
+	bool	operator==( const Point& _point );
 
 	//다른 점과의 거리를 리턴
-	double	GetDistance( const Point& that );
-
+	double	GetDistance( const Point& _point );
 	//다른 점과의 중점을 리턴
-	Point	GetCenter( const Point& that );
+	Point	GetCenter( const Point& _point );
+	//다른 점과의 각도(라디안)를 리턴
+	double	GetAngleRadian( const Point& _point );
+	//다른 점과의 각도(Degree)를 리턴
+	double	GetAngleDegree( const Point& _point );
+
 
 private:
-	double m_PosX;
-	double m_PosY;
+	double m_PointX;
+	double m_PointY;
 };
 

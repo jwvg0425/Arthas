@@ -2,6 +2,7 @@
 #include <iostream>
 #include <math.h>
 #include "Point.h"
+#include "Size.h"
 #include "Rect.h"
 
 /* 

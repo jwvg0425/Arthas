@@ -1,73 +1,83 @@
 #include "Rect.h"
-#include "Point.h"
+#include "define.h"
 
 Rect::Rect()
+	:m_Left(0.f) , m_Top(0.f) , m_Right(0.f) , m_Bottom(0.f)
 {
-	Point stdPos( 0.f , 0.f );
-	SetRect( stdPos , stdPos );
 }
 
-Rect::Rect( Point _head , Point _tail )
+Rect::Rect( double _pointX , double _pointY , double _width , double _height )
 {
-	SetRect( _head , _tail );
+	SetRect( _pointX , _pointY , _width , _height );
 }
 
-Rect::Rect( const Rect& that )
+Rect::Rect( const Point& _point , const Size& _size )
 {
-	SetRect( that.GetHead() , that.GetTail() );
+	SetRect( _point , _size );
+}
+
+Rect::Rect( const Rect& _rect )
+{
+	SetRect( _rect );
 }
 
 Rect::~Rect()
 {
 }
 
-void Rect::SetRect( const Point& _head , const Point& _tail )
+void Rect::SetRect( double _pointX , double _pointY , double _width , double _height )
 {
-	SetHead( _head );
-	SetTail( _tail );
+	SetLeft( _pointX );
+	SetTop( _pointY );
+	SetRight( m_Left + _width );
+	SetBottom( m_Top + _height );
+}
+
+void Rect::SetRect( const Point& _point , const Size& _size )
+{
+	SetLeft( _point.GetPosX() );
+	SetTop( _point.GetPosY() );
+	SetRight( m_Left + _size.GetWidth() );
+	SetBottom( m_Top + _size.GetHeigth() );
+}
+
+void Rect::SetRect( const Rect& _rect )
+{
+	m_Left = _rect.GetLeft();
+	m_Right = _rect.GetRight();
+	m_Top = _rect.GetTop();
+	m_Bottom = _rect.GetBottom();
+}
+
+bool Rect::Contains( double _pointX , double _pointY )
+{
+	return ( m_Left <= _pointX && m_Right >= _pointX &&
+			 m_Top <= _pointY && m_Bottom >= _pointY );
+}
+
+bool Rect::Contains( const Point& _point )
+{
+	return ( m_Left <= _point.GetPosX() && m_Right >= _point.GetPosX() &&
+			 m_Top <= _point.GetPosY() && m_Bottom >= _point.GetPosY() );
+}
+
+bool Rect::Contains( const Rect& _rect )
+{
+	return ( m_Left <= _rect.GetLeft() && m_Top <= _rect.GetTop() &&
+			 m_Right >= _rect.GetRight() && m_Bottom >= _rect.GetBottom() );
 }
 
 
-void Rect::operator=( const Rect& rt )
+bool Rect::operator=( const Rect& _rect )
 {
-	SetRect( rt.GetHead() , rt.GetTail() );
+	SetRect( _rect );
 }
 
-bool Rect::operator==( const Rect& rt )
+
+bool Rect::operator==( const Rect& _rect )
 {
-	return ( m_Head == rt.GetHead() && m_Tail == rt.GetTail() );
+	return ( m_Left == _rect.GetLeft() && m_Top == _rect.GetTop() &&
+			 m_Right == _rect.GetRight() && m_Bottom == _rect.GetBottom() );
 }
 
-Point Rect::GetCenter()
-{
-	return m_Head.GetCenter( m_Tail );
-}
-
-double Rect::GetSquare()
-{
-	return abs(
-		( m_Tail.GetPosX() - m_Head.GetPosX() )
-		*( m_Tail.GetPosY() - m_Head.GetPosY() )
-		);
-}
-
-bool Rect::IsIn( const Point& pos )
-{
-	return (
-		pos.GetPosX() > m_Head.GetPosX() &&
-		pos.GetPosX() < m_Tail.GetPosX() &&
-		pos.GetPosY() > m_Head.GetPosY() &&
-		pos.GetPosY() < m_Tail.GetPosY()
-		);
-}
-
-bool Rect::IsOverLaped( const Rect& rt )
-{
-	return (
-		rt.GetHead().GetPosX() < m_Tail.GetPosX() &&
-		rt.GetHead().GetPosX() > m_Head.GetPosX() &&
-		rt.GetTail().GetPosY() < m_Tail.GetPosY() &&
-		rt.GetTail().GetPosY() > m_Head.GetPosY()
-		);
-}
 
