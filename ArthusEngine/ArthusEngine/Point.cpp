@@ -1,6 +1,4 @@
 #include "Point.h"
-#include <iostream>
-#include <math.h>
 
 Point::Point()
 	:m_PosX(0.f) , m_PosY(0.f)
@@ -13,10 +11,10 @@ Point::Point( double _x , double _y )
 	SetPosY( _y );
 }
 
-Point::Point( const Point& point )
+Point::Point( const Point& that )
 {
-	SetPosX( point.GetPosX() );
-	SetPosY( point.GetPosY() );
+	SetPosX( that.GetPosX() );
+	SetPosY( that.GetPosY() );
 }
 
 
@@ -48,20 +46,27 @@ void Point::SetPosY( double _y )
 	}
 }
 
+
+void Point::SetPoint( double _x , double _y )
+{
+	SetPosX( _x );
+	SetPosY( _y );
+}
+
+
 Point Point::operator+( const Point& that )
 {
 	Point resultPoint;
 
-	resultPoint.SetPosX( that.GetPosX() + m_PosX );
-	resultPoint.SetPosY( that.GetPosY() + m_PosY );
+	resultPoint.SetPosX( m_PosX + that.GetPosX() );
+	resultPoint.SetPosY( m_PosY + that.GetPosY() );
 
 	return resultPoint;
 }
 
 void Point::operator=( const Point& that )
 {
-	SetPosX( that.GetPosX() );
-	SetPosY( that.GetPosY() );
+	SetPoint( that.GetPosX() ,that.GetPosY() );
 }
 
 bool Point::operator==( const Point& that )
@@ -69,7 +74,17 @@ bool Point::operator==( const Point& that )
 	return ( m_PosX == that.GetPosX() && m_PosY == that.GetPosY() );
 }
 
-double Point::GetDistance( Point& that )
+double Point::GetDistance( const Point& that )
 {
 	return sqrt( pow( m_PosX - that.GetPosX() , 2 ) + pow( m_PosY - that.GetPosY() , 2 ) );
+}
+
+Point Point::GetCenter( const Point& that )
+{
+	Point resultPoint;
+	resultPoint.SetPoint(
+		( m_PosX + that.GetPosX() ) / 2 ,
+		( m_PosY + that.GetPosY() ) / 2
+		);
+	return resultPoint;
 }
