@@ -19,7 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Application.cpp" />
     <ClCompile Include="AEPoint.cpp">
       <Filter>Framework\DataType\Point</Filter>
     </ClCompile>
@@ -29,6 +28,7 @@
     <ClCompile Include="AESize.cpp">
       <Filter>Framework\DataType\Size</Filter>
     </ClCompile>
+    <ClCompile Include="AEApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AEPoint.h">

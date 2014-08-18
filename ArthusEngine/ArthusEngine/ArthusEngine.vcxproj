@@ -85,7 +85,7 @@
     <ClInclude Include="AESize.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AEApplication.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AEPoint.cpp" />
     <ClCompile Include="AERect.cpp" />
