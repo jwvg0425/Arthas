@@ -11,9 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{18D5F784-F455-4CC5-A837-308C89CE3CC5}</ProjectGuid>
+    <ProjectGuid>{EA26C16D-1556-4002-B4DB-0C2596750622}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ArthusEngine</RootNamespace>
+    <RootNamespace>ArthasEngine</RootNamespace>
+    <ProjectName>ArthasEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
