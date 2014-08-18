@@ -13,15 +13,15 @@
 */
 
 #pragma once
-#include "define.h"
+#include "AEDefine.h"
 
-class Point
+class AEPoint
 {
 public:
-	Point();
-	Point(double _x, double _y);
-	Point( const Point& _point );
-	~Point();
+	AEPoint();
+	AEPoint(double _x, double _y);
+	AEPoint( const AEPoint& _point );
+	~AEPoint();
 	
 	double	GetPosX() const {return m_PointX;}
 	double	GetPosY() const {return m_PointY;}
@@ -29,18 +29,18 @@ public:
 	void	SetPosY( double _y );
 	void	SetPoint( double _x , double _y );
 
-	Point	operator+( const Point& _point );
-	void	operator=( const Point& _point );
-	bool	operator==( const Point& _point );
+	AEPoint	operator+( const AEPoint& _point );
+	void	operator=( const AEPoint& _point );
+	bool	operator==( const AEPoint& _point );
 
 	//다른 점과의 거리를 리턴
-	double	GetDistance( const Point& _point );
+	double	GetDistance( const AEPoint& _point );
 	//다른 점과의 중점을 리턴
-	Point	GetCenter( const Point& _point );
+	AEPoint	GetCenter( const AEPoint& _point );
 	//다른 점과의 각도(라디안)를 리턴
-	double	GetAngleRadian( const Point& _point );
+	double	GetAngleRadian( const AEPoint& _point );
 	//다른 점과의 각도(Degree)를 리턴
-	double	GetAngleDegree( const Point& _point );
+	double	GetAngleDegree( const AEPoint& _point );
 
 
 private:

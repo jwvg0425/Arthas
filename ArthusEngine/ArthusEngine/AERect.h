@@ -13,19 +13,19 @@ DataType >> Rect
 */
 
 #pragma once
-#include "define.h"
-#include "Point.h"
-#include "Size.h"
+#include "AEDefine.h"
+#include "AEPoint.h"
+#include "AESize.h"
 
-class Rect
+class AERect
 {
 public:
-	Rect();
-	Rect( double _pointX , double _pointY , 
+	AERect();
+	AERect( double _pointX , double _pointY , 
 		  double _width , double _height );
-	Rect( const Point& _point , const Size& _size );
-	Rect( const Rect& _rect );
-	~Rect();
+	AERect( const AEPoint& _point , const AESize& _size );
+	AERect( const AERect& _rect );
+	~AERect();
 
 	double	GetLeft() const { return m_Left; }
 	double	GetRight() const { return m_Right; }
@@ -33,8 +33,8 @@ public:
 	double	GetBottom() const { return m_Bottom; }
 	double	GetWidth() const { return abs(m_Right - m_Left); }
 	double	GetHeight() const { return abs(m_Bottom - m_Top); }
-	Point	GetPoint() const { return Point(m_Left, m_Top); } //최초 Point
-	Size	GetSize() const { return Size(GetWidth(), GetHeight()); } //사이즈
+	AEPoint	GetPoint() const { return AEPoint(m_Left, m_Top); } //최초 Point
+	AESize	GetSize() const { return AESize(GetWidth(), GetHeight()); } //사이즈
 	double	GetSquare() const { return GetHeight()*GetWidth(); } //넓이
 
 	void	SetLeft(double _left) { m_Left = _left; }
@@ -44,15 +44,15 @@ public:
 	
 	void	SetRect( double _pointX , double _pointY ,
 					 double _width , double _height );
-	void	SetRect( const Point& _point , const Size& _size );
-	void	SetRect( const Rect& _rect );
+	void	SetRect( const AEPoint& _point , const AESize& _size );
+	void	SetRect( const AERect& _rect );
 
 	bool	IsEmpty() { return (GetWidth() == 0 && GetHeight() == 0); }
 	bool	Contains( double _pointX , double _pointY );
-	bool	Contains( const Point& _point );
-	bool	Contains( const Rect& _rect );
-	void	operator=( const Rect& _rect );
-	bool	operator==( const Rect& _rect );
+	bool	Contains( const AEPoint& _point );
+	bool	Contains( const AERect& _rect );
+	void	operator=( const AERect& _rect );
+	bool	operator==( const AERect& _rect );
 
 private:
 	double	m_Left;

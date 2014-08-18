@@ -18,27 +18,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Point.cpp">
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AEPoint.cpp">
       <Filter>Framework\DataType\Point</Filter>
     </ClCompile>
-    <ClCompile Include="Rect.cpp">
+    <ClCompile Include="AERect.cpp">
       <Filter>Framework\DataType\Rect</Filter>
     </ClCompile>
-    <ClCompile Include="Size.cpp">
+    <ClCompile Include="AESize.cpp">
       <Filter>Framework\DataType\Size</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Point.h">
+    <ClInclude Include="AEPoint.h">
       <Filter>Framework\DataType\Point</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
+    <ClInclude Include="AERect.h">
       <Filter>Framework\DataType\Rect</Filter>
     </ClInclude>
-    <ClInclude Include="Size.h">
+    <ClInclude Include="AESize.h">
       <Filter>Framework\DataType\Size</Filter>
     </ClInclude>
-    <ClInclude Include="define.h" />
+    <ClInclude Include="AEDefine.h" />
+    <ClInclude Include="AEApplication.h" />
   </ItemGroup>
 </Project>

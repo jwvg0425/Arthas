@@ -1,63 +1,63 @@
-#include "Size.h"
+#include "AESize.h"
 
-Size::Size()
+AESize::AESize()
 	:m_Width(0) , m_Height(0)
 {
 }
 
-Size::Size( double _width , double _height )
+AESize::AESize( double _width , double _height )
 {
 	SetWidth( _width );
 	SetHeigth( _height );
 }
 
-Size::Size( const Size& _size )
+AESize::AESize( const AESize& _size )
 {
 	SetWidth( _size.GetWidth() );
 	SetHeigth( _size.GetHeigth() );
 }
 
-Size::Size( const Rect& _rect )
+AESize::AESize( const AERect& _rect )
 {
 }
 
 
-Size::~Size()
+AESize::~AESize()
 {
 }
 
-void Size::operator=( const Size& _size )
+void AESize::operator=( const AESize& _size )
 {
 	SetSize( _size.GetWidth() , _size.GetHeigth() );
 }
 
-bool Size::operator>( const Size& _size )
+bool AESize::operator>( const AESize& _size )
 {
 	return ( GetSquare() > _size.GetSquare() );
 }
 
-bool Size::operator<( const Size& _size )
+bool AESize::operator<( const AESize& _size )
 {
 	return ( GetSquare() < _size.GetSquare() );
 }
 
-bool Size::operator==( const Size& _size )
+bool AESize::operator==( const AESize& _size )
 {
 	return ( m_Width == _size.GetWidth() && 
 			 m_Height == _size.GetHeigth() );
 }
 
-Size Size::operator+( const Size& _size )
+AESize AESize::operator+( const AESize& _size )
 {
-	Size resultSize;
+	AESize resultSize;
 	resultSize.SetSize( m_Width + _size.GetWidth() , 
 						m_Height + _size.GetHeigth() );
 	return resultSize;
 }
 
-Size Size::operator-( const Size& _size )
+AESize AESize::operator-( const AESize& _size )
 {
-	Size resultSize;
+	AESize resultSize;
 	resultSize.SetSize( m_Width - _size.GetWidth() , 
 						m_Height - _size.GetHeigth() );
 	return resultSize;

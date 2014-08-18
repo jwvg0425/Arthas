@@ -13,17 +13,17 @@ DataType >> Size
 */
 
 #pragma once
-#include "define.h"
-class Rect;
+#include "AEDefine.h"
+class AERect;
 
-class Size
+class AESize
 {
 public:
-	Size();
-	Size( double _width , double _height );
-	Size( const Size& _size );
-	Size( const Rect& _rt );
-	~Size();
+	AESize();
+	AESize( double _width , double _height );
+	AESize( const AESize& _size );
+	AESize( const AERect& _rt );
+	~AESize();
 
 	double	GetWidth() const {return m_Width; }
 	double	GetHeigth() const {return m_Height;}
@@ -58,12 +58,12 @@ public:
 	}
 
 	bool	IsEmpty(){ return ( m_Width == 0 && m_Height == 0 ); }
-	bool	operator==( const Size& _size );
-	bool	operator>( const Size& _size );
-	bool	operator<( const Size& _size );
-	Size	operator+( const Size& _size );
-	Size	operator-( const Size& _size );
-	void	operator=( const Size& _size );
+	bool	operator==( const AESize& _size );
+	bool	operator>( const AESize& _size );
+	bool	operator<( const AESize& _size );
+	AESize	operator+( const AESize& _size );
+	AESize	operator-( const AESize& _size );
+	void	operator=( const AESize& _size );
 
 
 private:

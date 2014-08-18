@@ -1,28 +1,28 @@
-#include "Point.h"
+#include "AEPoint.h"
 
-Point::Point()
+AEPoint::AEPoint()
 	:m_PointX(0.f) , m_PointY(0.f)
 {
 }
 
-Point::Point( double _x , double _y )
+AEPoint::AEPoint( double _x , double _y )
 {
 	SetPosX( _x );
 	SetPosY( _y );
 }
 
-Point::Point( const Point& _point )
+AEPoint::AEPoint( const AEPoint& _point )
 {
 	SetPosX( _point.GetPosX() );
 	SetPosY( _point.GetPosY() );
 }
 
 
-Point::~Point()
+AEPoint::~AEPoint()
 {
 }
 
-void Point::SetPosX( double _x )
+void AEPoint::SetPosX( double _x )
 {
 	if( _x >= 0.f )
 	{
@@ -34,7 +34,7 @@ void Point::SetPosX( double _x )
 	}
 }
 
-void Point::SetPosY( double _y )
+void AEPoint::SetPosY( double _y )
 {
 	if( _y >= 0.f )
 	{
@@ -47,16 +47,16 @@ void Point::SetPosY( double _y )
 }
 
 
-void Point::SetPoint( double _x , double _y )
+void AEPoint::SetPoint( double _x , double _y )
 {
 	SetPosX( _x );
 	SetPosY( _y );
 }
 
 
-Point Point::operator+( const Point& _point )
+AEPoint AEPoint::operator+( const AEPoint& _point )
 {
-	Point resultPoint;
+	AEPoint resultPoint;
 
 	resultPoint.SetPosX( m_PointX + _point.GetPosX() );
 	resultPoint.SetPosY( m_PointY + _point.GetPosY() );
@@ -64,24 +64,24 @@ Point Point::operator+( const Point& _point )
 	return resultPoint;
 }
 
-void Point::operator=( const Point& _point )
+void AEPoint::operator=( const AEPoint& _point )
 {
 	SetPoint( _point.GetPosX() ,_point.GetPosY() );
 }
 
-bool Point::operator==( const Point& _point )
+bool AEPoint::operator==( const AEPoint& _point )
 {
 	return ( m_PointX == _point.GetPosX() && m_PointY == _point.GetPosY() );
 }
 
-double Point::GetDistance( const Point& _point )
+double AEPoint::GetDistance( const AEPoint& _point )
 {
 	return sqrt( pow( m_PointX - _point.GetPosX() , 2 ) + pow( m_PointY - _point.GetPosY() , 2 ) );
 }
 
-Point Point::GetCenter( const Point& _point )
+AEPoint AEPoint::GetCenter( const AEPoint& _point )
 {
-	Point resultPoint;
+	AEPoint resultPoint;
 	resultPoint.SetPoint(
 		( m_PointX + _point.GetPosX() ) / 2 ,
 		( m_PointY + _point.GetPosY() ) / 2
@@ -89,7 +89,7 @@ Point Point::GetCenter( const Point& _point )
 	return resultPoint;
 }
 
-double Point::GetAngleRadian( const Point& _point )
+double AEPoint::GetAngleRadian( const AEPoint& _point )
 {
 	return atan2(
 		( _point.GetPosY() - m_PointY ) , 
@@ -97,7 +97,7 @@ double Point::GetAngleRadian( const Point& _point )
 		);
 }
 
-double Point::GetAngleDegree( const Point& _point )
+double AEPoint::GetAngleDegree( const AEPoint& _point )
 {
 	return GetAngleRadian( _point ) * 180 / PI;
 }

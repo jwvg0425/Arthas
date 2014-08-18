@@ -1,5 +1,5 @@
 ﻿#include <windows.h>
-#include "define.h"
+#include "AEDefine.h"
 
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance
