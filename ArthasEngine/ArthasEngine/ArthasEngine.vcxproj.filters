@@ -16,6 +16,9 @@
     <Filter Include="Framework\DataType\Size">
       <UniqueIdentifier>{035148ac-3d0f-47c9-ad98-9f953543e49d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Macro">
+      <UniqueIdentifier>{28215434-5e1d-48f7-89de-adb2e2c29a36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -40,7 +43,12 @@
     <ClInclude Include="AESize.h">
       <Filter>Framework\DataType\Size</Filter>
     </ClInclude>
-    <ClInclude Include="AEDefine.h" />
     <ClInclude Include="AEApplication.h" />
+    <ClInclude Include="AEDefine.h">
+      <Filter>Framework\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="AEInclude.h">
+      <Filter>Framework\Macro</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ DataType >> Rect
 */
 
 #pragma once
-#include "AEDefine.h"
+#include "AEInclude.h"
 #include "AEPoint.h"
 #include "AESize.h"
 

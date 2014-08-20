@@ -13,7 +13,7 @@ DataType >> Size
 */
 
 #pragma once
-#include "AEDefine.h"
+#include "AEInclude.h"
 class AERect;
 
 class AESize

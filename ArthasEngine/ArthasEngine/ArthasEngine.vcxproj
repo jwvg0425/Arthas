@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="AEApplication.h" />
     <ClInclude Include="AEDefine.h" />
+    <ClInclude Include="AEInclude.h" />
     <ClInclude Include="AEPoint.h" />
     <ClInclude Include="AERect.h" />
     <ClInclude Include="AESize.h" />
