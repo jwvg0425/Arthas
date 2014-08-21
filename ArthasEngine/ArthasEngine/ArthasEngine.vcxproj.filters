@@ -49,6 +49,9 @@
     <ClCompile Include="AEApplication.cpp">
       <Filter>Platform</Filter>
     </ClCompile>
+    <ClCompile Include="TestClass.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AEPoint.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="AEApplication.h">
       <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClass.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 #include "AEObject.h"
 
-
 AEObject::AEObject()
-	:m_Parent(nullptr)
+	:m_Parent( nullptr )
 {
 }
 
@@ -12,31 +11,32 @@ AEObject::~AEObject()
 }
 
 
-void AEObject::RenderAll()
+void AEObject::Render()
 {
-	Render();
 	for( auto child : m_ChildList )
 	{
-		child->RenderAll();
+		child->Render();
 	}
+
+	CustomRender();
 }
 
-void AEObject::UpdateAll()
+void AEObject::Update()
 {
-	Update();
 	for( auto child : m_ChildList )
 	{
-		child->UpdateAll();
+		child->Update();
 	}
+	CustomUpdate();
 }
 
-void AEObject::ClearAll()
+void AEObject::Clear()
 {
 	for( auto child : m_ChildList )
 	{
-		child->ClearAll();
+		child->Clear();
 	}
-	Clear();
+	CustomClear();
 }
 
 void AEObject::SetParent( AEObject* parent )
@@ -65,6 +65,5 @@ void AEObject::DeleteChild( AEObject* child )
 		return;
 	}
 	m_ChildList.remove( child );
-	child->ClearAll();
+	child->Clear();
 }
-
