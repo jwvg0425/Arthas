@@ -19,6 +19,9 @@
     <Filter Include="Framework\Macro">
       <UniqueIdentifier>{28215434-5e1d-48f7-89de-adb2e2c29a36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{97554d82-aebb-4a70-82cb-bdf29f4aded5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

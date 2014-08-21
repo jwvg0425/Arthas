@@ -47,4 +47,3 @@ private:
 	double m_PointX;
 	double m_PointY;
 };
-

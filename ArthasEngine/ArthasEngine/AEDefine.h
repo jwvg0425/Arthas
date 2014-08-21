@@ -14,3 +14,6 @@ inline void SafeDelete( Interface **ppInterfaceToRelease )
 		( *ppInterfaceToRelease ) = NULL;
 	}
 }
+
+//ÀÌ»óÇÑ°Å °Çµå¸®±â
+//²ô¾Ç²ô¾Ç
