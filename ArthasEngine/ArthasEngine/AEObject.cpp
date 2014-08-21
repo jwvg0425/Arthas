@@ -11,36 +11,33 @@ AEObject::~AEObject()
 {
 }
 
-void AEObject::Delete()
+
+void AEObject::Render()
 {
+	for( auto child : m_ChildList )
+	{
+		child->Update();
+	}
+	//Do Detail Render
+}
+
+void AEObject::Update()
+{
+	for( auto child : m_ChildList )
+	{
+		child->Update();
+	}
+	//Do Detail Update 
+}
+
+void AEObject::Clear()
+{
+	for( auto child : m_ChildList )
+	{
+		child->Clear();
+	}
+	//Do Detail Clear
 	m_ChildList.clear();
-}
-
-void AEObject::RenderChildren()
-{
-	for( auto child : m_ChildList )
-	{
-		child->RenderChildren();
-	}
-	Render();
-}
-
-void AEObject::UpdateChildren()
-{
-	for( auto child : m_ChildList )
-	{
-		child->UpdateChildren();
-	}
-	Update();
-}
-
-void AEObject::DeleteChildren()
-{
-	for( auto child : m_ChildList )
-	{
-		child->DeleteChildren();
-	}
-	Delete();
 }
 
 void AEObject::SetParent( AEObject* parent )
@@ -59,5 +56,16 @@ void AEObject::AddChild( AEObject* child )
 		return;
 	}
 	child->SetParent( this );
+	m_ChildList.push_back( child );
+}
+
+void AEObject::DeleteChild( AEObject* child )
+{
+	if( child == nullptr )
+	{
+		return;
+	}
+	m_ChildList.remove( child );
+	child->Clear();
 }
 
