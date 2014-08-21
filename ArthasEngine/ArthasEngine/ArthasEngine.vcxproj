@@ -85,11 +85,13 @@
     <ClInclude Include="AEObject.h" />
     <ClInclude Include="AEPoint.h" />
     <ClInclude Include="AERect.h" />
+    <ClInclude Include="AESceneManager.h" />
     <ClInclude Include="AESize.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AEApplication.cpp" />
     <ClCompile Include="AEObject.cpp" />
+    <ClCompile Include="AESceneManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AEPoint.cpp" />
     <ClCompile Include="AERect.cpp" />

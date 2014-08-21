@@ -21,7 +21,7 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{97554d82-aebb-4a70-82cb-bdf29f4aded5}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
     </Filter>
@@ -40,6 +40,9 @@
     <ClCompile Include="AEApplication.cpp" />
     <ClCompile Include="AEObject.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="AESceneManager.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="AEObject.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="AESceneManager.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
