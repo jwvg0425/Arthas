@@ -19,6 +19,9 @@
     <Filter Include="Framework\Macro">
       <UniqueIdentifier>{28215434-5e1d-48f7-89de-adb2e2c29a36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -32,6 +35,9 @@
       <Filter>Framework\DataType\Size</Filter>
     </ClCompile>
     <ClCompile Include="AEApplication.cpp" />
+    <ClCompile Include="AEObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AEPoint.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="AEInclude.h">
       <Filter>Framework\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="AEObject.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
