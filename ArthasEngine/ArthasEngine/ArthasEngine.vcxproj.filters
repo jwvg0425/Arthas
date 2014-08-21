@@ -21,6 +21,7 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{97554d82-aebb-4a70-82cb-bdf29f4aded5}</UniqueIdentifier>
+	</Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
     </Filter>
