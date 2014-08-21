@@ -2,6 +2,7 @@
 
 
 AEObject::AEObject()
+	:m_Parent(nullptr)
 {
 }
 
@@ -10,17 +11,53 @@ AEObject::~AEObject()
 {
 }
 
-bool AEObject::Render()
+void AEObject::Delete()
 {
-	if( m_ChildList.empty() )
-	{
-		return false;
-	}
+	m_ChildList.clear();
+}
 
+void AEObject::RenderChildren()
+{
 	for( auto child : m_ChildList )
 	{
-		child->Render();
+		child->RenderChildren();
 	}
-
-	return true;
+	Render();
 }
+
+void AEObject::UpdateChildren()
+{
+	for( auto child : m_ChildList )
+	{
+		child->UpdateChildren();
+	}
+	Update();
+}
+
+void AEObject::DeleteChildren()
+{
+	for( auto child : m_ChildList )
+	{
+		child->DeleteChildren();
+	}
+	Delete();
+}
+
+void AEObject::SetParent( AEObject* parent )
+{
+	if( parent == nullptr )
+	{
+		return;
+	}
+	m_Parent = parent;
+}
+
+void AEObject::AddChild( AEObject* child )
+{
+	if( child == nullptr )
+	{
+		return;
+	}
+	child->SetParent( this );
+}
+
