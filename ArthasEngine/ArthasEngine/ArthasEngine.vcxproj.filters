@@ -19,11 +19,14 @@
     <Filter Include="Framework\Macro">
       <UniqueIdentifier>{28215434-5e1d-48f7-89de-adb2e2c29a36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{97554d82-aebb-4a70-82cb-bdf29f4aded5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object">
+    <Filter Include="Framework\Object">
       <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{14ae66e1-5a88-4cc1-98ea-44a020d08476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneManager">
+      <UniqueIdentifier>{97554d82-aebb-4a70-82cb-bdf29f4aded5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,12 +40,14 @@
     <ClCompile Include="AESize.cpp">
       <Filter>Framework\DataType\Size</Filter>
     </ClCompile>
-    <ClCompile Include="AEApplication.cpp" />
     <ClCompile Include="AEObject.cpp">
-      <Filter>Object</Filter>
+      <Filter>Framework\Object</Filter>
     </ClCompile>
     <ClCompile Include="AESceneManager.cpp">
-      <Filter>Scene</Filter>
+      <Filter>SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AEApplication.cpp">
+      <Filter>Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +60,6 @@
     <ClInclude Include="AESize.h">
       <Filter>Framework\DataType\Size</Filter>
     </ClInclude>
-    <ClInclude Include="AEApplication.h" />
     <ClInclude Include="AEDefine.h">
       <Filter>Framework\Macro</Filter>
     </ClInclude>
@@ -63,10 +67,13 @@
       <Filter>Framework\Macro</Filter>
     </ClInclude>
     <ClInclude Include="AEObject.h">
-      <Filter>Object</Filter>
+      <Filter>Framework\Object</Filter>
     </ClInclude>
     <ClInclude Include="AESceneManager.h">
-      <Filter>Scene</Filter>
+      <Filter>SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AEApplication.h">
+      <Filter>Platform</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
