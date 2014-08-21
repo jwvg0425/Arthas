@@ -6,7 +6,7 @@ AEApplication* AEApplication::m_Instance = nullptr;
 AEApplication::AEApplication() 
 	: m_hInstance(nullptr), m_hWnd(nullptr), m_Running(false)
 {
-
+	m_Renderer = new AED2DRenderer();
 }
 
 AEApplication::~AEApplication()
@@ -86,7 +86,8 @@ bool AEApplication::Init(TCHAR* title, int width, int height)
 	CreateWindow_(title, width, height);
 
 	ShowWindow(m_hWnd, SW_SHOWNORMAL);
-	
+	m_Renderer->Init();
+
 	return true;
 }
 

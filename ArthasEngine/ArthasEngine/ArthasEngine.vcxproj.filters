@@ -34,6 +34,9 @@
     <Filter Include="Renderer\D2D">
       <UniqueIdentifier>{d0b082f8-587d-4faa-afeb-341bd4dc1e28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{298ca6d8-3254-415c-8fd2-4530998f8bf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -58,6 +61,9 @@
     <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="AED2DRenderer.cpp">
       <Filter>Renderer\D2D</Filter>
+    </ClCompile>
+    <ClCompile Include="AEBitmap.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="AEMacro.h">
       <Filter>Framework\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="AEBitmap.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

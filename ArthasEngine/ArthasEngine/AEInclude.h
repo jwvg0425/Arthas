@@ -5,6 +5,7 @@
 #include <math.h>
 #include <Windows.h>
 #include <d2d1.h>
+#include <wincodec.h>
 
 #include <iostream>
 #include <list>
