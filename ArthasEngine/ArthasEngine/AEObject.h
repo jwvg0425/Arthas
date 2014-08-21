@@ -1,5 +1,20 @@
+/*
+Object >> AEObject
+
+@Class AEObjec
+->최상위 오브젝트
+
+@작성자: 김연우
+@작성일: 14-8-21
+@최종 수정자: 
+@최종 수정일:
+@최종 수정사유:
+
+*/
+
 #pragma once
 #include "AEInclude.h"
+
 class AEObject
 {
 public:

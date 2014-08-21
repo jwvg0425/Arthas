@@ -19,14 +19,14 @@
     <Filter Include="Framework\Macro">
       <UniqueIdentifier>{28215434-5e1d-48f7-89de-adb2e2c29a36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Object">
-      <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{14ae66e1-5a88-4cc1-98ea-44a020d08476}</UniqueIdentifier>
     </Filter>
     <Filter Include="SceneManager">
       <UniqueIdentifier>{97554d82-aebb-4a70-82cb-bdf29f4aded5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +41,7 @@
       <Filter>Framework\DataType\Size</Filter>
     </ClCompile>
     <ClCompile Include="AEObject.cpp">
-      <Filter>Framework\Object</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="AESceneManager.cpp">
       <Filter>SceneManager</Filter>
@@ -49,9 +49,7 @@
     <ClCompile Include="AEApplication.cpp">
       <Filter>Platform</Filter>
     </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
+    <ClCompile Include="TestClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AEPoint.h">
@@ -70,7 +68,7 @@
       <Filter>Framework\Macro</Filter>
     </ClInclude>
     <ClInclude Include="AEObject.h">
-      <Filter>Framework\Object</Filter>
+      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="AESceneManager.h">
       <Filter>SceneManager</Filter>
@@ -78,8 +76,6 @@
     <ClInclude Include="AEApplication.h">
       <Filter>Platform</Filter>
     </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Object</Filter>
-    </ClInclude>
+    <ClInclude Include="TestClass.h" />
   </ItemGroup>
 </Project>
