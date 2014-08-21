@@ -58,13 +58,17 @@ void AEObject::AddChild( AEObject* child )
 	m_ChildList.push_back( child );
 }
 
-void AEObject::DeleteChild( AEObject* child )
+void AEObject::RemoveChild( AEObject* child , bool isDelete)
 {
 	if( child == nullptr )
 	{
 		return;
 	}
 	m_ChildList.remove( child );
-	child->ClearAll();
+
+	if( isDelete )
+	{
+		child->ClearAll();
+	}
 }
 

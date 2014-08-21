@@ -34,6 +34,7 @@ public:
 	double	GetWidth() const { return abs(m_Right - m_Left); }
 	double	GetHeight() const { return abs(m_Bottom - m_Top); }
 	AEPoint	GetPoint() const { return AEPoint(m_Left, m_Top); } //최초 Point
+	AEPoint GetCenter() const { return AEPoint((m_Left+m_Right)/2, (m_Top+ m_Bottom)/2); }
 	AESize	GetSize() const { return AESize(GetWidth(), GetHeight()); } //사이즈
 	double	GetSquare() const { return GetHeight()*GetWidth(); } //넓이
 

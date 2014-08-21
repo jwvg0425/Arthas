@@ -28,6 +28,12 @@
     <Filter Include="Object">
       <UniqueIdentifier>{fbc358b7-2dec-4e65-9e7f-5be2e5db668f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{300fb85f-fca9-4ada-ad66-e5d300415f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\D2D">
+      <UniqueIdentifier>{d0b082f8-587d-4faa-afeb-341bd4dc1e28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -50,6 +56,9 @@
       <Filter>Platform</Filter>
     </ClCompile>
     <ClCompile Include="TestClass.cpp" />
+    <ClCompile Include="AED2DRenderer.cpp">
+      <Filter>Renderer\D2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AEPoint.h">
@@ -77,5 +86,11 @@
       <Filter>Platform</Filter>
     </ClInclude>
     <ClInclude Include="TestClass.h" />
+    <ClInclude Include="AED2DRenderer.h">
+      <Filter>Renderer\D2D</Filter>
+    </ClInclude>
+    <ClInclude Include="AEMacro.h">
+      <Filter>Framework\Macro</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

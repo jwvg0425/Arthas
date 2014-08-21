@@ -6,9 +6,10 @@ AEApplication.h
 
 @작성자: 남현욱
 @작성일: 14-8-20
-@최종 수정자:
-@최종 수정일: 
-@최종 수정사유:
+@최종 수정자: 김연우
+@최종 수정일: 14-8-21
+@최종 수정사유:	RENDERER만들때 GetHWND 필요해서 넣어줌 
+				혹시 몰라서 GetHinstance만듬
 
 */
 
@@ -22,6 +23,8 @@ public:
 	static void ReleaseInstance();
 	void Run();
 	bool Init(TCHAR* title, int width, int height);
+	HWND GetHWND() {return m_hWnd;}
+	HINSTANCE GetHInstance() {return m_hInstance;}
 
 private:
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);

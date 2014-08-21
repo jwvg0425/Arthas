@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AEApplication.h" />
+    <ClInclude Include="AED2DRenderer.h" />
     <ClInclude Include="AEDefine.h" />
     <ClInclude Include="AEInclude.h" />
     <ClInclude Include="AEObject.h" />
@@ -88,9 +89,11 @@
     <ClInclude Include="AESceneManager.h" />
     <ClInclude Include="AESize.h" />
     <ClInclude Include="TestClass.h" />
+    <ClInclude Include="AEMacro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AEApplication.cpp" />
+    <ClCompile Include="AED2DRenderer.cpp" />
     <ClCompile Include="AEObject.cpp" />
     <ClCompile Include="AESceneManager.cpp" />
     <ClCompile Include="main.cpp" />

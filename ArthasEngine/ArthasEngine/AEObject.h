@@ -14,6 +14,7 @@ Object >> AEObject
 
 #pragma once
 #include "AEInclude.h"
+#include "AERect.h"
 
 class AEObject
 {
@@ -23,7 +24,7 @@ public:
 
 
 public:
-	virtual void		DeleteChild( AEObject* child );
+	virtual void		RemoveChild( AEObject* child , bool isDelete);
 	virtual void		AddChild(AEObject* child);
 
 	virtual void		SetParent( AEObject* parent );
@@ -33,6 +34,10 @@ public:
 	virtual void		Update() = 0;
 	virtual void		Clear() = 0;
 
+	AEPoint				GetPosition() {return m_Rect.GetPoint();}
+	AEPoint				GetCenter() {return m_Rect.GetCenter();}
+	AESize				GetSize() {return m_Rect.GetSize();}
+
 private:
 	void				RenderAll();
 	void				UpdateAll();
@@ -41,5 +46,6 @@ private:
 protected:
 	std::list<AEObject*>	m_ChildList;
 	AEObject*				m_Parent;
+	AERect					m_Rect;
 };
 
