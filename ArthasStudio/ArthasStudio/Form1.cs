@@ -8,13 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ArthaStudio
+namespace ArthasStudio
 {
 	public partial class mainForm : Form
 	{
 		public mainForm()
 		{
 			InitializeComponent();
+		}
+
+		private void newFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 		}
 	}
 }

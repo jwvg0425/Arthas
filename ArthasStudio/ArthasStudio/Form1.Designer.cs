@@ -1,4 +1,4 @@
-﻿namespace ArthaStudio
+﻿namespace ArthasStudio
 {
 	partial class mainForm
 	{
@@ -34,6 +34,15 @@
 			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Sounds");
 			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Strings");
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
+			this.spriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.newSpriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.sortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.changeNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,19 +55,74 @@
 			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-			this.spriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.newSpriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.newFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.sortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.changeNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.spriteMenuStrip.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.mainStatusStrip.SuspendLayout();
-			this.spriteMenuStrip.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// spriteMenuStrip
+			// 
+			this.spriteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newSpriteToolStripMenuItem,
+            this.newFolderToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.copyToolStripMenuItem,
+            this.sortingToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.changeNameToolStripMenuItem,
+            this.propertiesToolStripMenuItem});
+			this.spriteMenuStrip.Name = "spriteMenuStrip";
+			this.spriteMenuStrip.Size = new System.Drawing.Size(153, 170);
+			// 
+			// newSpriteToolStripMenuItem
+			// 
+			this.newSpriteToolStripMenuItem.Name = "newSpriteToolStripMenuItem";
+			this.newSpriteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newSpriteToolStripMenuItem.Text = "NewSprite";
+			// 
+			// newFolderToolStripMenuItem
+			// 
+			this.newFolderToolStripMenuItem.Name = "newFolderToolStripMenuItem";
+			this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newFolderToolStripMenuItem.Text = "NewFolder";
+			this.newFolderToolStripMenuItem.Click += new System.EventHandler(this.newFolderToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+			// 
+			// copyToolStripMenuItem
+			// 
+			this.copyToolStripMenuItem.Enabled = false;
+			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+			this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.copyToolStripMenuItem.Text = "Copy";
+			// 
+			// sortingToolStripMenuItem
+			// 
+			this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
+			this.sortingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.sortingToolStripMenuItem.Text = "Sort";
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+			// 
+			// changeNameToolStripMenuItem
+			// 
+			this.changeNameToolStripMenuItem.Enabled = false;
+			this.changeNameToolStripMenuItem.Name = "changeNameToolStripMenuItem";
+			this.changeNameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.changeNameToolStripMenuItem.Text = "ChangeName";
+			// 
+			// propertiesToolStripMenuItem
+			// 
+			this.propertiesToolStripMenuItem.Enabled = false;
+			this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+			this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.propertiesToolStripMenuItem.Text = "Properties";
 			// 
 			// menuStrip1
 			// 
@@ -183,66 +247,6 @@
 			this.toolStripStatusLabel1.Size = new System.Drawing.Size(46, 17);
 			this.toolStripStatusLabel1.Text = "Label 1";
 			// 
-			// spriteMenuStrip
-			// 
-			this.spriteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newSpriteToolStripMenuItem,
-            this.newFolderToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.copyToolStripMenuItem,
-            this.sortingToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.changeNameToolStripMenuItem,
-            this.propertiesToolStripMenuItem});
-			this.spriteMenuStrip.Name = "spriteMenuStrip";
-			this.spriteMenuStrip.Size = new System.Drawing.Size(148, 148);
-			// 
-			// newSpriteToolStripMenuItem
-			// 
-			this.newSpriteToolStripMenuItem.Name = "newSpriteToolStripMenuItem";
-			this.newSpriteToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.newSpriteToolStripMenuItem.Text = "NewSprite";
-			// 
-			// newFolderToolStripMenuItem
-			// 
-			this.newFolderToolStripMenuItem.Name = "newFolderToolStripMenuItem";
-			this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.newFolderToolStripMenuItem.Text = "NewFolder";
-			// 
-			// copyToolStripMenuItem
-			// 
-			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-			this.copyToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.copyToolStripMenuItem.Text = "Copy";
-			// 
-			// sortingToolStripMenuItem
-			// 
-			this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
-			this.sortingToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.sortingToolStripMenuItem.Text = "Sort";
-			// 
-			// changeNameToolStripMenuItem
-			// 
-			this.changeNameToolStripMenuItem.Name = "changeNameToolStripMenuItem";
-			this.changeNameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.changeNameToolStripMenuItem.Text = "ChangeName";
-			// 
-			// propertiesToolStripMenuItem
-			// 
-			this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-			this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.propertiesToolStripMenuItem.Text = "Properties";
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(144, 6);
-			// 
 			// mainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -256,11 +260,11 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "mainForm";
 			this.Text = "ArthuStudio alpha";
+			this.spriteMenuStrip.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.mainStatusStrip.ResumeLayout(false);
 			this.mainStatusStrip.PerformLayout();
-			this.spriteMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
