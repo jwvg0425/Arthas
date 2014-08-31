@@ -70,7 +70,6 @@ LRESULT CALLBACK WndProc( HWND hWnd , UINT iMessage , WPARAM wParam , LPARAM lPa
 			return 0;
 
 		case WM_KEYDOWN:
-			InvalidateRect( hWnd , &rt , true );
 			switch(wParam)
 			{
 				case VK_LEFT:
@@ -86,6 +85,7 @@ LRESULT CALLBACK WndProc( HWND hWnd , UINT iMessage , WPARAM wParam , LPARAM lPa
 					posY -= 10;
 					break;
 			}
+			InvalidateRect(hWnd, &rt, true);
 
 		case WM_PAINT:							//윈도우 그리기할때 이거 실행
 		{
