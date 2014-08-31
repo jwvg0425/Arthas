@@ -89,6 +89,7 @@
     <ClInclude Include="AERect.h" />
     <ClInclude Include="AESceneManager.h" />
     <ClInclude Include="AESize.h" />
+    <ClInclude Include="AE2DSprite.h" />
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="AEMacro.h" />
   </ItemGroup>
@@ -98,6 +99,7 @@
     <ClCompile Include="AED2DRenderer.cpp" />
     <ClCompile Include="AEObject.cpp" />
     <ClCompile Include="AESceneManager.cpp" />
+    <ClCompile Include="AE2DSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AEPoint.cpp" />
     <ClCompile Include="AERect.cpp" />

@@ -5,7 +5,7 @@ AERect::AERect()
 {
 }
 
-AERect::AERect( double _pointX , double _pointY , double _width , double _height )
+AERect::AERect( float _pointX , float _pointY , float _width , float _height )
 {
 	SetRect( _pointX , _pointY , _width , _height );
 }
@@ -24,7 +24,7 @@ AERect::~AERect()
 {
 }
 
-void AERect::SetRect( double _pointX , double _pointY , double _width , double _height )
+void AERect::SetRect( float _pointX , float _pointY , float _width , float _height )
 {
 	SetLeft( _pointX );
 	SetTop( _pointY );
@@ -48,7 +48,7 @@ void AERect::SetRect( const AERect& _rect )
 	m_Bottom = _rect.GetBottom();
 }
 
-bool AERect::Contains( double _pointX , double _pointY )
+bool AERect::Contains( float _pointX , float _pointY )
 {
 	return ( m_Left <= _pointX && m_Right >= _pointX &&
 			 m_Top <= _pointY && m_Bottom >= _pointY );

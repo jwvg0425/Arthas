@@ -30,6 +30,7 @@ public:
 	virtual void		SetParent( AEObject* parent );
 	virtual AEObject*	GetParent() {return m_Parent;}
 
+	virtual void		Init() = 0;
 	virtual void		Render() = 0;
 	virtual void		Update() = 0;
 	virtual void		Clear() = 0;

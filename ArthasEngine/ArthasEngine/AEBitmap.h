@@ -23,6 +23,8 @@ public:
 	~AEBitmap();
 
 	void Release();
+	ID2D1Bitmap* GetD2D1Bitmap() {return m_D2DBitmap;}
+
 private:
 	static IWICImagingFactory*	m_WICFactory;
 	ID2D1Bitmap*				m_D2DBitmap;

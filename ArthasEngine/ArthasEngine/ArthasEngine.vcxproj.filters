@@ -37,6 +37,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{298ca6d8-3254-415c-8fd2-4530998f8bf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Sprite">
+      <UniqueIdentifier>{d0028991-32d2-4a97-8c54-9efa320b5285}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="AEBitmap.cpp">
       <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="AE2DSprite.cpp">
+      <Filter>Object\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="AEBitmap.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="AE2DSprite.h">
+      <Filter>Object\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@ AEPoint::AEPoint()
 {
 }
 
-AEPoint::AEPoint( double _x , double _y )
+AEPoint::AEPoint( float _x , float _y )
 {
 	SetPosX( _x );
 	SetPosY( _y );
@@ -22,7 +22,7 @@ AEPoint::~AEPoint()
 {
 }
 
-void AEPoint::SetPosX( double _x )
+void AEPoint::SetPosX( float _x )
 {
 	if( _x >= 0.f )
 	{
@@ -34,7 +34,7 @@ void AEPoint::SetPosX( double _x )
 	}
 }
 
-void AEPoint::SetPosY( double _y )
+void AEPoint::SetPosY( float _y )
 {
 	if( _y >= 0.f )
 	{
@@ -47,7 +47,7 @@ void AEPoint::SetPosY( double _y )
 }
 
 
-void AEPoint::SetPoint( double _x , double _y )
+void AEPoint::SetPoint( float _x , float _y )
 {
 	SetPosX( _x );
 	SetPosY( _y );
@@ -74,7 +74,7 @@ bool AEPoint::operator==( const AEPoint& _point )
 	return ( m_PointX == _point.GetPosX() && m_PointY == _point.GetPosY() );
 }
 
-double AEPoint::GetDistance( const AEPoint& _point )
+float AEPoint::GetDistance( const AEPoint& _point )
 {
 	return sqrt( pow( m_PointX - _point.GetPosX() , 2 ) + pow( m_PointY - _point.GetPosY() , 2 ) );
 }
@@ -89,7 +89,7 @@ AEPoint AEPoint::GetCenter( const AEPoint& _point )
 	return resultPoint;
 }
 
-double AEPoint::GetAngleRadian( const AEPoint& _point )
+float AEPoint::GetAngleRadian( const AEPoint& _point )
 {
 	return atan2(
 		( _point.GetPosY() - m_PointY ) , 
@@ -97,7 +97,7 @@ double AEPoint::GetAngleRadian( const AEPoint& _point )
 		);
 }
 
-double AEPoint::GetAngleDegree( const AEPoint& _point )
+float AEPoint::GetAngleDegree( const AEPoint& _point )
 {
 	return GetAngleRadian( _point ) * 180 / PI;
 }

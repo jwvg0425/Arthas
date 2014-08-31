@@ -5,7 +5,7 @@ AESize::AESize()
 {
 }
 
-AESize::AESize( double _width , double _height )
+AESize::AESize( float _width , float _height )
 {
 	SetWidth( _width );
 	SetHeigth( _height );

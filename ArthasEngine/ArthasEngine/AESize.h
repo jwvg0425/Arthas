@@ -20,16 +20,16 @@ class AESize
 {
 public:
 	AESize();
-	AESize( double _width , double _height );
+	AESize( float _width , float _height );
 	AESize( const AESize& _size );
 	AESize( const AERect& _rt );
 	~AESize();
 
-	double	GetWidth() const {return m_Width; }
-	double	GetHeigth() const {return m_Height;}
-	double	GetSquare() const {return m_Height * m_Width;}
+	float	GetWidth() const {return m_Width; }
+	float	GetHeigth() const {return m_Height;}
+	float	GetSquare() const {return m_Height * m_Width;}
 
-	void	SetWidth(double _width) 
+	void	SetWidth(float _width) 
 	{
 		if( _width < 0 )
 		{
@@ -40,7 +40,7 @@ public:
 			m_Width = _width;
 		}
 	}
-	void	SetHeigth( double _height )
+	void	SetHeigth( float _height )
 	{
 		if( _height < 0 )
 		{
@@ -51,7 +51,7 @@ public:
 			m_Height = _height;
 		}
 	}
-	void	SetSize( double _width , double _height )
+	void	SetSize( float _width , float _height )
 	{
 		SetWidth( _width );
 		SetHeigth( _height );
@@ -67,7 +67,7 @@ public:
 
 
 private:
-	double	m_Width;
-	double	m_Height;
+	float	m_Width;
+	float	m_Height;
 };
 
