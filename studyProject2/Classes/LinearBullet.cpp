@@ -20,18 +20,17 @@ bool LinearBullet::init()
 void LinearBullet::setMoveAttribute(bool isPlayersBullet, float velocity, float degree)
 {
 	m_Velocity = velocity;
+	m_IsPlayersBullet = isPlayersBullet;
 
 	if (isPlayersBullet == false)
 	{
 		m_Velocity = -m_Velocity;
 		m_Sprite = Sprite::create("enemy_bullet.png");
-		m_CollisionKind = PLAYER;
 	}
 	else
 	{
 		m_Sprite = Sprite::create("bullet.png");
 		m_Sprite->setFlippedX(true);
-		m_CollisionKind = ENEMY;
 	}
 
 	m_Degree = degree;
@@ -44,7 +43,7 @@ void LinearBullet::setMoveAttribute(bool isPlayersBullet, float velocity, float 
 	this->addChild(m_Sprite);
 }
 
-cocos2d::Rect LinearBullet::getSize()
+cocos2d::Rect LinearBullet::getSize() const
 {
 	float x = this->getPositionX();
 	float y = this->getPositionY();

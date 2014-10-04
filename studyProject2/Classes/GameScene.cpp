@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "Player.h"
 #include "Bat.h"
+#include "Ghost.h"
 #include "Bullet.h"
 #include "BackgroundLayer.h"
 #include "Effect.h"
@@ -38,8 +39,10 @@ bool GameScene::init()
 	this->addChild(backgroundLayer, -1);
 	
 	auto player = Player::create();
-	mobSpawnTime = 1;
-	mobSpawnDelay = 0;
+	batSpawnTime = 1;
+	batSpawnDelay = 0;
+	ghostSpawnTime = 10;
+	ghostSpawnDelay = 0;
 
 	player->setPosition(Point(200, 200));
 	this->addCharacter(player, 5, PLAYER_TAG);
@@ -50,12 +53,14 @@ bool GameScene::init()
 
 	srand(time(NULL));
 
-	this->schedule(schedule_selector(GameScene::update));
+	this->scheduleUpdate();
 	return true;
 }
 
 void GameScene::update(float delta)
 {
+	static int prevTime = time(NULL);
+	static float height = 30 + rand() % 420;
 	cocos2d::Vector<Character*> removeCharacters;
 	Player* player = (Player*)this->getChildByTag(PLAYER_TAG);
 
@@ -70,56 +75,74 @@ void GameScene::update(float delta)
 
 	for (auto character : removeCharacters)
 	{
-		m_Characters.eraseObject(character);
-		this->removeChild(character);
+		removeCharacter(character);
 	}
 	removeCharacters.clear();
 
 	//各 积己
-	mobSpawnDelay += delta;
-	if (mobSpawnDelay > mobSpawnTime)
+	if (time(NULL) - prevTime > 3)
 	{
-		mobSpawnDelay = 0;
+		height = 30 + rand() % 420;
+		prevTime = time(NULL);
+	}
+	batSpawnDelay += delta;
+	if (batSpawnDelay > batSpawnTime)
+	{
+		batSpawnDelay = 0;
 
 		auto bat = Bat::create();
 
-		bat->setPosition(Point(640, rand() % 480));
+		bat->setPosition(Point(640, height));
 
 		this->addCharacter(bat);
 	}
+	ghostSpawnDelay += delta;
+	if (ghostSpawnDelay > ghostSpawnTime)
+	{
+		ghostSpawnDelay = 0;
 
-	std::vector<CollisionData> data;
+		auto ghost = Ghost::create();
 
+		ghost->setPosition(Point(640, 30 + rand() % 420));
+
+		this->addCharacter(ghost);
+	}
+
+	//面倒 贸府
 	for (auto iter = m_Characters.begin(); iter != m_Characters.end(); ++iter)
 	{
-		for (auto iter2 = iter + 1; iter2 != m_Characters.end(); ++iter2 )
+		for (auto iter2 = iter + 1; iter2 != m_Characters.end(); ++iter2)
 		{
-			Character* character1 = *iter;
+			Character* character = *iter;
 			Character* character2 = *iter2;
-
-			if (character1->getCollisionKind() & character2->getType())
+			
+			if (m_RemovingReservedCharacters.contains(character) ||
+				m_RemovingReservedCharacters.contains(character2) ||
+				character->isUnbeatable() || character2->isUnbeatable())
 			{
-				if (character1->hitCheck(character2->getSize()))
+				continue;  
+			}
+
+			if (character->hitCheck(character2->getSize()))
+			{
+				if (character->collisionOccured(character2))
 				{
-					data.push_back(CollisionData(character1, character2));
-					data.push_back(CollisionData(character2, character1));
+					reserveRemoving(character);
+				}
+				if (character2->collisionOccured(character))
+				{
+					reserveRemoving(character2);
 				}
 			}
 		}
 	}
 
-	for (auto datum : data)
-	{
-		if (m_Characters.contains(datum.character1))
-		{
-			datum.character1->collisionOccured(datum.character2);
-		}
-		if (m_Characters.contains(datum.character2))
-		{
-			datum.character2->collisionOccured(datum.character1);
-		}
-	}
+	//昏力 贸府
 
+	for (auto character : m_RemovingReservedCharacters)
+	{
+		removeCharacter(character);
+	}
 }
 
 void GameScene::addCharacter(Character* character)
@@ -142,6 +165,11 @@ bool GameScene::removeCharacter(Character* character)
 		this->removeChild(character);
 		return true;
 	}
-	
+
 	return false;
+}
+
+void GameScene::reserveRemoving(Character* character)
+{
+	m_RemovingReservedCharacters.pushBack(character);
 }

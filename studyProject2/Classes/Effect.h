@@ -1,4 +1,5 @@
-﻿#include "cocos2d.h"
+﻿#pragma once
+#include "cocos2d.h"
 
 class EffectManager : public cocos2d::Node
 {
@@ -6,6 +7,8 @@ public:
 	enum Type
 	{
 		BULLET_EFFECT,
+		BAT_DIE,
+		GHOST_DIE,
 	};
 	virtual bool init();
 

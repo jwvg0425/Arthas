@@ -16,19 +16,20 @@ public:
 
 	virtual bool init();
 
-	CharacterType getType(){ return m_Type; }
+	CharacterType getType() const { return m_Type; }
 	void setType(CharacterType t){ m_Type = t; }
 	
-	virtual cocos2d::Rect getSize() = 0;
+	virtual cocos2d::Rect getSize() const = 0;
 
 	bool hitCheck(cocos2d::Rect enemyRect);
 	bool isOutOfScreen();
-	void setCollisionKind(CharacterType kind){ m_CollisionKind = kind; }
-	int getCollisionKind(){ return m_CollisionKind; }
-	virtual bool collisionOccured(Character* enemy);
+	bool isUnbeatable(){ return m_IsUnbeatable; }
+	virtual bool collisionOccured(const Character* enemy);
 
 protected:
 	CharacterType m_Type;
-	int m_CollisionKind;
 	float m_Width, m_Height;
+	bool m_IsUnbeatable;
+	int m_Hp;
+
 };

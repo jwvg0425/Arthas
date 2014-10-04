@@ -8,37 +8,37 @@ public:
 	virtual bool init();
 	void initStand();
 	void initAttack();
+	void initAttacked();
 	void update(float delta);
-	virtual cocos2d::Rect getSize();
-	bool isUnbeatable();
+	virtual cocos2d::Rect getSize() const;
+	virtual bool collisionOccured(const Character* enemy);
 
 	CREATE_FUNC(Player);
 
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
-	virtual bool collisionOccured(Character* enemy);
 
 private:
 	enum Status
 	{
 		STAND,
 		ATTACK,
+		ATTACKED,
+		STATE_NUM,
 	};
 	
 	void changeStatus(Status status);
 	
 	void startUnbeatableState();
 	void endUnbeatableState(cocos2d::Ref* sender);
+	cocos2d::Sprite* m_Sprites[STATE_NUM];
+	cocos2d::Animation* m_Animation[STATE_NUM];
 
-	cocos2d::Sprite* m_StandSprite;
-	cocos2d::Sprite* m_AttackSprite;
-	cocos2d::Animation* m_StandAnimation;
-	cocos2d::Animation* m_AttackAnimation;
-	double m_AttackDelay, m_AfterAttackDelay;
+	double m_MotionDelay, m_AfterMotionDelay;
 	double m_AttackSpeed;
+	double m_AttackedTime;
 	bool m_IsAttacking;
-	bool m_IsUnbeatable;
 	float m_UnbeatableTime;
 	cocos2d::Sprite* m_NowSprite;
 

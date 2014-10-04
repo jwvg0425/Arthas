@@ -5,8 +5,7 @@ class Monster : public Character
 {
 public:
 	virtual bool init();
-
-	virtual bool collisionOccured(Character* enemy);
+	virtual bool collisionOccured(const Character* enemy);
 
 private:
 };

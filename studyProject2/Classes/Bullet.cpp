@@ -7,29 +7,30 @@ USING_NS_CC;
 
 bool Bullet::init()
 {
+	Character::init();
 	m_Type = BULLET;
 	return true;
 }
 
-bool Bullet::collisionOccured(Character* enemy)
+bool Bullet::collisionOccured(const Character* enemy)
 {
-	if (enemy->getType() & this->getCollisionKind())
+	if (m_IsPlayersBullet)
+	{
+		if (enemy->getType() == ENEMY)
+		{
+			EffectManager* effectManager = (EffectManager*)this->getParent()->getChildByTag(EFFECT_MANAGER_TAG);
+			effectManager->createEffect(EffectManager::BULLET_EFFECT, this->getPosition());
+			return true;
+		}
+	}
+	else
 	{
 		if (enemy->getType() == PLAYER)
 		{
-			if (((Player*)enemy)->isUnbeatable())
-			{
-				return false;
-			}
+			EffectManager* effectManager = (EffectManager*)this->getParent()->getChildByTag(EFFECT_MANAGER_TAG);
+			effectManager->createEffect(EffectManager::BULLET_EFFECT, this->getPosition());
+			return true;
 		}
-
-		EffectManager* effectManager = (EffectManager*)this->getParent()->getChildByTag(EFFECT_MANAGER_TAG);
-
-		effectManager->createEffect(EffectManager::BULLET_EFFECT,this->getPosition());
-		((GameScene*)this->getParent())->removeCharacter(this);
-		
-		return true;
 	}
-	
 	return false;
 }

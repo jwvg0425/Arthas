@@ -19,25 +19,20 @@ public:
 	void addCharacter(Character* character);
 	void addCharacter(Character* character, int zOrder, int tag);
 	bool removeCharacter(Character* character);
+	void reserveRemoving(Character* character);
    
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);
 	
 private:
-
 	cocos2d::Vector<Character*> m_Characters;
-	float mobSpawnTime;
-	float mobSpawnDelay;
+	cocos2d::Vector<Character*> m_RemovingReservedCharacters;
+	float batSpawnTime;
+	float batSpawnDelay;
+	float ghostSpawnTime;
+	float ghostSpawnDelay;
 
 };
-
-struct CollisionData
-{
-	Character* character1, *character2;
-
-	CollisionData(Character* char1, Character* char2){ character1 = char1; character2 = char2; }
-};
-
 
 #endif // __HELLOWORLD_SCENE_H__
 

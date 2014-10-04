@@ -6,6 +6,7 @@ USING_NS_CC;
 
 bool Character::init()
 {
+	m_IsUnbeatable = false;
 	return true;
 }
 
@@ -13,7 +14,7 @@ bool Character::hitCheck(cocos2d::Rect enemyRect)
 {
 	float x = this->getPosition().x;
 	float y = this->getPosition().y;
-	Rect myRect = Rect(x, y, m_Width, m_Height);
+	Rect myRect = Rect(x - m_Width/2, y - m_Height/2, m_Width, m_Height);
 
 	return myRect.intersectsRect(enemyRect);
 }
@@ -30,9 +31,7 @@ bool Character::isOutOfScreen()
 	return false;
 }
 
-bool Character::collisionOccured(Character* enemy)
+bool Character::collisionOccured(const Character* enemy)
 {
-	((GameScene*)this->getParent())->removeCharacter(this);
-
-	return true;
+	return false;
 }

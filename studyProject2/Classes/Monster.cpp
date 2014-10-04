@@ -7,26 +7,27 @@ USING_NS_CC;
 
 bool Monster::init()
 {
+	Character::init();
 	m_Type = ENEMY;
-	m_CollisionKind = PLAYER | BULLET;
+	m_Hp = 1;
 
 	return true;
 }
 
-bool Monster::collisionOccured(Character* enemy)
+bool Monster::collisionOccured(const Character* enemy)
 {
-	switch (enemy->getType())
+	if (enemy->getType() == BULLET)
 	{
-	case BULLET:
-		if (((Bullet*)enemy)->getCollisionKind() & ENEMY)
+		Bullet* bullet = (Bullet*)enemy;
+
+		if (bullet->IsPlayersBullet())
 		{
-			((GameScene*)this->getParent())->removeCharacter(this);
-			return true;
+			m_Hp--;
+			if (m_Hp <= 0)
+			{
+				return true;
+			}
 		}
-		break;
-	case PLAYER:
-		((GameScene*)this->getParent())->removeCharacter(this);
-		return true;
 	}
 
 	return false;

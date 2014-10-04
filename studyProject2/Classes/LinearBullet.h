@@ -7,7 +7,7 @@ class LinearBullet : public Bullet
 public:
 	virtual bool init();
 	void setMoveAttribute(bool isPlayersBullet, float velocity, float degree);
-	virtual cocos2d::Rect getSize();
+	virtual cocos2d::Rect getSize() const;
 
 	CREATE_FUNC(LinearBullet);
 

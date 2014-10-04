@@ -17,17 +17,17 @@ bool AimingBullet::init()
 void AimingBullet::setMoveAttribute(bool isPlayersBullet, float velocity, Point myPos, Point targetPos)
 {
 	m_Velocity = velocity;
+	m_IsPlayersBullet = isPlayersBullet;
+
 	if (isPlayersBullet == false)
 	{
 		m_Velocity = -m_Velocity;
 		m_Sprite = Sprite::create("enemy_bullet.png");
-		m_CollisionKind = PLAYER;
 	}
 	else
 	{
 		m_Sprite = Sprite::create("bullet.png");
 		m_Sprite->setFlippedX(true);
-		m_CollisionKind = ENEMY;
 	}
 
 	float d = sqrt((myPos.x - targetPos.x)*(myPos.x - targetPos.x) + (myPos.y - targetPos.y)*(myPos.y - targetPos.y));
@@ -49,7 +49,7 @@ void AimingBullet::setMoveAttribute(bool isPlayersBullet, float velocity, Point 
 	this->addChild(m_Sprite);
 }
 
-cocos2d::Rect AimingBullet::getSize()
+cocos2d::Rect AimingBullet::getSize() const
 {
 	float x = this->getPositionX();
 	float y = this->getPositionY();

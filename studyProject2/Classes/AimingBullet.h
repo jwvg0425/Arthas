@@ -7,7 +7,7 @@ class AimingBullet : public Bullet
 public:
 	virtual bool init();
 	void setMoveAttribute(bool isPlayersBullet, float velocity, cocos2d::Point myPos, cocos2d::Point targetPos);
-	virtual cocos2d::Rect getSize();
+	virtual cocos2d::Rect getSize() const;
 
 	CREATE_FUNC(AimingBullet);
 

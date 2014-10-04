@@ -1,6 +1,7 @@
 ﻿#include "Bat.h"
 #include "AimingBullet.h"
 #include "GameScene.h"
+#include "Effect.h"
 
 USING_NS_CC;
 
@@ -49,13 +50,13 @@ bool Bat::init()
 		vvy = 0.1;
 	}
 
-	m_AttackTime = 1.2;
+	m_AttackTime = 1.6;
 	m_AttackDelay = 0;
 
 	return true;
 }
 
-cocos2d::Rect Bat::getSize()
+cocos2d::Rect Bat::getSize() const
 {
 	float x = this->getPositionX();
 	float y = this->getPositionY();
@@ -90,14 +91,25 @@ void Bat::update(float delta)
 
 		if (this->getParent()->getChildByTag(PLAYER_TAG))
 		{
-			bullet->setMoveAttribute(false, 4, this->getPosition(), this->getParent()->getChildByTag(PLAYER_TAG)->getPosition());
+			bullet->setMoveAttribute(false, 3, this->getPosition(), this->getParent()->getChildByTag(PLAYER_TAG)->getPosition());
 		}
 		else
 		{
-			bullet->setMoveAttribute(false, 4, this->getPosition(), this->getPosition());
+			bullet->setMoveAttribute(false, 3, this->getPosition(), this->getPosition());
 		}
 		bullet->setPosition(this->getPosition());
 
 		((GameScene*)this->getParent())->addCharacter(bullet);
 	}
+}
+
+bool Bat::collisionOccured(const Character* enemy)
+{
+	if (Monster::collisionOccured(enemy))
+	{
+		EffectManager* effectManager = (EffectManager*)this->getParent()->getChildByTag(EFFECT_MANAGER_TAG);
+		effectManager->createEffect(EffectManager::BAT_DIE, this->getPosition());
+		return true;
+	}
+	return false;
 }
