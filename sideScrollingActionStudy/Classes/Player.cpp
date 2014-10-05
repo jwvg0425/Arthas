@@ -14,6 +14,7 @@ bool Player::init()
 	m_Vx = 0;
 	m_Vy = 0;
 	m_Type = OT_PLAYER;
+	m_IsFlying = true;
 
 	m_AnimationNum = PL_STATE_NUM;
 
@@ -61,32 +62,79 @@ void Player::update(float dTime)
 
 	this->setPosition(pos);
 
+	//jump중
+	if (m_IsFlying)
+	{
+		if (m_Vy < 0)
+		{
+			changeState(PL_JUMP_DOWN);
+		}
+		else
+		{
+			changeState(PL_JUMP_UP);
+		}
 
-	//착지 모션, 점프 준비 모션일 때는 기타 행동 수행 불가
-	if (m_State == PL_LAND || m_State == PL_JUMP_READY)
-	{
-		return;
-	}
-
-	if (m_IsRightDirection && m_KeyState & KS_RIGHT)
-	{
-		changeState(PL_WALK);
-		m_Vx = m_MoveSpeed;
-	}
-	else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
-	{
-		changeState(PL_WALK);
-		m_Vx = -m_MoveSpeed;
+		//공중에선 좌우 이동 조금 느림
+		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
+		{
+			m_Vx = m_MoveSpeed/2;
+		}
+		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
+		{
+			m_Vx = -m_MoveSpeed/2;
+		}
+		else
+		{
+			m_Vx = 0;
+		}
 	}
 	else
 	{
-		m_Vx = 0;
-		changeState(PL_STAND);
+		//착지 모션, 점프 준비 모션일 때는 기타 행동 수행 불가
+		if (!(m_State == PL_LAND || m_State == PL_JUMP_READY))
+		{
+
+			if (m_IsRightDirection && m_KeyState & KS_RIGHT)
+			{
+				changeState(PL_WALK);
+				m_Vx = m_MoveSpeed;
+			}
+			else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
+			{
+				changeState(PL_WALK);
+				m_Vx = -m_MoveSpeed;
+			}
+			else
+			{
+				m_Vx = 0;
+				changeState(PL_STAND);
+			}
+		}
 	}
+
+	m_Vy -= GRAVITY*dTime;
+	m_IsFlying = true;
 }
 
 void Player::collisionOccured(InteractiveObject* enemy, CollisionDirection dir, OUT bool* isRemoving)
 {
+	switch (enemy->getType())
+	{
+	case OT_FLOOR:
+		switch (dir)
+		{
+		case CD_BOTTOM:
+			m_IsFlying = false;
+		case CD_TOP:
+			m_Vy = 0;
+			break;
+		case CD_LEFT:
+		case CD_RIGHT:
+			m_Vx = 0;
+			break;
+		}
+		break;
+	}
 	*isRemoving = false;
 }
 

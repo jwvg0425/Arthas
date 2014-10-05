@@ -15,3 +15,19 @@ Animation* UtilFunction::makeAnimation(const char* animationName, int startIdx, 
 	}
 	return animation;
 }
+
+CollisionDirection UtilFunction::getReverseDirection(CollisionDirection dir)
+{
+	switch (dir)
+	{
+	case CD_TOP:
+		return CD_BOTTOM;
+	case CD_BOTTOM:
+		return CD_TOP;
+	case CD_LEFT:
+		return CD_RIGHT;
+	case CD_RIGHT:
+		return CD_LEFT;
+	}
+	return CD_NONE;
+}
