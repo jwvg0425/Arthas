@@ -14,6 +14,7 @@ public:
 
 	void update(float dTime);
 	virtual void setOuterForce(cocos2d::Vec2 OuterForce);
+	virtual cocos2d::Rect getRect();
 
 	CREATE_FUNC(Player);
 

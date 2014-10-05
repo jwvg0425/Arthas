@@ -13,7 +13,7 @@ public:
 	virtual bool init();
 
 	virtual bool collisionOccured(InteractiveObject* enemy) = 0;
-	virtual cocos2d::Rect getRect() const;
+	virtual cocos2d::Rect getRect();
 	ObjectType getType() const { return m_Type; }
 
 	cocos2d::Vec2 getVelcotiy() const;

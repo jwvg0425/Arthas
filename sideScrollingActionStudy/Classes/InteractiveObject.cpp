@@ -7,7 +7,7 @@ bool InteractiveObject::init()
 	return true;
 }
 
-cocos2d::Rect InteractiveObject::getRect() const
+cocos2d::Rect InteractiveObject::getRect()
 {
 	Point pos = this->getPosition();
 

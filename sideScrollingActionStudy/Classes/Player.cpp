@@ -204,3 +204,11 @@ void Player::setOuterForce(cocos2d::Vec2 OuterForce)
 
 	InteractiveObject::setOuterForce(OuterForce);
 }
+
+cocos2d::Rect Player::getRect()
+{
+	m_Width = m_MainSprite->getContentSize().width;
+	m_Height = m_MainSprite->getContentSize().height;
+
+	return InteractiveObject::getRect();
+}
