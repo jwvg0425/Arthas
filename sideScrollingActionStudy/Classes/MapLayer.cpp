@@ -32,6 +32,7 @@ bool MapLayer::init()
 		"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n"
 		"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n"
 		"1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n");
+
 	m_Width = UserDefault::getInstance()->getIntegerForKey("mapWidth");
 	m_Height = UserDefault::getInstance()->getIntegerForKey("mapHeight");
 	m_MapRawData = UserDefault::getInstance()->getStringForKey("mapData");

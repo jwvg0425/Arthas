@@ -14,16 +14,23 @@ public:
 
 	void update(float dTime);
 
+	cocos2d::Vec2 getVelcotiy() const;
+
+	void setOuterForce(cocos2d::Vec2 OuterForce);
+
 	CREATE_FUNC(Player);
+
 private:
 	typedef int KeyState;
+	float m_Vx, m_Vy;
+	float m_MoveSpeed;
+
 	enum State
 	{
 		PL_STAND,
 		PL_WALK,
 		PL_JUMP_READY,
 		PL_JUMP_UP,
-		PL_JUMP_HIGH,
 		PL_JUMP_DOWN,
 		PL_LAND,
 		PL_STATE_NUM,
@@ -40,4 +47,5 @@ private:
 	State m_State;
 
 	void changeState(State state);
+	void endAnimation(Ref* sender);
 };
