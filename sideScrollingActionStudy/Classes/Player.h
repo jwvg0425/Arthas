@@ -1,56 +1,48 @@
 ﻿#pragma once
 
-#include "Character.h"
+#include"InteractiveObject.h"
 
-class Player : public Character
+class Player : public InteractiveObject
 {
 public:
 	virtual bool init();
-	void initStand();
-	void initAttack();
-	void initAttacked();
-	void update(float delta);
-	virtual cocos2d::Rect getSize() const;
-	virtual bool collisionOccured(const Character* enemy);
 
-	CREATE_FUNC(Player);
+	virtual bool collisionOccured(InteractiveObject* enemy);
 
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
+	void update(float dTime);
+	virtual void setOuterForce(cocos2d::Vec2 OuterForce);
+	virtual cocos2d::Rect getRect();
+
+	CREATE_FUNC(Player);
 
 private:
-	enum Status
-	{
-		STAND,
-		ATTACK,
-		ATTACKED,
-		STATE_NUM,
-	};
-	
-	void changeStatus(Status status);
-	
-	void startUnbeatableState();
-	void endUnbeatableState(cocos2d::Ref* sender);
-	cocos2d::Sprite* m_Sprites[STATE_NUM];
-	cocos2d::Animation* m_Animation[STATE_NUM];
+	typedef int KeyState;
+	float m_MoveSpeed;
 
-	double m_MotionDelay, m_AfterMotionDelay;
-	double m_AttackSpeed;
-	double m_AttackedTime;
-	bool m_IsAttacking;
-	float m_UnbeatableTime;
-	cocos2d::Sprite* m_NowSprite;
-
-	enum Direction
+	enum State
 	{
-		UP = 1,
-		RIGHT = 2,
-		DOWN = 4,
-		LEFT = 8,
+		PL_STAND,
+		PL_WALK,
+		PL_JUMP_READY,
+		PL_JUMP_UP,
+		PL_JUMP_DOWN,
+		PL_LAND,
+		PL_STATE_NUM,
 	};
 
-	int m_Direction;
-	int m_Velocity;
-	Status m_Status;
+	enum KeyStateBit
+	{
+		KS_LEFT = 1,
+		KS_RIGHT = 2,
+	};
+
+	KeyState m_KeyState;
+	bool m_IsRightDirection;
+	State m_State;
+
+	void changeState(State state);
+	void endAnimation(cocos2d::Ref* sender);
 };
