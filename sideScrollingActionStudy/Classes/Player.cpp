@@ -14,6 +14,7 @@ bool Player::init()
 	m_MoveSpeed = 300;
 	m_Vx = 0;
 	m_Vy = 0;
+	m_PrevOuterForce = Vec2::ZERO;
 
 	m_AnimationNum = PL_STATE_NUM;
 
@@ -58,22 +59,37 @@ void Player::update(float dTime)
 
 	pos.x += m_Vx * dTime;
 	pos.y += m_Vy * dTime;
-	if (m_Vy == 0)
-	{
 
-		if (m_State == PL_STAND && m_Vx != 0)
+
+	//착지 모션, 점프일 때는 기타 행동 수행 불가
+	if (m_State == PL_LAND || m_State == PL_JUMP_READY)
+	{
+		return;
+	}
+
+	//바닥을 딛고 있는 경우
+	if (m_PrevOuterForce.y == 0)
+	{
+		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
 		{
 			changeState(PL_WALK);
+			m_Vx = m_MoveSpeed;
 		}
-
-		if (m_State == PL_WALK && m_Vx == 0)
+		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
 		{
+			changeState(PL_WALK);
+			m_Vx = -m_MoveSpeed;
+		}
+		else
+		{
+			m_Vx = 0;
 			changeState(PL_STAND);
 		}
 	}
+	//공중에 떠있는 경우
 	else
 	{
-		if (m_Vy < 0)
+		if (m_Vy > 0)
 		{
 			changeState(PL_JUMP_DOWN);
 		}
@@ -81,9 +97,21 @@ void Player::update(float dTime)
 		{
 			changeState(PL_JUMP_UP);
 		}
-	}
 
-	m_Vy -= 200*dTime;
+		//공중에 떠있을 땐 좌우 이동속도가 절반으로 떨어진다.
+		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
+		{
+			m_Vx = m_MoveSpeed/2;
+		}
+		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
+		{
+			m_Vx = -m_MoveSpeed/2;
+		}
+		else
+		{
+			m_Vx = 0;
+		}
+	}
 
 	this->setPosition(pos);
 }
@@ -95,12 +123,19 @@ bool Player::collisionOccured(InteractiveObject* enemy)
 
 void Player::changeState(State state)
 {
+	//이미 해당 상태인 경우 아무 처리도 하지 않는다.
+	if (m_State == state)
+	{
+		return;
+	}
 	m_State = state;
 	m_MainSprite->stopAllActions();
-	m_MainSprite->runAction(RepeatForever::create(
-							Sequence::create(
-							Animate::create(m_Animations[state]),
-							CallFuncN::create(CC_CALLBACK_1(Player::endAnimation,this)),NULL)));
+
+	auto animate = Animate::create(m_Animations[state]);
+	auto callfunc = CallFuncN::create(CC_CALLBACK_1(Player::endAnimation, this));
+	auto sequence = Sequence::create(animate, callfunc, NULL);
+
+	m_MainSprite->runAction(RepeatForever::create(sequence));
 }
 
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -108,17 +143,18 @@ void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		m_Vx = -m_MoveSpeed;
 		m_KeyState |= KS_LEFT;
 		m_IsRightDirection = false;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		m_Vx = m_MoveSpeed;
 		m_KeyState |= KS_RIGHT;
 		m_IsRightDirection = true;
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
-		m_Vy = 200;
+		if (m_State == PL_STAND || m_State == PL_WALK || m_State == PL_LAND)
+		{
+			changeState(PL_JUMP_READY);
+		}
 		break;
 	}
 }
@@ -130,24 +166,14 @@ void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
 		if (m_KeyState & KS_RIGHT)
 		{
-			m_Vx = m_MoveSpeed;
 			m_IsRightDirection = true;
-		}
-		else
-		{
-			m_Vx = 0;
 		}
 		m_KeyState &= ~KS_LEFT;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		if (m_KeyState & KS_LEFT)
 		{
-			m_Vx = -m_MoveSpeed;
 			m_IsRightDirection = false;
-		}
-		else
-		{
-			m_Vx = 0;
 		}
 		m_KeyState &= ~KS_RIGHT;
 		break;
@@ -156,15 +182,25 @@ void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 
 void Player::endAnimation(Ref* sender)
 {
-}
+	if (m_State == PL_LAND)
+	{
+		changeState(PL_STAND);
+	}
 
-cocos2d::Vec2 Player::getVelcotiy() const
-{
-	return Vec2(m_Vx, m_Vy);
+	if (m_State == PL_JUMP_READY)
+	{
+		changeState(PL_JUMP_UP);
+		m_Vy = 100;
+	}
 }
 
 void Player::setOuterForce(cocos2d::Vec2 OuterForce)
 {
-	m_Vx += OuterForce.x;
-	m_Vy += OuterForce.y;
+	//착지한 순간
+	if (m_PrevOuterForce.y > 0 && OuterForce.y == 0)
+	{
+		changeState(PL_LAND);
+	}
+
+	InteractiveObject::setOuterForce(OuterForce);
 }
