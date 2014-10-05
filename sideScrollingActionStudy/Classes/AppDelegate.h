@@ -1,4 +1,5 @@
-#pragma once
+#ifndef  _APP_DELEGATE_H_
+#define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
 
@@ -32,3 +33,6 @@ public:
     */
     virtual void applicationWillEnterForeground();
 };
+
+#endif // _APP_DELEGATE_H_
+

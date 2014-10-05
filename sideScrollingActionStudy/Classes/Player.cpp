@@ -1,41 +1,30 @@
-﻿#include "Player.h"
-#include "UtilFunction.h"
+﻿#include "GameScene.h"
+#include "Player.h"
+#include "LinearBullet.h"
 
 USING_NS_CC;
 
 
 bool Player::init()
 {
-	InteractiveObject::init();
+	Character::init();
 
-	m_IsRightDirection = false;
-	m_KeyState = 0;
-	m_State = PL_STAND;
-	m_MoveSpeed = 300;
-	m_Vx = 0;
-	m_Vy = 0;
-	m_PrevOuterForce = Vec2::ZERO;
+	m_Type = PLAYER;
+	m_Velocity = 4;
+	m_Direction = 0;
+	m_MotionDelay = 0;
+	m_AfterMotionDelay = 0;
+	m_AttackSpeed = 0.5;
+	m_IsAttacking = false;
+	m_UnbeatableTime = 2;
+	m_AttackedTime = 0.4;
 
-	m_AnimationNum = PL_STATE_NUM;
-
-	m_Animations[PL_STAND] = UtilFunction::makeAnimation("stand", 1, 9, 0.1f);
-	m_Animations[PL_WALK] = UtilFunction::makeAnimation("walk", 1, 12, 0.1f);
-	m_Animations[PL_JUMP_READY] = UtilFunction::makeAnimation("jump_ready", 1, 4, 0.1f);
-	m_Animations[PL_JUMP_UP] = UtilFunction::makeAnimation("jump_up", 1, 1, 0.1f);
-	m_Animations[PL_JUMP_DOWN] = UtilFunction::makeAnimation("jump_down", 1, 1, 0.1f);
-	m_Animations[PL_LAND] = UtilFunction::makeAnimation("land", 1, 4, 0.1f);
-
-	for (int i = 0; i < PL_STATE_NUM; i++)
-	{
-		m_Animations[i]->retain();
-	}
-
-	m_MainSprite = Sprite::create();
-	m_MainSprite->setAnchorPoint(Point(0.5, 0.5));
-	changeState(PL_STAND);
-	this->addChild(m_MainSprite);
+	initStand();
+	initAttack();
+	initAttacked();
 
 	auto keyListener = EventListenerKeyboard::create();
+
 	keyListener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, this);
 	keyListener->onKeyReleased = CC_CALLBACK_2(Player::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
@@ -44,117 +33,80 @@ bool Player::init()
 	return true;
 }
 
-void Player::update(float dTime)
+void Player::initStand()
 {
-	Point pos = this->getPosition();
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("player_stand.plist");
 
-	if (m_IsRightDirection)
+	m_Sprites[STAND]= Sprite::createWithSpriteFrameName("player1.png");
+	m_Sprites[STAND]->setAnchorPoint(Point(0.5, 0.5));
+	m_Sprites[STAND]->setFlippedX(true);
+
+	m_Animation[STAND] = Animation::create();
+	m_Animation[STAND]->setDelayPerUnit(0.2);
+	m_Animation[STAND]->retain();
+
+	for (int i = 0; i < 5; i++)
 	{
-		m_MainSprite->setFlippedX(true);
-	}
-	else
-	{
-		m_MainSprite->setFlippedX(false);
-	}
+		auto frame = SpriteFrameCache::getInstance()->
+			getSpriteFrameByName(StringUtils::format(
+			"player%d.png", i + 1));
 
-	pos.x += m_Vx * dTime;
-	pos.y += m_Vy * dTime;
-
-	this->setPosition(pos);
-
-
-	//착지 모션, 점프일 때는 기타 행동 수행 불가
-	if (m_State == PL_LAND || m_State == PL_JUMP_READY)
-	{
-		return;
+		m_Animation[STAND]->addSpriteFrame(frame);
 	}
 
-	//바닥을 딛고 있는 경우
-	if (m_PrevOuterForce.y == 0)
-	{
-		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
-		{
-			changeState(PL_WALK);
-			m_Vx = m_MoveSpeed;
-		}
-		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
-		{
-			changeState(PL_WALK);
-			m_Vx = -m_MoveSpeed;
-		}
-		else
-		{
-			m_Vx = 0;
-			changeState(PL_STAND);
-		}
-	}
-	//공중에 떠있는 경우
-	else
-	{
-		if (m_Vy > 0)
-		{
-			changeState(PL_JUMP_DOWN);
-		}
-		else
-		{
-			changeState(PL_JUMP_UP);
-		}
+	this->addChild(m_Sprites[STAND]);
 
-		//공중에 떠있을 땐 좌우 이동속도가 절반으로 떨어진다.
-		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
-		{
-			m_Vx = m_MoveSpeed/2;
-		}
-		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
-		{
-			m_Vx = -m_MoveSpeed/2;
-		}
-		else
-		{
-			m_Vx = 0;
-		}
-	}
+	m_NowSprite = m_Sprites[STAND];
 }
 
-bool Player::collisionOccured(InteractiveObject* enemy)
+void Player::initAttack()
 {
-	return true;
-}
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("player_attack.plist");
 
-void Player::changeState(State state)
-{
-	//이미 해당 상태인 경우 아무 처리도 하지 않는다.
-	if (m_State == state)
+	m_Sprites[ATTACK] = Sprite::createWithSpriteFrameName("attack1.png");
+	m_Sprites[ATTACK]->setAnchorPoint(Point(0.5, 0.5));
+	m_Sprites[ATTACK]->setFlippedX(true);
+
+	m_Animation[ATTACK] = Animation::create();
+	m_Animation[ATTACK]->setDelayPerUnit(m_AttackSpeed/7);
+	m_Animation[ATTACK]->retain();
+
+	for (int i = 0; i < 7; i++)
 	{
-		return;
+		auto frame = SpriteFrameCache::getInstance()->
+			getSpriteFrameByName(StringUtils::format(
+			"attack%d.png", i + 1));
+
+		m_Animation[ATTACK]->addSpriteFrame(frame);
 	}
-	m_State = state;
-	m_MainSprite->stopAllActions();
 
-	auto animate = Animate::create(m_Animations[state]);
-	auto callfunc = CallFuncN::create(CC_CALLBACK_1(Player::endAnimation, this));
-	auto sequence = Sequence::create(animate, callfunc, NULL);
+	m_Sprites[ATTACK]->setVisible(false);
 
-	m_MainSprite->runAction(RepeatForever::create(sequence));
+	this->addChild(m_Sprites[ATTACK]);
 }
 
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
 	switch (keyCode)
 	{
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		m_Direction |= UP;
+		break;
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		m_KeyState |= KS_LEFT;
-		m_IsRightDirection = false;
+		m_Direction |= LEFT;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		m_KeyState |= KS_RIGHT;
-		m_IsRightDirection = true;
+		m_Direction |= RIGHT;
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		m_Direction |= DOWN;
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
-		if (m_State == PL_STAND || m_State == PL_WALK || m_State == PL_LAND)
+		if (m_Status == STAND)
 		{
-			changeState(PL_JUMP_READY);
+			changeStatus(ATTACK);
 		}
+		m_IsAttacking = true;
 		break;
 	}
 }
@@ -163,60 +115,177 @@ void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 {
 	switch (keyCode)
 	{
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		m_Direction &= ~UP;
+		break;
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		if (m_KeyState & KS_RIGHT)
-		{
-			m_IsRightDirection = true;
-		}
-		m_KeyState &= ~KS_LEFT;
+		m_Direction &= ~LEFT;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		if (m_KeyState & KS_LEFT)
+		m_Direction &= ~RIGHT;
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		m_Direction &= ~DOWN;
+		break;
+	case EventKeyboard::KeyCode::KEY_SPACE:
+		m_IsAttacking = false;
+		break;
+	}
+}
+
+void Player::update(float delta)
+{
+	m_MotionDelay += delta;
+	m_AfterMotionDelay += delta;
+
+	m_Width = m_NowSprite->getContentSize().width;
+	m_Height = m_NowSprite->getContentSize().height;
+
+	Point pos = this->getPosition();
+
+	if (m_Direction & UP)
+	{
+		pos.y += m_Velocity;
+	}
+	else if (m_Direction & DOWN)
+	{
+		pos.y -= m_Velocity;
+	}
+
+	if (m_Direction & LEFT)
+	{
+		pos.x -= m_Velocity;
+	}
+	else if (m_Direction & RIGHT)
+	{
+		pos.x += m_Velocity;
+	}
+
+	if (!(pos.x - m_Width/2 <0 || pos.x + m_Width/2 > Director::getInstance()->getWinSize().width ||
+		pos.y - m_Height/2 <0 || pos.y + m_Height/2> Director::getInstance()->getWinSize().height))
+	{
+		this->setPosition(pos);
+	}
+
+	if (m_MotionDelay >= m_AttackedTime && m_Status == ATTACKED)
+	{
+		if (m_IsAttacking)
 		{
-			m_IsRightDirection = false;
+			changeStatus(ATTACK);
 		}
-		m_KeyState &= ~KS_RIGHT;
-		break;
+		else
+		{
+			changeStatus(STAND);
+		}
+	}
+
+	if (m_MotionDelay >= m_AttackSpeed/2 && m_Status == ATTACK)
+	{
+		m_MotionDelay -= m_AttackSpeed;
+
+		auto bullet = LinearBullet::create();
+
+		bullet->setMoveAttribute(true, 6, 0);
+		bullet->setPosition(this->getPosition());
+
+		((GameScene*)this->getParent())->addCharacter(bullet);
+	}
+
+	if (m_AfterMotionDelay >= m_AttackSpeed)
+	{
+		if (!m_IsAttacking)
+		{
+			changeStatus(STAND);
+		}
+		m_AfterMotionDelay = 0;
 	}
 }
 
-void Player::endAnimation(Ref* sender)
+cocos2d::Rect Player::getSize() const
 {
-	if (m_State == PL_LAND)
-	{
-		changeState(PL_STAND);
-	}
+	float x = this->getPositionX();
+	float y = this->getPositionY();
 
-	if (m_State == PL_JUMP_READY)
+	return Rect(x - m_Width / 2, y - m_Height / 2, m_Width, m_Height);
+}
+
+void Player::changeStatus(Status status)
+{
+	m_MotionDelay = 0;
+	m_AfterMotionDelay = 0;
+	m_Status = status;
+	m_NowSprite = m_Sprites[status];
+
+	for (int i = 0; i < STATE_NUM; i++)
 	{
-		changeState(PL_JUMP_UP);
-		m_Vy = 100;
+		if (i == status)
+		{
+			m_Sprites[i]->setVisible(true);
+			m_Sprites[i]->runAction(RepeatForever::create(Animate::create(m_Animation[i])));
+		}
+		else
+		{
+			m_Sprites[i]->setVisible(false);
+			m_Sprites[i]->stopAllActions();
+		}
 	}
 }
 
-void Player::setOuterForce(cocos2d::Vec2 OuterForce)
+void Player::startUnbeatableState()
 {
-	//착지한 순간
-	if (m_PrevOuterForce.y > 0 && OuterForce.y == 0)
+	if (!m_IsUnbeatable)
 	{
-		changeState(PL_LAND);
-	}
+		m_IsUnbeatable = true;
+		auto action = Blink::create(m_UnbeatableTime, m_UnbeatableTime * 5);
+		auto callback = CallFuncN::create(CC_CALLBACK_1(Player::endUnbeatableState, this));
 
-	InteractiveObject::setOuterForce(OuterForce);
+		this->runAction(Sequence::create(action, callback, NULL));
+	}
 }
 
-cocos2d::Rect Player::getRect()
+void Player::endUnbeatableState(Ref* sender)
 {
-	switch (m_State)
+	m_IsUnbeatable = false;
+}
+
+bool Player::collisionOccured(const Character* enemy)
+{
+	if (enemy->getType() == BULLET)
 	{
-	case PL_WALK:
-		m_Width = 48;
-		m_Height = 58;
-		break;
-	default:
-		m_Width = 32;
-		m_Height = 62;
-		break;
+		Bullet* bullet = (Bullet*)enemy;
+
+		if (!bullet->IsPlayersBullet())
+		{
+			changeStatus(ATTACKED);
+			startUnbeatableState();
+		}
 	}
-	return InteractiveObject::getRect();
+
+	return false;
+}
+
+void Player::initAttacked()
+{
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("player_attacked.plist");
+
+	m_Sprites[ATTACKED] = Sprite::createWithSpriteFrameName("attacked1.png");
+	m_Sprites[ATTACKED]->setAnchorPoint(Point(0.5, 0.5));
+	m_Sprites[ATTACKED]->setFlippedX(true);
+
+	m_Animation[ATTACKED] = Animation::create();
+	m_Animation[ATTACKED]->setDelayPerUnit(m_AttackedTime/3);
+	m_Animation[ATTACKED]->retain();
+
+	for (int i = 0; i < 3; i++)
+	{
+		auto frame = SpriteFrameCache::getInstance()->
+			getSpriteFrameByName(StringUtils::format(
+			"attacked%d.png", i + 1));
+
+		m_Animation[ATTACKED]->addSpriteFrame(frame);
+	}
+
+	m_Sprites[ATTACKED]->setVisible(false);
+
+	this->addChild(m_Sprites[ATTACKED]);
 }
