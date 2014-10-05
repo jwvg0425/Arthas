@@ -7,14 +7,17 @@ class Player;
 class MapLayer : public cocos2d::Layer
 {
 public:
-	virtual bool init();
+	virtual bool	init();
+	void			update(float dTime);
+	void			initMap(char* mapData);
 
-	CREATE_FUNC(MapLayer);
+	CREATE_FUNC( MapLayer );
 
-	void update(float dTime);
 private:
-	int m_Width, m_Height;
-	std::string m_MapRawData;
-	std::vector<int> m_MapData;
-	Player* m_Player;
+	cocos2d::Rect		m_MapRect;
+	cocos2d::Size		m_BoxSize;
+	int					m_BoxWidthNum, m_BoxHeightNum;
+	std::string			m_MapRawData;
+	std::vector<int>	m_MapData;
+	Player*				m_Player;
 };

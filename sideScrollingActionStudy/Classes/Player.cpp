@@ -11,9 +11,6 @@ bool Player::init()
 	m_IsRightDirection = false;
 	m_KeyState = 0;
 	m_State = PL_STAND;
-	m_MoveSpeed = 300;
-	m_Vx = 0;
-	m_Vy = 0;
 
 	m_AnimationNum = PL_STATE_NUM;
 
@@ -21,6 +18,7 @@ bool Player::init()
 	m_Animations[PL_WALK] = UtilFunction::makeAnimation("walk", 1, 12, 0.1f);
 	m_Animations[PL_JUMP_READY] = UtilFunction::makeAnimation("jump_ready", 1, 4, 0.1f);
 	m_Animations[PL_JUMP_UP] = UtilFunction::makeAnimation("jump_up", 1, 1, 0.1f);
+	m_Animations[PL_JUMP_HIGH] = UtilFunction::makeAnimation("jump_high", 1, 3, 0.1f);
 	m_Animations[PL_JUMP_DOWN] = UtilFunction::makeAnimation("jump_down", 1, 1, 0.1f);
 	m_Animations[PL_LAND] = UtilFunction::makeAnimation("land", 1, 4, 0.1f);
 
@@ -46,6 +44,7 @@ bool Player::init()
 void Player::update(float dTime)
 {
 	Point pos = this->getPosition();
+	bool isMoving = false;
 
 	if (m_IsRightDirection)
 	{
@@ -56,34 +55,40 @@ void Player::update(float dTime)
 		m_MainSprite->setFlippedX(false);
 	}
 
-	pos.x += m_Vx * dTime;
-	pos.y += m_Vy * dTime;
-	if (m_Vy == 0)
+	if (m_KeyState & KS_RIGHT)
 	{
-
-		if (m_State == PL_STAND && m_Vx != 0)
+		if (m_IsRightDirection)
 		{
-			changeState(PL_WALK);
+			pos.x += 6;
+			isMoving = true;
 		}
-
-		if (m_State == PL_WALK && m_Vx == 0)
+		else if (!(m_KeyState & KS_LEFT))
 		{
-			changeState(PL_STAND);
+			m_IsRightDirection = true;
 		}
 	}
-	else
+	if (m_KeyState & KS_LEFT)
 	{
-		if (m_Vy < 0)
+		if (!m_IsRightDirection)
 		{
-			changeState(PL_JUMP_DOWN);
+			pos.x -= 6;
+			isMoving = true;
 		}
-		else
+		else if (!(m_KeyState & KS_RIGHT))
 		{
-			changeState(PL_JUMP_UP);
+			m_IsRightDirection = false;
 		}
 	}
 
-	m_Vy -= 200*dTime;
+	if (m_State == PL_STAND && isMoving)
+	{
+		changeState(PL_WALK);
+	}
+
+	if (m_State == PL_WALK && !isMoving)
+	{
+		changeState(PL_STAND);
+	}
 
 	this->setPosition(pos);
 }
@@ -97,10 +102,7 @@ void Player::changeState(State state)
 {
 	m_State = state;
 	m_MainSprite->stopAllActions();
-	m_MainSprite->runAction(RepeatForever::create(
-							Sequence::create(
-							Animate::create(m_Animations[state]),
-							CallFuncN::create(CC_CALLBACK_1(Player::endAnimation,this)),NULL)));
+	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[state])));
 }
 
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -108,19 +110,15 @@ void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		m_Vx = -m_MoveSpeed;
 		m_KeyState |= KS_LEFT;
 		m_IsRightDirection = false;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		m_Vx = m_MoveSpeed;
 		m_KeyState |= KS_RIGHT;
 		m_IsRightDirection = true;
 		break;
-	case EventKeyboard::KeyCode::KEY_SPACE:
-		m_Vy = 200;
-		break;
 	}
+
 }
 
 void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -128,43 +126,10 @@ void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		if (m_KeyState & KS_RIGHT)
-		{
-			m_Vx = m_MoveSpeed;
-			m_IsRightDirection = true;
-		}
-		else
-		{
-			m_Vx = 0;
-		}
 		m_KeyState &= ~KS_LEFT;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		if (m_KeyState & KS_LEFT)
-		{
-			m_Vx = -m_MoveSpeed;
-			m_IsRightDirection = false;
-		}
-		else
-		{
-			m_Vx = 0;
-		}
 		m_KeyState &= ~KS_RIGHT;
 		break;
 	}
-}
-
-void Player::endAnimation(Ref* sender)
-{
-}
-
-cocos2d::Vec2 Player::getVelcotiy() const
-{
-	return Vec2(m_Vx, m_Vy);
-}
-
-void Player::setOuterForce(cocos2d::Vec2 OuterForce)
-{
-	m_Vx += OuterForce.x;
-	m_Vy += OuterForce.y;
 }
