@@ -62,7 +62,7 @@ void Player::update(float dTime)
 
 	this->setPosition(pos);
 
-	CCLOG("Vx = %f, Vy = %f", m_Vx, m_Vy);
+	CCLOG("X = %f, Y= %f, Vx = %f, Vy = %f",pos.x, pos.y, m_Vx, m_Vy);
 
 	//jump중
 	if (m_Vy!=0)

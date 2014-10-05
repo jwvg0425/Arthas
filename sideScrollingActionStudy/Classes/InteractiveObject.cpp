@@ -149,8 +149,8 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 	{
 		auto pos = this->getPosition();
 
-		pos.x = pos.x + minTime*m_Vx;
-		pos.y = pos.y + minTime*m_Vy;
+		pos.x = pos.x + minTime*this->getVelocity().x;
+		pos.y = pos.y + minTime*this->getVelocity().y;
 
 		this->setPosition(pos);
 	}
