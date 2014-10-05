@@ -27,5 +27,5 @@ protected:
 	ObjectType							m_Type;
 	float								m_Vx, m_Vy;
 	bool								m_IsOnGravity;
-
+	float								m_MoveSpeed;
 };

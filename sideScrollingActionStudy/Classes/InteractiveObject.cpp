@@ -149,8 +149,24 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 	{
 		auto pos = this->getPosition();
 
-		//pos.x = pos.x + minTime*this->getVelocity().x;
-		pos.y = pos.y + minTime*this->getVelocity().y;
+		if (dir&CD_LEFT || dir&CD_RIGHT)
+		{
+			pos.x = pos.x + minTime*this->getVelocity().x;
+		}
+		if (dir&CD_TOP || dir&CD_BOTTOM)
+		{
+			pos.y = pos.y + minTime*this->getVelocity().y;
+		}
+
+		if (dir & CD_LEFT &&this->getVelocity().x!=0)
+		{
+			pos.x += m_MoveSpeed * 0.0001;
+		}
+
+		if (dir & CD_RIGHT && this->getVelocity().x != 0)
+		{
+			pos.x -= m_MoveSpeed * 0.0001;
+		}
 
 		if (dir & CD_BOTTOM && this->IsOnGravity())
 		{

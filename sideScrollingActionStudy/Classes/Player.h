@@ -18,7 +18,6 @@ public:
 
 private:
 	typedef int		KeyState;
-	float			m_MoveSpeed;
 
 	enum State
 	{
