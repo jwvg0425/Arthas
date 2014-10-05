@@ -18,7 +18,8 @@ enum CollisionDirectionBit
 
 enum ZOrder
 {
-	ZO_BACKGROUND = 0,
+	ZO_BACKBACKGROUND = 0,
+	ZO_BACKGROUND,
 	ZO_ACCESSARY,
 	ZO_CHARACTER,
 	ZO_TILE,

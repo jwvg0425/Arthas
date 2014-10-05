@@ -35,7 +35,10 @@ bool GameScene::init()
 
 	layer->setAnchorPoint(Point(0.5,0.5));
 	layer->setPosition(Point(320,240));
-	this->addChild(layer);
-
+	auto backBackground = Sprite::create( "backGroundBack.png" );
+	backBackground->setAnchorPoint( Point::ZERO );
+	backBackground->setPosition( Point(0 , 40 ));
+	this->addChild( backBackground , ZOrder::ZO_BACKBACKGROUND );
+	this->addChild( layer );
 	return true;
 }

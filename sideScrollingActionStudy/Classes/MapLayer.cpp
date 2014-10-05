@@ -38,6 +38,11 @@ bool MapLayer::init()
 	m_InteractiveObjects.push_back( m_Player );
 
 	m_MapRect.setRect( 0, 0, 32*m_BoxWidthNum, 32*m_BoxHeightNum );
+
+	auto frontBackground = Sprite::create( "backGroundFront.png" );
+	frontBackground->setAnchorPoint( Point::ZERO );
+	frontBackground->setScaleY( 0.8 );
+	this->addChild( frontBackground , ZOrder::ZO_BACKGROUND );
 	this->addChild( m_Player , ZOrder::ZO_CHARACTER );
 	this->scheduleUpdate();
 
@@ -183,6 +188,7 @@ void MapLayer::addTile( TileType type , int xIdx , int yIdx )
 
 void MapLayer::addTilePiece(int xIdx, int yIdx)
 {
+	ZOrder zOrder = ZO_ACCESSARY;
 	Sprite* sprite = nullptr;
 	if( m_MapData[( yIdx - 1 )*( m_BoxWidthNum )+xIdx - 1] == 1 )
 	{
@@ -214,6 +220,7 @@ void MapLayer::addTilePiece(int xIdx, int yIdx)
 		if( m_MapData[( yIdx - 1 )*( m_BoxWidthNum )+xIdx] == 1 ) //(x, y) 박스 밑에 1 박스 왼쪽 아래 0,
 		{
 			sprite = Sprite::createWithSpriteFrameName( "tile_back_corner.png" );
+			zOrder = ZO_TILE;
 		}
 		else if( m_MapData[yIdx*( m_BoxWidthNum )+xIdx - 1] == 1 ) //(x, y) 박스 왼쪽 1 박스 왼쪽 아래 0,
 		{
@@ -223,7 +230,7 @@ void MapLayer::addTilePiece(int xIdx, int yIdx)
 	if( sprite != nullptr )
 	{
 		sprite->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
-		this->addChild( sprite , ZOrder::ZO_ACCESSARY );
+		this->addChild( sprite , zOrder );
 	}
 }
 
