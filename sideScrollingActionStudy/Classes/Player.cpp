@@ -13,6 +13,7 @@ bool Player::init()
 	m_MoveSpeed = 300;
 	m_Vx = 0;
 	m_Vy = 0;
+	m_Type = OT_PLAYER;
 
 	m_AnimationNum = PL_STATE_NUM;
 
@@ -61,7 +62,7 @@ void Player::update(float dTime)
 	this->setPosition(pos);
 
 
-	//착지 모션, 점프일 때는 기타 행동 수행 불가
+	//착지 모션, 점프 준비 모션일 때는 기타 행동 수행 불가
 	if (m_State == PL_LAND || m_State == PL_JUMP_READY)
 	{
 		return;
@@ -84,9 +85,9 @@ void Player::update(float dTime)
 	}
 }
 
-bool Player::collisionOccured(InteractiveObject* enemy)
+void Player::collisionOccured(InteractiveObject* enemy, CollisionDirection dir, OUT bool* isRemoving)
 {
-	return true;
+	*isRemoving = false;
 }
 
 void Player::changeState(State state)
@@ -177,9 +178,4 @@ cocos2d::Rect Player::getRect()
 		break;
 	}
 	return InteractiveObject::getRect();
-}
-
-bool Player::collisionCheck(InteractiveObject* enemy)
-{
-	return false;
 }

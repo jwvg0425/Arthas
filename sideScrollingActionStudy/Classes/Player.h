@@ -7,15 +7,13 @@ class Player : public InteractiveObject
 public:
 	virtual bool init();
 
-	virtual bool collisionOccured(InteractiveObject* enemy);
+	virtual void collisionOccured(InteractiveObject* enemy, CollisionDirection dir, OUT bool* isRemoving);
 
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
 	void update(float dTime);
 	virtual cocos2d::Rect getRect();
-
-	virtual bool collisionCheck(InteractiveObject* enemy);
 
 	CREATE_FUNC(Player);
 
