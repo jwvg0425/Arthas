@@ -32,7 +32,7 @@ bool Player::init()
 	}
 
 	m_MainSprite = Sprite::create();
-	m_MainSprite->setAnchorPoint(Point(0.4, 0.5));
+	m_MainSprite->setAnchorPoint(Point(0.35, 0.35));
 	changeState(PL_STAND);
 	this->addChild(m_MainSprite);
 

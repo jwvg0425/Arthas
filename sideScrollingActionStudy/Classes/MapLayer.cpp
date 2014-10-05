@@ -38,7 +38,7 @@ bool MapLayer::init()
 	m_InteractiveObjects.push_back( m_Player );
 
 	m_MapRect.setRect( 0, 0, 32*m_BoxWidthNum, 32*m_BoxHeightNum );
-	this->addChild(m_Player);
+	this->addChild( m_Player , ZOrder::ZO_CHARACTER );
 	this->scheduleUpdate();
 
 	return true;
@@ -176,7 +176,7 @@ void MapLayer::addTile( TileType type , int xIdx , int yIdx )
 		auto tile = Floor::create();
 		tile->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
 		m_InteractiveObjects.push_back( tile );
-		this->addChild( tile );
+		this->addChild( tile , ZOrder::ZO_TILE);
 	}
 	
 }
@@ -223,7 +223,7 @@ void MapLayer::addTilePiece(int xIdx, int yIdx)
 	if( sprite != nullptr )
 	{
 		sprite->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
-		this->addChild( sprite );
+		this->addChild( sprite , ZOrder::ZO_ACCESSARY );
 	}
 }
 

@@ -10,7 +10,7 @@ bool Floor::init()
 	m_MainSprite->setAnchorPoint( Point(0.5, 0.5) );
 	this->addChild( m_MainSprite );
 	m_Width = m_MainSprite->getContentSize().width;
-	m_Height = m_MainSprite->getContentSize().height + 10;
+	m_Height = m_MainSprite->getContentSize().height;
 	return true;
 }
 
