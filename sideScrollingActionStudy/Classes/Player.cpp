@@ -207,8 +207,16 @@ void Player::setOuterForce(cocos2d::Vec2 OuterForce)
 
 cocos2d::Rect Player::getRect()
 {
-	m_Width = m_MainSprite->getContentSize().width;
-	m_Height = m_MainSprite->getContentSize().height;
-
+	switch (m_State)
+	{
+	case PL_WALK:
+		m_Width = 48;
+		m_Height = 58;
+		break;
+	default:
+		m_Width = 32;
+		m_Height = 62;
+		break;
+	}
 	return InteractiveObject::getRect();
 }
