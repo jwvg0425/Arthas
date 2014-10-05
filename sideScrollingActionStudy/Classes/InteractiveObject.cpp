@@ -2,12 +2,10 @@
 
 USING_NS_CC;
 
-const float InteractiveObject::GRAVITY = 980;
+const float InteractiveObject::GRAVITY = 98;
 
 bool InteractiveObject::init()
 {
-	m_Vx = 0;
-	m_Vy = 0;
 	return true;
 }
 
@@ -143,16 +141,6 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 				dir = CD_RIGHT;
 			}
 		}
-	}
-
-	if (dir != CD_NONE)
-	{
-		auto pos = this->getPosition();
-
-		pos.x = pos.x + minTime*m_Vx;
-		pos.y = pos.y + minTime*m_Vy;
-
-		this->setPosition(pos);
 	}
 
 	return dir;
