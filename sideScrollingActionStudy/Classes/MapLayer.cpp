@@ -36,6 +36,8 @@ bool MapLayer::init()
 	m_Player = Player::create();
 	m_Player->setAnchorPoint(Point(0.5, 0.5));
 	m_Player->setPosition(Point(100, 200));
+	m_InteractiveObjects.push_back( m_Player );
+
 	m_MapRect.setRect( 0, 0, 32*m_BoxWidthNum, 32*m_BoxHeightNum );
 	this->addChild(m_Player);
 	this->scheduleUpdate();
@@ -47,6 +49,7 @@ void MapLayer::update(float dTime)
 {
 	setViewPosition();
 	collisionCheck(dTime);
+	removeObjects();
 }
 
 void MapLayer::collisionCheck( float dTime )
@@ -80,6 +83,15 @@ void MapLayer::collisionCheck( float dTime )
 		}
 	}
 }
+
+void MapLayer::removeObjects()
+{
+	for( auto removeObject : m_RemoveObjects )
+	{
+
+	}
+}
+
 
 void MapLayer::setViewPosition()
 {
@@ -165,6 +177,7 @@ void MapLayer::addTile( TileType type , int xIdx , int yIdx )
 		auto tile = Floor::create();
 		tile->setAnchorPoint( Point::ZERO );
 		tile->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
+		m_InteractiveObjects.push_back( tile );
 		this->addChild( tile );
 	}
 	
@@ -216,3 +229,4 @@ void MapLayer::addTilePiece(int xIdx, int yIdx)
 		this->addChild( sprite );
 	}
 }
+

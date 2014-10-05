@@ -13,6 +13,7 @@ public:
 	virtual bool				init();
 	void						update(float dTime);
 	void						collisionCheck(float dTime);
+	void						removeObjects();
 	void						initMap(char* mapData);
 	void						setViewPosition();
 	void						addTile(TileType type, int posX, int posY);
