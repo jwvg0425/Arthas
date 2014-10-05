@@ -62,8 +62,8 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 			if (time < minTime)
 			{
 				minTime = time;
-				dir = CD_BOTTOM;
 			}
+			dir |= CD_BOTTOM;
 		}
 	}
 
@@ -88,8 +88,8 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 			if (time < minTime)
 			{
 				minTime = time;
-				dir = CD_TOP;
 			}
+			dir |= CD_TOP;
 		}
 	}
 
@@ -114,8 +114,8 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 			if (time < minTime)
 			{
 				minTime = time;
-				dir = CD_LEFT;
 			}
+			dir |= CD_LEFT;
 		}
 	}
 
@@ -140,8 +140,8 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 			if (time < minTime)
 			{
 				minTime = time;
-				dir = CD_RIGHT;
 			}
+			dir |= CD_RIGHT;
 		}
 	}
 
@@ -149,10 +149,10 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 	{
 		auto pos = this->getPosition();
 
-		pos.x = pos.x + minTime*this->getVelocity().x;
+		//pos.x = pos.x + minTime*this->getVelocity().x;
 		pos.y = pos.y + minTime*this->getVelocity().y;
 
-		if (dir == CD_BOTTOM && this->IsOnGravity())
+		if (dir & CD_BOTTOM && this->IsOnGravity())
 		{
 			pos.y += GRAVITY*0.0001;
 		}

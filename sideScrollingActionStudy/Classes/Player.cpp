@@ -113,6 +113,10 @@ void Player::update(float dTime)
 				changeState(PL_STAND);
 			}
 		}
+		else
+		{
+			m_Vx = 0;
+		}
 	}
 
 	m_Vy -= GRAVITY*dTime;

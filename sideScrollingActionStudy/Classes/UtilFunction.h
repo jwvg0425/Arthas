@@ -10,10 +10,10 @@ enum ObjectType
 enum CollisionDirectionBit
 {
 	CD_NONE,
-	CD_TOP,
-	CD_LEFT,
-	CD_BOTTOM,
-	CD_RIGHT,
+	CD_TOP = 1,
+	CD_LEFT = 2,
+	CD_BOTTOM = 4,
+	CD_RIGHT = 8,
 };
 typedef int CollisionDirection;
 
