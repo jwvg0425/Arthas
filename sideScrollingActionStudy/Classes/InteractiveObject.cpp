@@ -1,5 +1,5 @@
 ﻿#include "InteractiveObject.h"
-
+ 
 USING_NS_CC;
 
 const float InteractiveObject::GRAVITY = 980;
@@ -62,7 +62,7 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 			if (time < minTime)
 			{
 				minTime = time;
-				dir = CD_TOP;
+				dir = CD_BOTTOM;
 			}
 		}
 	}
@@ -88,7 +88,7 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 			if (time < minTime)
 			{
 				minTime = time;
-				dir = CD_BOTTOM;
+				dir = CD_TOP;
 			}
 		}
 	}
@@ -151,6 +151,11 @@ CollisionDirection InteractiveObject::collisionCheck(InteractiveObject* enemy,fl
 
 		pos.x = pos.x + minTime*this->getVelocity().x;
 		pos.y = pos.y + minTime*this->getVelocity().y;
+
+		if (dir == CD_BOTTOM && this->IsOnGravity())
+		{
+			pos.y += GRAVITY*0.0001;
+		}
 
 		this->setPosition(pos);
 	}

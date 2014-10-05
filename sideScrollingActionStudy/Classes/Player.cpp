@@ -15,6 +15,7 @@ bool Player::init()
 	m_Vy = 0;
 	m_Type = OT_PLAYER;
 	m_IsFlying = true;
+	m_IsOnGravity = true;
 
 	m_AnimationNum = PL_STATE_NUM;
 

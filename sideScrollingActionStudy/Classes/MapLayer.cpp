@@ -71,6 +71,7 @@ void MapLayer::collisionCheck( float dTime )
 					m_RemoveObjects.push_back( subject );
 				}
 			}
+			collisionDirection = object->collisionCheck(subject, dTime);
 			collisionDirection = UtilFunction::getReverseDirection( collisionDirection );
 			if( collisionDirection )
 			{

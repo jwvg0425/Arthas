@@ -16,6 +16,8 @@ public:
 
 	cocos2d::Vec2				getVelocity() const;
 
+	bool IsOnGravity() { return m_IsOnGravity; }
+
 protected:
 	static const float					GRAVITY;
 	cocos2d::Sprite*					m_MainSprite;
