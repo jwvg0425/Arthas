@@ -112,7 +112,7 @@ void Player::update(float dTime)
 			m_Vx = 0;
 		}
 	}
-
+	setOuterForce(Vec2(0, -10));
 	this->setPosition(pos);
 }
 
