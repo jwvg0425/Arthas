@@ -10,51 +10,75 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Core">
+      <UniqueIdentifier>{5cef3201-c527-4fc7-9240-edd9d4896eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameNodes">
+      <UniqueIdentifier>{41c12feb-5e89-4eb6-a016-2921091b5067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameNodes\InteractiveObject">
+      <UniqueIdentifier>{c1240bfc-dacb-43bb-ac69-e86f63a1001e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameNodes\InteractiveObject\Tile">
+      <UniqueIdentifier>{aade8b96-e052-4cd2-b42b-6a13843da244}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MapLayer.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\InteractiveObject.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\GameNodes\InteractiveObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\GameNodes\InteractiveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Floor.cpp">
+      <Filter>Classes\GameNodes\InteractiveObject\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\UtilFunction.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TileObject.cpp">
+      <Filter>Classes\GameNodes\InteractiveObject\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>Classes\GameNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapLayer.cpp">
+      <Filter>Classes\GameNodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MapLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\InteractiveObject.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\GameNodes\InteractiveObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\GameNodes\InteractiveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Floor.h">
+      <Filter>Classes\GameNodes\InteractiveObject\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UtilFunction.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TileObject.h">
+      <Filter>Classes\GameNodes\InteractiveObject\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>Classes\GameNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapLayer.h">
+      <Filter>Classes\GameNodes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

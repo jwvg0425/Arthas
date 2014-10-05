@@ -1,5 +1,6 @@
 ﻿#include "MapLayer.h"
 #include "Player.h"
+#include "Floor.h"
 
 USING_NS_CC;
 
@@ -9,6 +10,8 @@ bool MapLayer::init()
 	{
 		return false;
 	}
+	m_BoxSize.setSize( 32 , 32 );
+
 	initMap( "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n"
 			 "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n"
 			 "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n"
@@ -33,7 +36,6 @@ bool MapLayer::init()
 	m_Player = Player::create();
 	m_Player->setAnchorPoint(Point(0.5, 0.5));
 	m_Player->setPosition(Point(100, 200));
-	m_BoxSize.setSize( 32 , 32 );
 	m_MapRect.setRect( 0, 0, 32*m_BoxWidthNum, 32*m_BoxHeightNum );
 	this->addChild(m_Player);
 	this->scheduleUpdate();
@@ -44,6 +46,39 @@ bool MapLayer::init()
 void MapLayer::update(float dTime)
 {
 	setViewPosition();
+	collisionCheck(dTime);
+}
+
+void MapLayer::collisionCheck( float dTime )
+{
+	CollisionDirection collisionDirection;
+	bool haveToRemove;
+	for( auto subjectIter = m_InteractiveObjects.begin(); subjectIter != m_InteractiveObjects.end(); ++subjectIter )
+	{
+		for( auto objectIter = subjectIter + 1; objectIter != m_InteractiveObjects.end(); ++objectIter )
+		{
+			auto subject = *subjectIter;
+			auto object = *objectIter;
+			collisionDirection = subject->collisionCheck( object , dTime );
+			if( collisionDirection )
+			{
+				subject->collisionOccured( object , collisionDirection , &haveToRemove );
+				if( haveToRemove )
+				{
+					m_RemoveObjects.push_back( subject );
+				}
+			}
+			collisionDirection = UtilFunction::getReverseDirection( collisionDirection );
+			if( collisionDirection )
+			{
+				object->collisionOccured( subject , collisionDirection , &haveToRemove );
+				if( haveToRemove )
+				{
+					m_RemoveObjects.push_back( object );
+				}
+			}
+		}
+	}
 }
 
 void MapLayer::setViewPosition()
@@ -94,72 +129,90 @@ void MapLayer::initMap(char* mapData)
 
 	rawValue = strtok( rawData , " \n" );
 	int value;
-	for( int y = m_BoxHeightNum - 1; y >= 0; y-- )
+	for( int yIdx = m_BoxHeightNum - 1; yIdx >= 0; yIdx-- )
 	{
-		for( int x = 0; x < m_BoxWidthNum; x++ )
+		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
 		{
 			value = atoi( rawValue );
-			m_MapData[m_BoxWidthNum*y + x] = value;
+			m_MapData[m_BoxWidthNum*yIdx + xIdx] = value;
 
 			rawValue = strtok( nullptr , " \n" );
 		}
 	}
 
-	for( int y = 0; y < m_BoxHeightNum; y++ )
+	for( int yIdx = 0; yIdx < m_BoxHeightNum; yIdx++ )
 	{
-		for( int x = 0; x < m_BoxWidthNum; x++ )
+		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
 		{
 			Sprite* sprite = nullptr;
-			switch( m_MapData[y*m_BoxWidthNum + x] )
+			switch( m_MapData[yIdx*m_BoxWidthNum + xIdx] )
 			{
 				case 0:
-					if( m_MapData[( y - 1 )*( m_BoxWidthNum ) + x - 1] == 1 ) 
-					{
-						if( m_MapData[( y - 1 )*( m_BoxWidthNum  ) + x] == 1 )
-						{
-							if( m_MapData[y*( m_BoxWidthNum ) + x - 1] == 1 ) //(x, y) 박스 밑에 1 박스 왼쪽 아래 1, 박스 왼쪽 1
-							{
-								sprite = Sprite::createWithSpriteFrameName( "tile_side_lowercorner.png" );
-							}
-							else //(x, y) 박스 밑에 1 박스 왼쪽 아래 1, 박스 왼쪽 0
-							{
-								sprite = Sprite::createWithSpriteFrameName( "tile_back.png" );
-							}
-						}
-						else 
-						{
-							if( m_MapData[y*( m_BoxWidthNum ) + x - 1] == 1 )  //(x, y) 박스 밑에 0 박스 왼쪽 아래 1, 박스 왼쪽 1
-							{
-								sprite = Sprite::createWithSpriteFrameName( "tile_side.png" );
-							}
-							else //(x, y) 박스 밑에 0 박스 왼쪽 아래 1, 박스 왼쪽 0	
-							{
-								sprite = Sprite::createWithSpriteFrameName( "tile_side_uppercorner.png" );
-							}
-						}
-					}
-					else
-					{
-						if( m_MapData[( y - 1 )*( m_BoxWidthNum) + x] == 1 ) //(x, y) 박스 밑에 1 박스 왼쪽 아래 0,
-						{
-							sprite = Sprite::createWithSpriteFrameName( "tile_back_corner.png" );
-						}
-						else if( m_MapData[y*( m_BoxWidthNum ) + x - 1] == 1 ) //(x, y) 박스 왼쪽 1 박스 왼쪽 아래 0,
-						{
-							sprite = Sprite::createWithSpriteFrameName( "tile_side_corner.png" );
-						}
-					}
+					addTilePiece(xIdx, yIdx);
 					break;
 				case 1:
-					sprite = Sprite::createWithSpriteFrameName( "tile.png" );
+					addTile( TT_FLOOR , xIdx , yIdx );
 					break;
 			}
-			if( sprite != nullptr )
+		}
+	}
+}
+
+void MapLayer::addTile( TileType type , int xIdx , int yIdx )
+{
+	if(type == TT_FLOOR)
+	{
+		auto tile = Floor::create();
+		tile->setAnchorPoint( Point::ZERO );
+		tile->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
+		this->addChild( tile );
+	}
+	
+}
+
+void MapLayer::addTilePiece(int xIdx, int yIdx)
+{
+	Sprite* sprite = nullptr;
+	if( m_MapData[( yIdx - 1 )*( m_BoxWidthNum )+xIdx - 1] == 1 )
+	{
+		if( m_MapData[( yIdx - 1 )*( m_BoxWidthNum )+xIdx] == 1 )
+		{
+			if( m_MapData[yIdx*( m_BoxWidthNum )+xIdx - 1] == 1 ) //(x, y) 박스 밑에 1 박스 왼쪽 아래 1, 박스 왼쪽 1
 			{
-				sprite->setAnchorPoint( Point::ZERO );
-				sprite->setPosition( Point( x * 32 , y * 32 ) );
-				this->addChild( sprite );
+				sprite = Sprite::createWithSpriteFrameName( "tile_side_lowercorner.png" );
+			}
+			else //(x, y) 박스 밑에 1 박스 왼쪽 아래 1, 박스 왼쪽 0
+			{
+				sprite = Sprite::createWithSpriteFrameName( "tile_back.png" );
 			}
 		}
+		else
+		{
+			if( m_MapData[yIdx*( m_BoxWidthNum )+xIdx - 1] == 1 )  //(x, y) 박스 밑에 0 박스 왼쪽 아래 1, 박스 왼쪽 1
+			{
+				sprite = Sprite::createWithSpriteFrameName( "tile_side.png" );
+			}
+			else //(x, y) 박스 밑에 0 박스 왼쪽 아래 1, 박스 왼쪽 0	
+			{
+				sprite = Sprite::createWithSpriteFrameName( "tile_side_uppercorner.png" );
+			}
+		}
+	}
+	else
+	{
+		if( m_MapData[( yIdx - 1 )*( m_BoxWidthNum )+xIdx] == 1 ) //(x, y) 박스 밑에 1 박스 왼쪽 아래 0,
+		{
+			sprite = Sprite::createWithSpriteFrameName( "tile_back_corner.png" );
+		}
+		else if( m_MapData[yIdx*( m_BoxWidthNum )+xIdx - 1] == 1 ) //(x, y) 박스 왼쪽 1 박스 왼쪽 아래 0,
+		{
+			sprite = Sprite::createWithSpriteFrameName( "tile_side_corner.png" );
+		}
+	}
+	if( sprite != nullptr )
+	{
+		sprite->setAnchorPoint( Point::ZERO );
+		sprite->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
+		this->addChild( sprite );
 	}
 }
