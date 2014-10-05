@@ -34,7 +34,7 @@ bool MapLayer::init()
 			 "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n" );
 
 	m_Player = Player::create();
-	m_Player->setAnchorPoint(Point(0.5, 0.5));
+	m_Player->setAnchorPoint(Point::ZERO);
 	m_Player->setPosition(Point(100, 200));
 	m_InteractiveObjects.push_back( m_Player );
 
