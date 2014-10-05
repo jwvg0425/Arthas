@@ -62,8 +62,10 @@ void Player::update(float dTime)
 
 	this->setPosition(pos);
 
+	CCLOG("Vx = %f, Vy = %f", m_Vx, m_Vy);
+
 	//jump중
-	if (m_IsFlying)
+	if (m_Vy!=0)
 	{
 		if (m_Vy < 0)
 		{
@@ -125,6 +127,10 @@ void Player::collisionOccured(InteractiveObject* enemy, CollisionDirection dir, 
 		{
 		case CD_BOTTOM:
 			m_IsFlying = false;
+			if (m_State == PL_JUMP_UP || m_State == PL_JUMP_DOWN)
+			{
+				changeState(PL_LAND);
+			}
 		case CD_TOP:
 			m_Vy = 0;
 			break;
@@ -207,23 +213,15 @@ void Player::endAnimation(Ref* sender)
 	if (m_State == PL_JUMP_READY)
 	{
 		changeState(PL_JUMP_UP);
-		m_Vy = 100;
+		m_Vy = 400;
 	}
 }
 
 
 cocos2d::Rect Player::getRect()
 {
-	switch (m_State)
-	{
-	case PL_WALK:
-		m_Width = 48;
-		m_Height = 58;
-		break;
-	default:
-		m_Width = 32;
-		m_Height = 62;
-		break;
-	}
+	m_Width = 32;
+	m_Height = 62;
+	
 	return InteractiveObject::getRect();
 }
