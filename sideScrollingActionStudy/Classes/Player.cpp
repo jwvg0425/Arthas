@@ -32,7 +32,7 @@ bool Player::init()
 
 	m_MainSprite = Sprite::create();
 	m_MainSprite->setAnchorPoint(Point(0.5, 0.5));
-	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[PL_STAND])));
+	changeState(PL_STAND);
 	this->addChild(m_MainSprite);
 
 	auto keyListener = EventListenerKeyboard::create();
@@ -59,6 +59,8 @@ void Player::update(float dTime)
 
 	pos.x += m_Vx * dTime;
 	pos.y += m_Vy * dTime;
+
+	this->setPosition(pos);
 
 
 	//착지 모션, 점프일 때는 기타 행동 수행 불가
@@ -112,8 +114,6 @@ void Player::update(float dTime)
 			m_Vx = 0;
 		}
 	}
-	setOuterForce(Vec2(0, -10));
-	this->setPosition(pos);
 }
 
 bool Player::collisionOccured(InteractiveObject* enemy)
