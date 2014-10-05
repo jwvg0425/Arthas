@@ -13,7 +13,6 @@ bool Player::init()
 	m_MoveSpeed = 300;
 	m_Vx = 0;
 	m_Vy = 0;
-	m_PrevOuterForce = Vec2::ZERO;
 
 	m_AnimationNum = PL_STATE_NUM;
 
@@ -68,50 +67,20 @@ void Player::update(float dTime)
 		return;
 	}
 
-	//바닥을 딛고 있는 경우
-	if (m_PrevOuterForce.y == 0)
+	if (m_IsRightDirection && m_KeyState & KS_RIGHT)
 	{
-		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
-		{
-			changeState(PL_WALK);
-			m_Vx = m_MoveSpeed;
-		}
-		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
-		{
-			changeState(PL_WALK);
-			m_Vx = -m_MoveSpeed;
-		}
-		else
-		{
-			m_Vx = 0;
-			changeState(PL_STAND);
-		}
+		changeState(PL_WALK);
+		m_Vx = m_MoveSpeed;
 	}
-	//공중에 떠있는 경우
+	else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
+	{
+		changeState(PL_WALK);
+		m_Vx = -m_MoveSpeed;
+	}
 	else
 	{
-		if (m_Vy > 0)
-		{
-			changeState(PL_JUMP_DOWN);
-		}
-		else
-		{
-			changeState(PL_JUMP_UP);
-		}
-
-		//공중에 떠있을 땐 좌우 이동속도가 절반으로 떨어진다.
-		if (m_IsRightDirection && m_KeyState & KS_RIGHT)
-		{
-			m_Vx = m_MoveSpeed/2;
-		}
-		else if (!m_IsRightDirection && m_KeyState & KS_LEFT)
-		{
-			m_Vx = -m_MoveSpeed/2;
-		}
-		else
-		{
-			m_Vx = 0;
-		}
+		m_Vx = 0;
+		changeState(PL_STAND);
 	}
 }
 
@@ -193,16 +162,6 @@ void Player::endAnimation(Ref* sender)
 	}
 }
 
-void Player::setOuterForce(cocos2d::Vec2 OuterForce)
-{
-	//착지한 순간
-	if (m_PrevOuterForce.y > 0 && OuterForce.y == 0)
-	{
-		changeState(PL_LAND);
-	}
-
-	InteractiveObject::setOuterForce(OuterForce);
-}
 
 cocos2d::Rect Player::getRect()
 {
@@ -218,4 +177,9 @@ cocos2d::Rect Player::getRect()
 		break;
 	}
 	return InteractiveObject::getRect();
+}
+
+bool Player::collisionCheck(InteractiveObject* enemy)
+{
+	return false;
 }

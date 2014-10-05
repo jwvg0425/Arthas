@@ -13,8 +13,9 @@ public:
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
 	void update(float dTime);
-	virtual void setOuterForce(cocos2d::Vec2 OuterForce);
 	virtual cocos2d::Rect getRect();
+
+	virtual bool collisionCheck(InteractiveObject* enemy);
 
 	CREATE_FUNC(Player);
 

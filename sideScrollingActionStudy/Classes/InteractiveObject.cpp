@@ -14,15 +14,7 @@ cocos2d::Rect InteractiveObject::getRect()
 	return Rect(pos.x - m_Width / 2, pos.y - m_Height / 2, m_Width, m_Height);
 }
 
-void InteractiveObject::setOuterForce(cocos2d::Vec2 OuterForce)
-{
-	m_Vx += OuterForce.x;
-	m_Vy += OuterForce.y;
-
-	m_PrevOuterForce = OuterForce;
-}
-
-cocos2d::Vec2 InteractiveObject::getVelcotiy() const
+cocos2d::Vec2 InteractiveObject::getVelocity() const
 {
 	return Vec2(m_Vx, m_Vy);
 }
