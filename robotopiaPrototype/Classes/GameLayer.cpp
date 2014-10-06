@@ -1,6 +1,5 @@
 #include "GameLayer.h"
 #include "LandFloor.h"
-#include "View.h"
 
 USING_NS_CC;
 
@@ -107,24 +106,32 @@ void GameLayer::update( float dTime )
 
 void GameLayer::collisionCheck(float dTime)
 {
-	Direction collisionDirection;
+	std::vector<CollisionInformation> collisionInformations;
+	Directions collisionDirections;
+
 	for( auto subjectIter = m_InteractiveObjects.begin(); subjectIter != m_InteractiveObjects.end(); ++subjectIter )
 	{
 		for( auto objectIter = subjectIter + 1; objectIter != m_InteractiveObjects.end(); ++objectIter )
 		{
-			auto subject = *subjectIter;
-			auto object = *objectIter;
-			collisionDirection = subject->collisionCheck( object , dTime );
-			if( collisionDirection )
+			auto subject = *subjectIter; //충돌 주체
+			auto object = *objectIter;	//충돌당하는 애
+			collisionDirections = subject->collisionCheck( object , dTime );
+			if( collisionDirections )
 			{
-				subject->collisionOccured( object , collisionDirection);
+				collisionInformations.push_back( CollisionInformation(subject, object, collisionDirections));
 			}
-			collisionDirection = object->collisionCheck( subject , dTime );
-			if( collisionDirection )
+			
+			collisionDirections = object->collisionCheck( subject , dTime );
+			if( collisionDirections )
 			{
-				object->collisionOccured( subject , collisionDirection);
+				collisionInformations.push_back( CollisionInformation( object , subject , collisionDirections ) );
 			}
 		}
+	}
+
+	for( auto collisionInfo : collisionInformations )
+	{
+		collisionInfo.subject->collisionOccured( collisionInfo.object , collisionInfo.directions );
 	}
 }
 

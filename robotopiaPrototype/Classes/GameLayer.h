@@ -43,6 +43,20 @@ public:
 
 	CREATE_FUNC( GameLayer );
 private:
+
+	struct CollisionInformation
+	{
+		CollisionInformation( InteractiveObject* sub , InteractiveObject* obj , Directions dirs )
+		{
+			subject = sub;
+			object = obj;
+			directions = dirs;
+		}
+		InteractiveObject*	subject;
+		InteractiveObject*	object;
+		Directions			directions;
+	};
+
 	cocos2d::Rect					m_WinRect;
 	cocos2d::Rect					m_MapRect;
 	cocos2d::Size					m_BoxSize;
