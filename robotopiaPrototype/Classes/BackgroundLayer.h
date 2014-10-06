@@ -9,6 +9,8 @@ public:
 	CREATE_FUNC( BackgroundLayer );
 
 private:
-	cocos2d::Sprite* m_FrontSprite;
-	cocos2d::Sprite* m_BackSprite;
+	cocos2d::Sprite*	m_FrontSprite;
+	cocos2d::Sprite*	m_BackSprite1;
+	cocos2d::Sprite*	m_BackSprite2;
+
 };

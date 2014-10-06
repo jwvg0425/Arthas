@@ -23,10 +23,12 @@ bool GameLayer::init()
 	KeyStateManager::receiveKeyboardData( this );
 	this->scheduleUpdate();
 
+	addBackground();
+
 	m_Player = Player::create();
-	m_Player->setAnchorPoint( Point( 0.5 , 0.5 ) );
+	m_Player->setAnchorPoint( Point( 0.6 , 0.6 ) );
 	m_Player->setPosition(Point(100 , 300));
-	this->addChild( m_Player );
+	this->addChild( m_Player , GameLayer::ZOrder::GAME_OBJECT);
 	m_InteractiveObjects.push_back( m_Player );
 
 	return true;
@@ -38,8 +40,8 @@ bool GameLayer::initWorldFromData( char* data )
 	//받아야 하는 데이터들 BoxSize MapSize MapData(값)
 	UserDefault::getInstance()->setIntegerForKey( "mapWidth" , 48 );
 	UserDefault::getInstance()->setIntegerForKey( "mapHeight" , 20 );
-	UserDefault::getInstance()->setIntegerForKey( "boxWidth" , 35 );
-	UserDefault::getInstance()->setIntegerForKey( "boxHeight" , 35 );
+	UserDefault::getInstance()->setIntegerForKey( "boxWidth" , 32 );
+	UserDefault::getInstance()->setIntegerForKey( "boxHeight" , 32 );
 	UserDefault::getInstance()->setStringForKey( "mapData" , data );
 	m_BoxWidthNum = UserDefault::getInstance()->getIntegerForKey( "mapWidth" );
 	m_BoxHeightNum = UserDefault::getInstance()->getIntegerForKey( "mapHeight" );
@@ -92,7 +94,7 @@ void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
 		auto floor = LandFloor::create();
 		floor->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
 		m_InteractiveObjects.push_back( floor );
-		this->addChild( floor );
+		this->addChild( floor , GameLayer::ZOrder::LAND_OBJECT );
 	}
 
 }
@@ -148,6 +150,24 @@ void GameLayer::removeObject()
 		else
 		{
 			objectIter++;
+		}
+	}
+}
+
+void GameLayer::addBackground()
+{
+	auto backgroundSprite = Sprite::createWithSpriteFrameName( "background.png" );
+	Size spriteSize = backgroundSprite->getContentSize();
+	int xSpriteNum = ( m_MapRect.size.width / spriteSize.width );
+	int ySpriteNum = ( m_MapRect.size.height / spriteSize.height );
+	for( int yIdx = 0; yIdx <= ySpriteNum; ++yIdx )
+	{
+		for( int xIdx = 0; xIdx <= xSpriteNum; ++xIdx )
+		{
+			backgroundSprite = Sprite::createWithSpriteFrameName( "background.png" );
+			backgroundSprite->setPosition( xIdx*spriteSize.width, yIdx*spriteSize.height );
+			backgroundSprite->setAnchorPoint( Point::ZERO );
+			this->addChild( backgroundSprite , GameLayer::ZOrder::BACKGROUND);
 		}
 	}
 }

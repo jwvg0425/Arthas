@@ -9,10 +9,10 @@ bool LandFloor::init()
 		return false;
 	}
 
-	m_MainSprite = Sprite::createWithSpriteFrameName( "FloorLand.png" );
+	m_MainSprite = Sprite::createWithSpriteFrameName( "Floor.png" );
 	m_MainSprite->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite, 10 );
-	m_PieceSprite = Sprite::createWithSpriteFrameName( "FloorLandPiece.png" );
+	m_PieceSprite = Sprite::createWithSpriteFrameName( "floorPiece.png" );
 	m_PieceSprite->setAnchorPoint( Point::ZERO );
 	this->addChild( m_PieceSprite , 0);
 
