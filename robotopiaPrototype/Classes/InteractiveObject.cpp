@@ -136,6 +136,47 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 	if (collisionDir != DIR_NONE)
 	{
+		auto pos = this->getPosition();
+		float changeX = pos.x, changeY = pos.y;
+
+		if (collisionDir&DIR_LEFT || collisionDir&DIR_RIGHT)
+		{
+			changeX = pos.x + horzTime*this->getVelocity().x;
+		}
+		if (collisionDir&DIR_UP || collisionDir&DIR_DOWN)
+		{
+			changeY = pos.y + vertTime*this->getVelocity().y;
+		}
+
+		if (collisionDir & DIR_LEFT &&this->getVelocity().x != 0)
+		{
+			changeX += m_MoveSpeed * 0.0001;
+		}
+
+		if (collisionDir & DIR_RIGHT && this->getVelocity().x != 0)
+		{
+			changeX -= m_MoveSpeed * 0.0001;
+		}
+
+		if (collisionDir & DIR_DOWN)
+		{
+			changeY += GRAVITY*0.0001;
+		}
+
+		if (collisionDir & DIR_LEFT && changeX == pos.x)
+		{
+			collisionDir &= ~DIR_LEFT;
+		}
+
+		if (collisionDir & DIR_RIGHT && changeX == pos.x)
+		{
+			collisionDir &= ~DIR_RIGHT;
+		}
+
+		pos.x = changeX;
+		pos.y = changeY;
+
+		this->setPosition(pos);
 
 	}
 	

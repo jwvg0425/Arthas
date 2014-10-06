@@ -35,7 +35,20 @@ bool Player::init()
 
 void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
-
+	switch (enemy->getType())
+	{
+	case OT_FLOOR:
+		CCLOG("%d",dir);
+		if (dir & DIR_DOWN || dir & DIR_UP)
+		{
+			m_Velocity.y = 0;
+		}
+		if (dir & DIR_LEFT || dir & DIR_RIGHT)
+		{
+			m_Velocity.x = 0;
+		}
+		break;
+	}
 }
 
 void Player::update(float dTime)
@@ -66,9 +79,12 @@ void Player::update(float dTime)
 
 		if (m_State != PS_ATTACK)
 		{
-			if (leftState == KS_HOLD)
+			if (KeyStateManager::getKeyState(KC_JUMP))
 			{
-
+				m_Velocity.y = 300;
+			}
+			else if (leftState == KS_HOLD)
+			{
 				changeState(PS_WALK);
 				m_Velocity.x = -m_MoveSpeed;
 				m_IsRightDirection = false;
