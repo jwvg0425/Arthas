@@ -1,19 +1,24 @@
 #pragma once
 
 #include "cocos2d.h"
+class WorldScene;
 
 class View
 {
 public:
 	virtual bool init();
 
-	// x,y좌표에 있는 width, height 크기의 대상을 화면의 정 가운데로 표시  
-	void centerView(cocos2d::Node* inputNode, cocos2d::Rect inputRect);
+	// x,y
+	void setViewPort(WorldScene* scene, cocos2d::Point standardPoint, cocos2d::Point anchorPoint);
+	//
+	void setViewPort(WorldScene* inputScene, cocos2d::Rect stadardRect, Point anchorPoint);
+
+	//몇 배로 크게 해줘라 
+	void setViewPortWithHighlight();
 
 	
-
-
 private:
-
+	float m_AnchorX, m_AnchorY;
+	float m_MoveX, m_MoveY;
 
 };

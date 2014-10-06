@@ -51,6 +51,9 @@
     <ClCompile Include="..\Classes\LandObject.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\View.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\LandObject.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View.h">
+      <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
