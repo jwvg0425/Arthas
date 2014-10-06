@@ -1,6 +1,6 @@
 #include "GameLayer.h"
 #include "LandFloor.h"
-
+#include "LandBlock.h"
 USING_NS_CC;
 
 Scene* GameLayer::createScene()
@@ -23,7 +23,7 @@ bool GameLayer::init()
 	KeyStateManager::receiveKeyboardData( this );
 	this->scheduleUpdate();
 
-	addBackground();
+	addMovingBackground();
 
 	m_Player = Player::create();
 	m_Player->setAnchorPoint( Point( 0.6 , 0.6 ) );
@@ -78,7 +78,10 @@ bool GameLayer::initWorldFromData( char* data )
 				case 0:
 					break;
 				case 1:
-					addLandObject( LT_FLOOR , xIdx , yIdx );
+					addLandObject( LandType::LT_FLOOR , xIdx , yIdx );
+					break;
+				case 2:
+					addLandObject( LandType::LT_BLOCK , xIdx , yIdx );
 					break;
 			}
 		}
@@ -89,12 +92,19 @@ bool GameLayer::initWorldFromData( char* data )
 
 void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
 {
-	if( type == LT_FLOOR )
+	if( type == LandType::LT_FLOOR )
 	{
 		auto floor = LandFloor::create();
 		floor->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
 		m_InteractiveObjects.push_back( floor );
 		this->addChild( floor , GameLayer::ZOrder::LAND_OBJECT );
+	}
+	if( type == LandType::LT_BLOCK )
+	{
+		auto block = LandBlock::create();
+		block->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
+		m_InteractiveObjects.push_back( block );
+		this->addChild( block , GameLayer::ZOrder::LAND_OBJECT );
 	}
 
 }
@@ -154,7 +164,7 @@ void GameLayer::removeObject()
 	}
 }
 
-void GameLayer::addBackground()
+void GameLayer::addMovingBackground()
 {
 	auto backgroundSprite = Sprite::createWithSpriteFrameName( "background.png" );
 	Size spriteSize = backgroundSprite->getContentSize();

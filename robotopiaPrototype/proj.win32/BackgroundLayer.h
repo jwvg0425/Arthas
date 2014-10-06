@@ -4,10 +4,10 @@
 class BackgroundLayer : public cocos2d::Layer
 {
 public:
-	OVERRIDE bool		init();
+	OVERRIDE bool init();
 	CREATE_FUNC( BackgroundLayer );
 
 private:
-	cocos2d::Sprite*	m_UnmoveableBackground;
-
+	cocos2d::Sprite* m_FrontSprite;
+	cocos2d::Sprite* m_BackSprite;
 };

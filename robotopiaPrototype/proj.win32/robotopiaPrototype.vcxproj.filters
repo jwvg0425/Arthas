@@ -25,6 +25,12 @@
     <Filter Include="Classes\InteractiveObject\Land">
       <UniqueIdentifier>{2d3ff877-d1a4-4eb0-92da-3aa88a260808}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\InteractiveObject\Character">
+      <UniqueIdentifier>{2f0cdff3-ec79-4d5d-870e-314f7d44a04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\InteractiveObject\Missle">
+      <UniqueIdentifier>{b757040d-808b-4ada-9bbb-34d9fccee41e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,9 +42,6 @@
     <ClCompile Include="..\Classes\InteractiveObject.cpp">
       <Filter>Classes\InteractiveObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>Classes\InteractiveObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Utils.cpp">
       <Filter>Classes\Core</Filter>
     </ClCompile>
@@ -48,17 +51,26 @@
     <ClCompile Include="..\Classes\LandObject.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\View.cpp">
-      <Filter>Classes\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameLayer.cpp">
       <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\View.cpp">
+      <Filter>Classes\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\WorldScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BackgroundLayer.cpp">
       <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LandBlock.cpp">
+      <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Monster.cpp">
+      <Filter>Classes\InteractiveObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>Classes\InteractiveObject\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,26 +86,32 @@
     <ClInclude Include="..\Classes\Utils.h">
       <Filter>Classes\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Player.h">
-      <Filter>Classes\InteractiveObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\LandFloor.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LandObject.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\View.h">
-      <Filter>Classes\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameLayer.h">
       <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View.h">
+      <Filter>Classes\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\WorldScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundLayer.h">
       <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LandBlock.h">
+      <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monster.h">
+      <Filter>Classes\InteractiveObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>Classes\InteractiveObject\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
