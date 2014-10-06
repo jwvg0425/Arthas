@@ -141,11 +141,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 	{
 		Point changePos = this->getPosition();
 		Point pos = this->getPosition();
-		
-		if (this->getType() == OT_PLAYER)
-		{
-			CCLOG("pos.x : %f pos.y : %f, changePos.x : %f changePos.y : %f Vx : %f Vy : %f dir : %d", pos.x, pos.y,changePos.x,changePos.y,m_Velocity.x,m_Velocity.y, collisionDir);
-		}
+
 		if (collisionDir&DIR_LEFT || collisionDir&DIR_RIGHT)
 		{
 			changePos.x = pos.x + horzTime*this->getVelocity().x;

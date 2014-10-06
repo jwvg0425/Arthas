@@ -10,12 +10,14 @@ enum ObjectType
 	OT_OBJECT,
 	OT_PLAYER,
 	OT_FLOOR,
+	OT_BLOCK,
 };
 
 enum LandType
 {
 	LT_OBJECT,
 	LT_FLOOR,
+	LT_BLOCK,
 };
 
 enum Direction
