@@ -1,9 +1,11 @@
 ﻿#pragma once
+
 #define ABSTRACT virtual
 #define OVERRIDE virtual
 
 enum ObjectType
 {
+	OT_OBJECT,
 	OT_PLAYER,
 };
 

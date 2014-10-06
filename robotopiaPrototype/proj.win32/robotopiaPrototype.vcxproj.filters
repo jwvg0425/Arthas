@@ -36,6 +36,9 @@
     <ClCompile Include="..\Classes\InteractiveObject.cpp">
       <Filter>Classes\InteractiveObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>Classes\InteractiveObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Utils.h">
       <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>Classes\InteractiveObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

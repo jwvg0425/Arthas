@@ -6,12 +6,12 @@
 class InteractiveObject : public cocos2d::Node
 {
 public:
-	virtual bool			init();
+	OVERRIDE bool			init();
 
-	virtual void			collisionOccured(InteractiveObject* enemy, Direction dir, OUT bool * isRemoving) = 0;
-	virtual Direction		collisionCheck(InteractiveObject* enemy, float dTime);
+	ABSTRACT void			collisionOccured(InteractiveObject* enemy, Direction dir, OUT bool * isRemoving) = 0;
+	ABSTRACT Direction		collisionCheck(InteractiveObject* enemy, float dTime);
 
-	virtual cocos2d::Rect	getRect();
+	ABSTRACT cocos2d::Rect	getRect();
 	ObjectType				getType() const { return m_Type; }
 	cocos2d::Vec2			getVelocity() const;
 	bool					isOnGravity() { return m_IsOnGravity; }
