@@ -6,7 +6,7 @@ class LandFloor : public LandObject
 {
 public:
 	OVERRIDE bool		init();
-	virtual void		collisionOccured(InteractiveObject* enemy , Direction dir , OUT bool * isRemoving) {};
+	virtual void		collisionOccured(InteractiveObject* enemy , Direction dir) {};
 
 	CREATE_FUNC( LandFloor );
 };

@@ -3,6 +3,7 @@
 
 #define ABSTRACT virtual
 #define OVERRIDE virtual
+#define GRAVITY 980
 
 enum ObjectType
 {
@@ -40,6 +41,8 @@ enum KeyCode
 	KC_RIGHT = cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
 	KC_DOWN = cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW,
 	KC_LEFT = cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW,
+	KC_ATTACK = cocos2d::EventKeyboard::KeyCode::KEY_A,
+	KC_JUMP = cocos2d::EventKeyboard::KeyCode::KEY_SPACE,
 };
 
 class UtilFunctions

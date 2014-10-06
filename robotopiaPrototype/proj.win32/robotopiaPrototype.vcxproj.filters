@@ -33,9 +33,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes\App</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\WorldScene.cpp">
-      <Filter>Classes\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\InteractiveObject.cpp">
       <Filter>Classes\InteractiveObject</Filter>
     </ClCompile>
@@ -54,6 +51,15 @@
     <ClCompile Include="..\Classes\View.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameLayer.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WorldScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -61,9 +67,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes\App</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\WorldScene.h">
-      <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\InteractiveObject.h">
       <Filter>Classes\InteractiveObject</Filter>
@@ -81,6 +84,15 @@
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\View.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLayer.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WorldScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundLayer.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,10 +12,10 @@ bool Player::init()
 	m_Type = OT_PLAYER;
 	m_MoveSpeed = 100;
 	m_AnimationNum = PS_STATE_NUM;
-	m_Animations[PS_STAND] = UtilFunctions::createAnimation("player_stand", 1, 4, 0.1f);
-	m_Animations[PS_WALK] = UtilFunctions::createAnimation("player_walk", 1, 8, 0.1f);
+	m_Animations[PS_STAND] = UtilFunctions::createAnimation("player_stand", 1, 4, 0.05f);
+	m_Animations[PS_WALK] = UtilFunctions::createAnimation("player_walk", 1, 8, 0.05f);
 	m_Animations[PS_JUMP] = UtilFunctions::createAnimation("player_jump", 1, 1, 0.1f);
-	m_Animations[PS_ATTACK] = UtilFunctions::createAnimation("player_attack", 1, 5, 0.1f);
+	m_Animations[PS_ATTACK] = UtilFunctions::createAnimation("player_attack", 1, 5, 0.05f);
 	m_IsRightDirection = true;
 
 	for (int i = 0; i < PS_STATE_NUM; i++)
@@ -33,7 +33,7 @@ bool Player::init()
 	return true;
 }
 
-void Player::collisionOccured(InteractiveObject* enemy, Direction dir, OUT bool * isRemoving)
+void Player::collisionOccured(InteractiveObject* enemy, Direction dir)
 {
 
 }
@@ -42,37 +42,57 @@ void Player::update(float dTime)
 {
 	Point pos = this->getPosition();
 
+
+	//좌표 변경 처리
 	pos.x += m_Velocity.x*dTime;
 	pos.y += m_Velocity.y*dTime;
 
 	
-	//키 상태에 따른 처리
+	//키, 상태 처리
 	KeyState leftState = KeyStateManager::getKeyState(KC_LEFT);
 	KeyState rightState = KeyStateManager::getKeyState(KC_RIGHT);
-
-	if (leftState == KS_HOLD)
+	
+	if (m_Velocity.y != 0)
 	{
-		changeState(PS_WALK);
-		m_Velocity.x = -m_MoveSpeed;
-		m_IsRightDirection = false;
-		m_MainSprite->setFlippedX(true);
-	}
-	else if (rightState == KS_HOLD)
-	{
-		changeState(PS_WALK);
-		m_Velocity.x = m_MoveSpeed;
-		m_IsRightDirection = true;
-		m_MainSprite->setFlippedX(false);
+		changeState(PS_JUMP);
 	}
 	else
 	{
-		changeState(PS_STAND);
-		m_Velocity.x = 0;
+		if (KeyStateManager::getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
+		{
+			changeState(PS_ATTACK);
+			m_Velocity.x = 0;
+		}
+
+		if (m_State != PS_ATTACK)
+		{
+			if (leftState == KS_HOLD)
+			{
+
+				changeState(PS_WALK);
+				m_Velocity.x = -m_MoveSpeed;
+				m_IsRightDirection = false;
+				m_MainSprite->setFlippedX(true);
+
+			}
+			else if (rightState == KS_HOLD)
+			{
+				changeState(PS_WALK);
+				m_Velocity.x = m_MoveSpeed;
+				m_IsRightDirection = true;
+				m_MainSprite->setFlippedX(false);
+			}
+			else
+			{
+				changeState(PS_STAND);
+				m_Velocity.x = 0;
+			}
+		}
 	}
 
+	m_Velocity.y -= GRAVITY*dTime;
+
 	this->setPosition(pos);
-
-
 }
 
 void Player::changeState(State state)
@@ -94,5 +114,16 @@ void Player::changeState(State state)
 
 void Player::endAnimation(cocos2d::Ref* sender)
 {
+	if (m_State == PS_ATTACK)
+	{
+		changeState(PS_STAND);
+	}
+}
 
+cocos2d::Rect Player::getRect()
+{
+	m_Width = m_MainSprite->getContentSize().width;
+	m_Height = m_MainSprite->getContentSize().height;
+
+	return InteractiveObject::getRect();
 }

@@ -24,7 +24,6 @@ bool InteractiveObject::init()
 Direction InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTime)
 {
 
-
 	return DIR_NONE;
 }
 
