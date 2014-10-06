@@ -12,4 +12,12 @@ public:
 
 	void update(float dTime);
 private:
+	enum State
+	{
+		PS_STAND,
+		PS_WALK,
+		PS_JUMP,
+		PS_ATTACK,
+		PS_STATE_NUM,
+	};
 };

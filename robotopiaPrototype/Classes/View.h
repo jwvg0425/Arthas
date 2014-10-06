@@ -11,7 +11,7 @@ public:
 	// x,y
 	void setViewPort(WorldScene* scene, cocos2d::Point standardPoint, cocos2d::Point anchorPoint);
 	//
-	void setViewPort(WorldScene* inputScene, cocos2d::Rect stadardRect, Point anchorPoint);
+	void setViewPort(WorldScene* inputScene, cocos2d::Rect stadardRect, cocos2d::Point anchorPoint);
 
 	//몇 배로 크게 해줘라 
 	void setViewPortWithHighlight();

@@ -36,18 +36,25 @@ enum KeyState
 
 enum KeyCode
 {
-	KC_UP,
-	KC_RIGHT,
-	KC_DOWN,
-	KC_LEFT,
+	KC_UP = cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW,
+	KC_RIGHT = cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
+	KC_DOWN = cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW,
+	KC_LEFT = cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 };
+
+class UtilFunctions
+{
+public:
+	static cocos2d::Animation* createAnimation(const char* animationName, int startIdx, size_t size, float delay);
+};
+
 
 class KeyStateManager
 {
 	friend class KeyStateSentinel;
 
 public:
-	static KeyState getKeyState(cocos2d::EventKeyboard::KeyCode keyCode);
+	static KeyState getKeyState(KeyCode keyCode);
 	static void receiveKeyboardData(cocos2d::Layer* layer); //layer에서 호출하면 이제 그 레이어에서는 키보드 정보가 자동으로 업데이트됨.
 private:
 	static std::map<cocos2d::EventKeyboard::KeyCode, KeyState> m_KeyStates;

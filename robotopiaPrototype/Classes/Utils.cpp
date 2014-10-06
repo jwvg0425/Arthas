@@ -6,9 +6,9 @@ std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_KeyStates
 std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_PrevKeyStates;
 std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_FinalKeyStates;
 
-KeyState KeyStateManager::getKeyState(cocos2d::EventKeyboard::KeyCode keyCode)
+KeyState KeyStateManager::getKeyState(KeyCode keyCode)
 {
-	return m_FinalKeyStates[keyCode];
+	return m_FinalKeyStates[(EventKeyboard::KeyCode)keyCode];
 }
 
 void KeyStateManager::receiveKeyboardData(cocos2d::Layer* layer)
@@ -76,4 +76,19 @@ void KeyStateSentinel::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, coc
 void KeyStateSentinel::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
 	KeyStateManager::m_KeyStates[keyCode] = KS_NONE;
+}
+
+cocos2d::Animation* UtilFunctions::createAnimation(const char* animationName, int startIdx, size_t size, float delay)
+{
+	auto animation = Animation::create();
+	animation->setDelayPerUnit(delay);
+
+	for (size_t i = 0; i < size; ++i)
+	{
+		auto frame = SpriteFrameCache::getInstance()->
+			getSpriteFrameByName(StringUtils::format("%s%d.png", animationName, i + startIdx));
+		animation->addSpriteFrame(frame);
+	}
+	return animation;
+
 }

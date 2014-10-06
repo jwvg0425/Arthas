@@ -1,4 +1,5 @@
 ﻿#pragma once
+
 #include "cocos2d.h"
 #include "Utils.h"
 
@@ -24,4 +25,5 @@ protected:
 	cocos2d::Vec2							m_Velocity;
 	bool									m_IsOnGravity;
 	float									m_MoveSpeed;
+	bool									m_IsDestroyed;
 };
