@@ -10,16 +10,31 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\App">
+      <UniqueIdentifier>{437c11f2-2a37-4c4c-9633-c56a18665fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene">
+      <UniqueIdentifier>{20c46c36-6f8a-4ddf-984b-246c38558203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\InteractiveObject">
+      <UniqueIdentifier>{f6ce0dc3-6e11-4d61-95d4-02432d2d8dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Core">
+      <UniqueIdentifier>{7439b958-df7e-4a52-89cf-9de031ab0be0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\App</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\WorldScene.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\InteractiveObject.cpp">
+      <Filter>Classes\InteractiveObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -27,10 +42,16 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\App</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\WorldScene.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\InteractiveObject.h">
+      <Filter>Classes\InteractiveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils.h">
+      <Filter>Classes\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
