@@ -6,7 +6,7 @@ std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_KeyStates
 std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_PrevKeyStates;
 std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_FinalKeyStates;
 
-KeyState KeyStateManager::getKeyboardState(cocos2d::EventKeyboard::KeyCode keyCode)
+KeyState KeyStateManager::getKeyState(cocos2d::EventKeyboard::KeyCode keyCode)
 {
 	return m_FinalKeyStates[keyCode];
 }
@@ -33,8 +33,8 @@ bool KeyStateSentinel::init()
 
 	for (EventKeyboard::KeyCode i = EventKeyboard::KeyCode::KEY_NONE; i < EventKeyboard::KeyCode::KEY_PLAY; i = (EventKeyboard::KeyCode)((int)i + 1))
 	{
-		KeyStateManager::m_PrevKeyStates[i] = NONE;
-		KeyStateManager::m_KeyStates[i] = NONE;
+		KeyStateManager::m_PrevKeyStates[i] = KS_NONE;
+		KeyStateManager::m_KeyStates[i] = KS_NONE;
 	}
 
 	return true;
@@ -47,21 +47,21 @@ void KeyStateSentinel::update(float dTime)
 		KeyState prevState = KeyStateManager::m_PrevKeyStates[state.first];
 		KeyState nowState = KeyStateManager::m_KeyStates[state.first];
 
-		if (prevState == NONE && nowState == NONE)
+		if (prevState == KS_NONE && nowState == KS_NONE)
 		{
-			KeyStateManager::m_FinalKeyStates[state.first] = NONE;
+			KeyStateManager::m_FinalKeyStates[state.first] = KS_NONE;
 		}
-		else if (prevState == NONE && nowState == PRESS)
+		else if (prevState == KS_NONE && nowState == KS_PRESS)
 		{
-			KeyStateManager::m_FinalKeyStates[state.first] = PRESS;
+			KeyStateManager::m_FinalKeyStates[state.first] = KS_PRESS;
 		}
-		else if (prevState == PRESS && nowState == NONE)
+		else if (prevState == KS_PRESS && nowState == KS_NONE)
 		{
-			KeyStateManager::m_FinalKeyStates[state.first] = RELEASE;
+			KeyStateManager::m_FinalKeyStates[state.first] = KS_RELEASE;
 		}
-		else if (prevState == PRESS && nowState == PRESS)
+		else if (prevState == KS_PRESS && nowState == KS_PRESS)
 		{
-			KeyStateManager::m_FinalKeyStates[state.first] = HOLD;
+			KeyStateManager::m_FinalKeyStates[state.first] = KS_HOLD;
 		}
 
 		KeyStateManager::m_PrevKeyStates[state.first] = state.second;
@@ -70,10 +70,10 @@ void KeyStateSentinel::update(float dTime)
 
 void KeyStateSentinel::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	KeyStateManager::m_KeyStates[keyCode] = PRESS;
+	KeyStateManager::m_KeyStates[keyCode] = KS_PRESS;
 }
 
 void KeyStateSentinel::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	KeyStateManager::m_KeyStates[keyCode] = NONE;
+	KeyStateManager::m_KeyStates[keyCode] = KS_NONE;
 }

@@ -22,6 +22,9 @@
     <Filter Include="Classes\Core">
       <UniqueIdentifier>{7439b958-df7e-4a52-89cf-9de031ab0be0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\InteractiveObject\Land">
+      <UniqueIdentifier>{2d3ff877-d1a4-4eb0-92da-3aa88a260808}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,12 @@
     <ClCompile Include="..\Classes\Utils.cpp">
       <Filter>Classes\Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\LandFloor.cpp">
+      <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LandObject.cpp">
+      <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -61,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>Classes\InteractiveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LandFloor.h">
+      <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LandObject.h">
+      <Filter>Classes\InteractiveObject\Land</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

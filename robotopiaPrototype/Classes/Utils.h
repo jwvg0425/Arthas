@@ -8,6 +8,13 @@ enum ObjectType
 {
 	OT_OBJECT,
 	OT_PLAYER,
+	OT_FLOOR,
+};
+
+enum LandType
+{
+	LT_OBJECT,
+	LT_FLOOR,
 };
 
 enum Direction
@@ -21,10 +28,18 @@ enum Direction
 
 enum KeyState
 {
-	NONE, // 뗀 상태
-	PRESS, //딱 누름
-	HOLD, //꾹 누르는 중
-	RELEASE, // 딱 뗌
+	KS_NONE, // 뗀 상태
+	KS_PRESS, //딱 누름
+	KS_HOLD, //꾹 누르는 중
+	KS_RELEASE, // 딱 뗌
+};
+
+enum KeyCode
+{
+	KC_UP,
+	KC_RIGHT,
+	KC_DOWN,
+	KC_LEFT,
 };
 
 class KeyStateManager
@@ -32,7 +47,7 @@ class KeyStateManager
 	friend class KeyStateSentinel;
 
 public:
-	KeyState getKeyboardState(cocos2d::EventKeyboard::KeyCode keyCode);
+	static KeyState getKeyState(cocos2d::EventKeyboard::KeyCode keyCode);
 	static void receiveKeyboardData(cocos2d::Layer* layer); //layer에서 호출하면 이제 그 레이어에서는 키보드 정보가 자동으로 업데이트됨.
 private:
 	static std::map<cocos2d::EventKeyboard::KeyCode, KeyState> m_KeyStates;
