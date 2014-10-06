@@ -256,11 +256,11 @@
                 <key>frame</key>
                 <string>{{1666,41},{52,37}}</string>
                 <key>offset</key>
-                <string>{-2,-2}</string>
+                <string>{-3,-2}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,4},{52,37}}</string>
+                <string>{{1,4},{52,37}}</string>
                 <key>sourceSize</key>
                 <string>{60,41}</string>
             </dict>
@@ -300,7 +300,7 @@
             <key>size</key>
             <string>{1721,414}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:36a476ed57f45904b30e8991e499f828:31f5510c929847e49a873a61b75653b5:40387c8163e24ac93b5bab61b171c8fd$</string>
+            <string>$TexturePacker:SmartUpdate:52d61ebd1853d4d013c52f62faf6e2c1:cb41c1dc2ae46d47126ca53f710927e7:40387c8163e24ac93b5bab61b171c8fd$</string>
             <key>textureFileName</key>
             <string>Robotopia.png</string>
         </dict>

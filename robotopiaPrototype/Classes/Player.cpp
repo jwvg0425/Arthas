@@ -10,13 +10,18 @@ bool Player::init()
 	}
 
 	m_Type = OT_PLAYER;
-	m_MoveSpeed = 300;
+	m_MoveSpeed = 100;
 	m_AnimationNum = PS_STATE_NUM;
 	m_Animations[PS_STAND] = UtilFunctions::createAnimation("player_stand", 1, 4, 0.1f);
 	m_Animations[PS_WALK] = UtilFunctions::createAnimation("player_walk", 1, 8, 0.1f);
 	m_Animations[PS_JUMP] = UtilFunctions::createAnimation("player_jump", 1, 1, 0.1f);
 	m_Animations[PS_ATTACK] = UtilFunctions::createAnimation("player_attack", 1, 5, 0.1f);
 	m_IsRightDirection = true;
+
+	for (int i = 0; i < PS_STATE_NUM; i++)
+	{
+		m_Animations[i]->retain();
+	}
 
 	m_MainSprite = Sprite::create();
 
@@ -37,15 +42,32 @@ void Player::update(float dTime)
 {
 	Point pos = this->getPosition();
 
+	pos.x += m_Velocity.x*dTime;
+	pos.y += m_Velocity.y*dTime;
+
 	
 	//키 상태에 따른 처리
-	if (KeyStateManager::getKeyState(KC_LEFT) == KS_HOLD)
+	KeyState leftState = KeyStateManager::getKeyState(KC_LEFT);
+	KeyState rightState = KeyStateManager::getKeyState(KC_RIGHT);
+
+	if (leftState == KS_HOLD)
 	{
-		pos.x -= m_MoveSpeed*dTime;
+		changeState(PS_WALK);
+		m_Velocity.x = -m_MoveSpeed;
+		m_IsRightDirection = false;
+		m_MainSprite->setFlippedX(true);
 	}
-	if (KeyStateManager::getKeyState(KC_RIGHT) == KS_HOLD)
+	else if (rightState == KS_HOLD)
 	{
-		pos.x += m_MoveSpeed*dTime;
+		changeState(PS_WALK);
+		m_Velocity.x = m_MoveSpeed;
+		m_IsRightDirection = true;
+		m_MainSprite->setFlippedX(false);
+	}
+	else
+	{
+		changeState(PS_STAND);
+		m_Velocity.x = 0;
 	}
 
 	this->setPosition(pos);
