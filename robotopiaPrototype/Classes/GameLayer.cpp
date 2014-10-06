@@ -25,6 +25,8 @@ bool GameLayer::init()
 	this->scheduleUpdate();
 
 	m_Player = Player::create();
+	m_Player->setAnchorPoint( Point( 0.5 , 0.5 ) );
+	m_Player->setPosition(Point(100 , 300));
 	this->addChild( m_Player );
 	m_InteractiveObjects.push_back( m_Player );
 
@@ -98,7 +100,7 @@ void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
 
 void GameLayer::update( float dTime )
 {
-	View::setViewPort( this , m_Player->getRect().origin , Point::ZERO );
+	View::setViewPort( this , m_Player->getRect().origin , Point(0.5, 0.5) );
 	collisionCheck(dTime);
 	removeObject();
 }
