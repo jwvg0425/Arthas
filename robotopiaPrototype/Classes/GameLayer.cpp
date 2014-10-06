@@ -99,13 +99,13 @@ void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
 void GameLayer::update( float dTime )
 {
 	View::setViewPort( this , m_Player->getRect().origin , Point::ZERO );
-	
+	collisionCheck(dTime);
+	removeObject();
 }
 
 void GameLayer::collisionCheck(float dTime)
 {
 	Direction collisionDirection;
-	bool haveToRemove;
 	for( auto subjectIter = m_InteractiveObjects.begin(); subjectIter != m_InteractiveObjects.end(); ++subjectIter )
 	{
 		for( auto objectIter = subjectIter + 1; objectIter != m_InteractiveObjects.end(); ++objectIter )
@@ -122,6 +122,23 @@ void GameLayer::collisionCheck(float dTime)
 			{
 				object->collisionOccured( subject , collisionDirection);
 			}
+		}
+	}
+}
+
+void GameLayer::removeObject()
+{
+	for( auto objectIter = m_InteractiveObjects.begin(); objectIter != m_InteractiveObjects.end(); )
+	{
+		auto object = *objectIter;
+		if( object->isDestroyed() )
+		{
+			objectIter = m_InteractiveObjects.erase( objectIter );
+			removeChild( object );
+		}
+		else
+		{
+			objectIter++;
 		}
 	}
 }

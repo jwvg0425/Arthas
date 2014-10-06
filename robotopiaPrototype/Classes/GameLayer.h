@@ -37,6 +37,7 @@ public:
 	bool							initWorldFromData(char* data);
 	void							addLandObject( LandType type , int xIdx , int yIdx );
 	void							collisionCheck(float dTime);
+	void							removeObject();
 	cocos2d::Rect					getMapRect() {return m_MapRect; }
 	cocos2d::Rect					getWinRect() {return m_WinRect; }
 
