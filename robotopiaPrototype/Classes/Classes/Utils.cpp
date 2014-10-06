@@ -6,9 +6,9 @@ std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_KeyStates
 std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_PrevKeyStates;
 std::map<cocos2d::EventKeyboard::KeyCode, KeyState> KeyStateManager::m_FinalKeyStates;
 
-KeyState KeyStateManager::getKeyState(cocos2d::EventKeyboard::KeyCode keyCode)
+KeyState KeyStateManager::getKeyState(KeyCode keyCode)
 {
-	return m_FinalKeyStates[keyCode];
+	return m_FinalKeyStates[(EventKeyboard::KeyCode)keyCode];
 }
 
 void KeyStateManager::receiveKeyboardData(cocos2d::Layer* layer)
