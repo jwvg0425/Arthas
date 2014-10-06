@@ -32,7 +32,7 @@ public:
 	static cocos2d::Scene*			createScene();
 	virtual bool					init();  
 	bool							initWorldFromData(char* data);
-	void							addTile( LandType type , int xIdx , int yIdx );
+	void							addLandObject( LandType type , int xIdx , int yIdx );
 
 	CREATE_FUNC( WorldScene );
 private:

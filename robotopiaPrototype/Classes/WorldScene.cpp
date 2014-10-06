@@ -21,6 +21,7 @@ bool WorldScene::init()
 	m_WinRect.size = Director::getInstance()->getVisibleSize();
 	m_WinRect.origin = Director::getInstance()->getVisibleOrigin();
 	initWorldFromData( MAPDATA );
+	KeyStateManager::receiveKeyboardData( this );
 	this->scheduleUpdate();
 
 	return true;
@@ -70,7 +71,7 @@ bool WorldScene::initWorldFromData( char* data )
 				case 0:
 					break;
 				case 1:
-					addTile( LT_FLOOR , xIdx , yIdx );
+					addLandObject( LT_FLOOR , xIdx , yIdx );
 					break;
 			}
 		}
@@ -79,7 +80,7 @@ bool WorldScene::initWorldFromData( char* data )
 }
 
 
-void WorldScene::addTile( LandType type , int xIdx , int yIdx )
+void WorldScene::addLandObject( LandType type , int xIdx , int yIdx )
 {
 	if( type == LT_FLOOR )
 	{
