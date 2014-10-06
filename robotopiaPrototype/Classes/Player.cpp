@@ -90,7 +90,7 @@ void Player::update(float dTime)
 		}
 	}
 
-	m_Velocity.y -= GRAVITY*dTime;
+	//m_Velocity.y -= GRAVITY*dTime;
 
 	this->setPosition(pos);
 }

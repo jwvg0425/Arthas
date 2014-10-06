@@ -17,6 +17,7 @@ bool InteractiveObject::init()
 	m_Velocity = Vec2(0, 0);
 	m_IsOnGravity = true;
 	m_MoveSpeed = 0;
+	m_IsDestroyed = false;
 
 	return true;
 }
