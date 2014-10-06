@@ -11,33 +11,39 @@ void View::setViewPort( GameLayer* scene , Point standardPoint , Point anchorPoi
 	float windowHeight = Director::getInstance()->getWinSize().height;
 	float anchorX = windowWidth * anchorPoint.x;
 	float anchorY = windowHeight * anchorPoint.y;
-	
-	float moveX = anchorX - standardPoint.x;
-	float moveY = anchorY - standardPoint.y;
 
 
 	//이걸하지 말라고 해야돼. 
 	// 언제? 이동하면 화면에 짤릴 때 
-	if (standardPoint.x + anchorPoint.x * windowWidth > mapRect.size.width ||
-		standardPoint.x - anchorPoint.x * windowWidth < 0||
-		standardPoint.y + anchorPoint.y * windowHeight > mapRect.size.height||
-		standardPoint.y + anchorPoint.y * windowHeight > mapRect.size.height)
+	if (standardPoint.x + anchorX > mapRect.size.width)
 	{
-		return;
+		anchorX = standardPoint.x -(mapRect.size.width - windowWidth);
 	}
-	else
+	if (standardPoint.x - anchorX < 0)
 	{
-		scene->setPosition(moveX, moveY);
-
+		anchorX = standardPoint.x;
+		//만약에 0으로하면 왼쪽 분이 보이지 않는다. 
+		//anchorX = 0;
+	}
+	if (standardPoint.y + anchorY > mapRect.size.height)
+	{
+		anchorY = standardPoint.y - (mapRect.size.height - windowHeight);
+	}
+	if (standardPoint.y - anchorY < 0)
+	{
+		anchorY = standardPoint.y;
 	}
 
-	
+	CCLOG("%d", (anchorX - standardPoint.x));
+	scene->setPosition(anchorX - standardPoint.x, anchorY - standardPoint.y);
 }
 
 
 
-void View::setViewPortWithHighlight(GameLayer* inputScene, cocos2d::Rect stadardRect)
+void View::setViewPortWithHighlight(GameLayer* Scene, cocos2d::Rect standardRect)
 {
+
+
 	return;
 }
 
