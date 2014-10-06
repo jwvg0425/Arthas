@@ -1,10 +1,10 @@
 #include "View.h"
-#include "WorldScene.h"
+#include "GameLayer.h"
 
 USING_NS_CC;
 
 
-void View::setViewPort(WorldScene* scene, cocos2d::Point standardPoint, cocos2d::Point anchorPoint)
+void View::setViewPort( GameLayer* scene , cocos2d::Point standardPoint , cocos2d::Point anchorPoint )
 {
 	Rect mapRect = scene->getMapRect();
 	float anchorX = Director::getInstance()->getWinSize().width * anchorPoint.x;
@@ -22,7 +22,7 @@ void View::setViewPort(WorldScene* scene, cocos2d::Point standardPoint, cocos2d:
 
 
 
-void View::setViewPort(WorldScene* scene, cocos2d::Rect rect, Point anchorPoint)
+void View::setViewPort( GameLayer* scene , cocos2d::Rect rect , Point anchorPoint )
 {
 	float nodeWidth = scene->getContentSize().width;
 	float nodeHeight = scene->getContentSize().height;
