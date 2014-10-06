@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.2</string>
         <key>fileName</key>
-        <string>C:/Users/ozt/Desktop/ozt/git/robotopiaPrototype/Resources/Robotopia.tps</string>
+        <string>C:/Users/namhyeonuk/Desktop/남현욱/nhn next/개경프/git project/Arthas/robotopiaPrototype/Resources/Robotopia.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -190,6 +190,24 @@
         <array>
             <filename>FloorLand.png</filename>
             <filename>FloorLandPiece.png</filename>
+            <filename>player_attack1.png</filename>
+            <filename>player_attack2.png</filename>
+            <filename>player_attack3.png</filename>
+            <filename>player_attack4.png</filename>
+            <filename>player_attack5.png</filename>
+            <filename>player_jump1.png</filename>
+            <filename>player_stand1.png</filename>
+            <filename>player_stand2.png</filename>
+            <filename>player_stand3.png</filename>
+            <filename>player_stand4.png</filename>
+            <filename>player_walk1.png</filename>
+            <filename>player_walk2.png</filename>
+            <filename>player_walk3.png</filename>
+            <filename>player_walk4.png</filename>
+            <filename>player_walk5.png</filename>
+            <filename>player_walk6.png</filename>
+            <filename>player_walk7.png</filename>
+            <filename>player_walk8.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
