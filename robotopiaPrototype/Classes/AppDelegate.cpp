@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "GameLayer.h"
+#include "WorldScene.h"
 
 USING_NS_CC;
 
@@ -24,7 +24,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     director->setAnimationInterval(1.0 / 60);
 
-    auto scene = GameLayer::createScene();
+	auto scene = WorldScene::create();
 
     director->runWithScene(scene);
 

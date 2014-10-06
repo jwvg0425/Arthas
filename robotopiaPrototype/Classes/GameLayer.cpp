@@ -18,7 +18,6 @@ bool GameLayer::init()
 	{
 		return false;
 	}
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile( "Robotopia.plist" );
 	m_WinRect.size = Director::getInstance()->getVisibleSize();
 	m_WinRect.origin = Director::getInstance()->getVisibleOrigin();
 	initWorldFromData( MAPDATA );
@@ -99,5 +98,30 @@ void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
 
 void GameLayer::update( float dTime )
 {
-	View::setViewPort( this , m_Player->getRect() , Point::ZERO );
+	View::setViewPort( this , m_Player->getRect().origin , Point::ZERO );
+	
+}
+
+void GameLayer::collisionCheck(float dTime)
+{
+	Direction collisionDirection;
+	bool haveToRemove;
+	for( auto subjectIter = m_InteractiveObjects.begin(); subjectIter != m_InteractiveObjects.end(); ++subjectIter )
+	{
+		for( auto objectIter = subjectIter + 1; objectIter != m_InteractiveObjects.end(); ++objectIter )
+		{
+			auto subject = *subjectIter;
+			auto object = *objectIter;
+			collisionDirection = subject->collisionCheck( object , dTime );
+			if( collisionDirection )
+			{
+				subject->collisionOccured( object , collisionDirection);
+			}
+			collisionDirection = object->collisionCheck( subject , dTime );
+			if( collisionDirection )
+			{
+				object->collisionOccured( subject , collisionDirection);
+			}
+		}
+	}
 }
