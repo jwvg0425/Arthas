@@ -3,30 +3,21 @@
 
 USING_NS_CC;
 
-bool View::init()
-{
-	m_AnchorX = 0;
-	m_AnchorY = 0;
-	m_MoveX = 0;
-	m_MoveY = 0;
-	return true;
-}
-
 
 void View::setViewPort(WorldScene* scene, cocos2d::Point standardPoint, cocos2d::Point anchorPoint)
 {
 	Rect mapRect = scene->getMapRect();
-	float m_AnchorX = Director::getInstance()->getWinSize().width / (1/anchorPoint.x);
-	float m_AnchorY = Director::getInstance()->getWinSize().height / (1/anchorPoint.y);
+	float anchorX = Director::getInstance()->getWinSize().width * anchorPoint.x;
+	float anchorY = Director::getInstance()->getWinSize().height * anchorPoint.y;
 
 
 
-	m_MoveX = m_AnchorX - standardPoint.x;
-	m_MoveY = m_AnchorY - standardPoint.y;
+	float moveX = anchorX - standardPoint.x;
+	float moveY = anchorY - standardPoint.y;
 
 
 
-	scene->setPosition(m_MoveX, m_MoveY);
+	scene->setPosition(moveX, moveY);
 }
 
 
@@ -46,5 +37,10 @@ void View::setViewPort(WorldScene* scene, cocos2d::Rect rect, Point anchorPoint)
 
 	return;
 
+}
+
+void View::setViewPortWithHighlight()
+{
+	return;
 }
 
