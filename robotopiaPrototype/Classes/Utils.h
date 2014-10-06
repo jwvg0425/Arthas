@@ -11,6 +11,7 @@ enum ObjectType
 	OT_PLAYER,
 	OT_FLOOR,
 	OT_BLOCK,
+	OT_MISSILE,
 };
 
 enum LandType
