@@ -19,6 +19,6 @@ bool WorldScene::init()
 	m_BackgroundLayer->setPosition( Point::ZERO );
 	this->addChild( m_GameLayer , WorldScene::ZOrder::GAMELAYER );
 	this->addChild( m_BackgroundLayer , WorldScene::ZOrder::BACKGROUND );
-	//m_GameLayer->addChild(m_BackgroundLayer->getFrontSprite(), -1);
+
 	return true;
 }
