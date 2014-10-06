@@ -8,7 +8,7 @@ public:
 	OVERRIDE bool			init();
 	CREATE_FUNC(Player);
 
-	OVERRIDE void			collisionOccured(InteractiveObject* enemy, Direction dir);
+	OVERRIDE void			collisionOccured(InteractiveObject* enemy, Directions dir);
 
 	OVERRIDE cocos2d::Rect	getRect();
 

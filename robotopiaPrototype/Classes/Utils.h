@@ -26,6 +26,7 @@ enum Direction
 	DIR_RIGHT = 4,
 	DIR_DOWN = 8,
 };
+typedef int Directions;
 
 enum KeyState
 {

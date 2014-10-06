@@ -6,7 +6,7 @@ class LandObject : public InteractiveObject
 {
 public:
 	OVERRIDE bool			init();
-	virtual void			collisionOccured(InteractiveObject* enemy , Direction dir , OUT bool * isRemoving) {};
+	virtual void			collisionOccured(InteractiveObject* enemy , Directions dir , OUT bool * isRemoving) {};
 	ObjectType				getType() const { return m_Type; };
 
 protected:

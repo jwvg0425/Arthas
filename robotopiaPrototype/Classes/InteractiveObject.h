@@ -8,8 +8,8 @@ class InteractiveObject : public cocos2d::Node
 public:
 	OVERRIDE bool			init();
 
-	ABSTRACT void			collisionOccured(InteractiveObject* enemy, Direction dir) = 0;
-	ABSTRACT Direction		collisionCheck(InteractiveObject* enemy, float dTime);
+	ABSTRACT void			collisionOccured(InteractiveObject* enemy, Directions dir) = 0;
+	ABSTRACT Directions		collisionCheck(InteractiveObject* enemy, float dTime);
 
 	ABSTRACT cocos2d::Rect	getRect();
 	ObjectType				getType() const { return m_Type; }

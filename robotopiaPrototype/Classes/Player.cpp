@@ -33,7 +33,7 @@ bool Player::init()
 	return true;
 }
 
-void Player::collisionOccured(InteractiveObject* enemy, Direction dir)
+void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
 
 }
@@ -90,7 +90,7 @@ void Player::update(float dTime)
 		}
 	}
 
-	//m_Velocity.y -= GRAVITY*dTime;
+	m_Velocity.y -= GRAVITY*dTime;
 
 	this->setPosition(pos);
 }
