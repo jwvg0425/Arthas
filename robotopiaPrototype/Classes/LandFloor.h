@@ -1,11 +1,12 @@
+#pragma once
 #include "cocos2d.h"
 #include "LandObject.h"
 
 class LandFloor : public LandObject
 {
 public:
-	OVERRIDE bool init();
-	OVERRIDE void update();
+	OVERRIDE bool		init();
+	virtual void		collisionOccured(InteractiveObject* enemy , Direction dir , OUT bool * isRemoving) {};
 
-	virtual void			collisionOccured(InteractiveObject* enemy , Direction dir , OUT bool * isRemoving) {};
+	CREATE_FUNC( LandFloor );
 };

@@ -1,5 +1,7 @@
 #pragma once
 #include "cocos2d.h"
+#include "InteractiveObject.h"
+#include "Utils.h"
 
 #define MAX_DATA_SIZE 1024*10
 static char* MAPDATA = 
@@ -30,8 +32,9 @@ public:
 	static cocos2d::Scene*			createScene();
 	virtual bool					init();  
 	bool							initWorldFromData(char* data);
-	CREATE_FUNC( WorldScene );
+	void							addTile( LandType type , int xIdx , int yIdx );
 
+	CREATE_FUNC( WorldScene );
 private:
 	cocos2d::Rect					m_WinRect;
 	cocos2d::Rect					m_MapRect;
@@ -39,5 +42,7 @@ private:
 	int								m_BoxWidthNum , m_BoxHeightNum;
 	std::string						m_MapRawData;
 	std::map<int , int>				m_MapData;
+
+	std::vector<InteractiveObject*> m_InteractiveObjects;
 };
 
