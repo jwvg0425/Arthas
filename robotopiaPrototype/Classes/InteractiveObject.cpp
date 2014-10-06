@@ -18,6 +18,7 @@ bool InteractiveObject::init()
 	m_IsOnGravity = true;
 	m_MoveSpeed = 0;
 	m_IsDestroyed = false;
+	m_IsFlying = false;
 
 	return true;
 }
@@ -90,6 +91,8 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			collisionDir |= DIR_UP;
 		}
 
+		//왼쪽면
+
 		gap = this->getRect().origin.x - (enemy->getRect().origin.x + enemy->getRect().size.width);
 		afterGap = myHorzAfterRect.origin.x - (enemyHorzAfterRect.origin.x + enemyHorzAfterRect.size.width);
 
@@ -136,48 +139,59 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 	if (collisionDir != DIR_NONE)
 	{
-		auto pos = this->getPosition();
-		float changeX = pos.x, changeY = pos.y;
-
+		Point changePos = this->getPosition();
+		Point pos = this->getPosition();
+		
+		if (this->getType() == OT_PLAYER)
+		{
+			CCLOG("pos.x : %f pos.y : %f, changePos.x : %f changePos.y : %f Vx : %f Vy : %f dir : %d", pos.x, pos.y,changePos.x,changePos.y,m_Velocity.x,m_Velocity.y, collisionDir);
+		}
 		if (collisionDir&DIR_LEFT || collisionDir&DIR_RIGHT)
 		{
-			changeX = pos.x + horzTime*this->getVelocity().x;
+			changePos.x = pos.x + horzTime*this->getVelocity().x;
 		}
 		if (collisionDir&DIR_UP || collisionDir&DIR_DOWN)
 		{
-			changeY = pos.y + vertTime*this->getVelocity().y;
+			changePos.y = pos.y + vertTime*this->getVelocity().y;
 		}
 
 		if (collisionDir & DIR_LEFT &&this->getVelocity().x != 0)
 		{
-			changeX += m_MoveSpeed * 0.0001;
+			changePos.x += m_MoveSpeed * 0.0001;
 		}
 
 		if (collisionDir & DIR_RIGHT && this->getVelocity().x != 0)
 		{
-			changeX -= m_MoveSpeed * 0.0001;
+			changePos.x -= m_MoveSpeed * 0.0001;
+		}
+
+		if (collisionDir & DIR_DOWN && this->isOnGravity())
+		{
+			changePos.y += GRAVITY*0.0001;
 		}
 
 		if (collisionDir & DIR_DOWN)
 		{
-			changeY += GRAVITY*0.0001;
+			if (collisionDir & DIR_LEFT && changePos.y == pos.y)
+			{
+				collisionDir &= ~DIR_LEFT;
+			}
+
+			if (collisionDir & DIR_RIGHT && changePos.y == pos.y)
+			{
+				collisionDir &= ~DIR_RIGHT;
+			}
 		}
 
-		if (collisionDir & DIR_LEFT && changeX == pos.x)
+		if (collisionDir & DIR_RIGHT || collisionDir & DIR_LEFT)
 		{
-			collisionDir &= ~DIR_LEFT;
+			if (collisionDir & DIR_DOWN && changePos.x == pos.x)
+			{
+				collisionDir &= ~DIR_DOWN;
+			}
 		}
 
-		if (collisionDir & DIR_RIGHT && changeX == pos.x)
-		{
-			collisionDir &= ~DIR_RIGHT;
-		}
-
-		pos.x = changeX;
-		pos.y = changeY;
-
-		this->setPosition(pos);
-
+		this->setPosition(changePos);
 	}
 	
 	return collisionDir;

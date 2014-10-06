@@ -38,8 +38,12 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 	switch (enemy->getType())
 	{
 	case OT_FLOOR:
-		CCLOG("%d",dir);
-		if (dir & DIR_DOWN || dir & DIR_UP)
+		if (dir & DIR_DOWN)
+		{
+			m_IsFlying = false;
+			m_Velocity.y = 0;
+		}
+		if (dir & DIR_UP)
 		{
 			m_Velocity.y = 0;
 		}
@@ -65,9 +69,27 @@ void Player::update(float dTime)
 	KeyState leftState = KeyStateManager::getKeyState(KC_LEFT);
 	KeyState rightState = KeyStateManager::getKeyState(KC_RIGHT);
 	
-	if (m_Velocity.y != 0)
+	if (m_IsFlying)
 	{
 		changeState(PS_JUMP);
+
+		if (leftState == KS_HOLD)
+		{
+			m_Velocity.x = -m_MoveSpeed;
+			m_IsRightDirection = false;
+			m_MainSprite->setFlippedX(true);
+
+		}
+		else if (rightState == KS_HOLD)
+		{
+			m_Velocity.x = m_MoveSpeed;
+			m_IsRightDirection = true;
+			m_MainSprite->setFlippedX(false);
+		}
+		else
+		{
+			m_Velocity.x = 0;
+		}
 	}
 	else
 	{
@@ -81,7 +103,7 @@ void Player::update(float dTime)
 		{
 			if (KeyStateManager::getKeyState(KC_JUMP))
 			{
-				m_Velocity.y = 300;
+				m_Velocity.y = 400;
 			}
 			else if (leftState == KS_HOLD)
 			{
@@ -107,6 +129,7 @@ void Player::update(float dTime)
 	}
 
 	m_Velocity.y -= GRAVITY*dTime;
+	m_IsFlying = true;
 
 	this->setPosition(pos);
 }

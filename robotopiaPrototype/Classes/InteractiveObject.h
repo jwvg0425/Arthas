@@ -25,6 +25,7 @@ protected:
 	ObjectType								m_Type;
 	cocos2d::Vec2							m_Velocity;
 	bool									m_IsOnGravity;
+	bool									m_IsFlying;
 	float									m_MoveSpeed;
 	bool									m_IsDestroyed;
 };
