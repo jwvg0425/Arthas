@@ -37,6 +37,8 @@ bool KeyStateSentinel::init()
 		KeyStateManager::m_KeyStates[i] = KS_NONE;
 	}
 
+	this->scheduleUpdate();
+
 	return true;
 }
 

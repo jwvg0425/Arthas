@@ -20,4 +20,10 @@ private:
 		PS_ATTACK,
 		PS_STATE_NUM,
 	};
+
+	State		m_State;
+	bool		m_IsRightDirection;
+
+	void		changeState(State state);
+	void		endAnimation(cocos2d::Ref* sender);
 };
