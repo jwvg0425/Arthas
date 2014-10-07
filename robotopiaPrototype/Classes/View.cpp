@@ -41,11 +41,14 @@ void View::setViewPort( GameLayer* scene , Point standardPoint , Point anchorPoi
 
 void View::setViewPortWithHighlight(GameLayer* scene, cocos2d::Rect standardRect)
 {
-	float ratioX = Director::getInstance()->getWinSize().width / standardRect.size.width;
-	float ratioY = Director::getInstance()->getWinSize().height / standardRect.size.height;
+	float windowWidth = Director::getInstance()->getWinSize().width;
+	float windowHeight = Director::getInstance()->getWinSize().height;
+	Point centerAnchor(0.5f, 0.5f);
+	float ratioX = windowWidth / standardRect.size.width;
+	float ratioY = windowHeight / standardRect.size.height;
 
-
-	setViewPort(scene, standardRect.origin, Point(0.5, 0.5));
+	scene->setPosition(windowWidth * centerAnchor.x - standardRect.origin.x,
+					   windowHeight * centerAnchor.y - standardRect.origin.y);
 	scene->setScale(ratioX, ratioY);
 
 	return;
@@ -53,7 +56,7 @@ void View::setViewPortWithHighlight(GameLayer* scene, cocos2d::Rect standardRect
 
 void View::setViewPortWithHighlight(GameLayer* Scene, cocos2d::Point standardPoint, cocos2d::Size size)
 {
-	Rect rect = Rect(standardPoint.x,standardPoint.y, size.width, size.height);
+	Rect rect = Rect(standardPoint.x, standardPoint.y, size.width, size.height);
 	setViewPortWithHighlight(Scene, rect);
 
 }
