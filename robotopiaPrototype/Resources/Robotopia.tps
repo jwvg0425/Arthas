@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.2</string>
         <key>fileName</key>
-        <string>C:/Users/ozt/Desktop/ozt/git/robotopiaPrototype/Resources/Robotopia.tps</string>
+        <string>C:/Users/SY/Desktop/robotopiaPrototype/Resources/Robotopia.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -210,6 +210,16 @@
             <filename>player_walk8.png</filename>
             <filename>FrontBackground.png</filename>
             <filename>BackBackground.png</filename>
+            <filename>../../그림들/LinearMissile0.png</filename>
+            <filename>../../그림들/LinearMissile1.png</filename>
+            <filename>../../그림들/LinearMissile2.png</filename>
+            <filename>../../그림들/LinearMissile7.png</filename>
+            <filename>../../그림들/LinearMissile8.png</filename>
+            <filename>../../그림들/LinearMissile9.png</filename>
+            <filename>../../그림들/LinearMissile3.png</filename>
+            <filename>../../그림들/LinearMissile4.png</filename>
+            <filename>../../그림들/LinearMissile5.png</filename>
+            <filename>../../그림들/LinearMissile6.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
