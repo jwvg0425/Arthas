@@ -13,7 +13,7 @@ bool InteractiveObject::init()
 	m_AnimationNum = 0;
 	m_Width = 0;
 	m_Height = 0;
-	m_Type = OT_OBJECT;
+	m_Type = OT_NONE;
 	m_Velocity = Vec2(0, 0);
 	m_IsOnGravity = true;
 	m_MoveSpeed = 0;

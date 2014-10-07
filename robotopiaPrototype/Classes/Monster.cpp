@@ -7,10 +7,7 @@ bool Monster::init()
 		return false;
 	}
 
+	m_Type = OT_MONSTER;
+
 	return true;
-}
-
-void Monster::collisionOccured(InteractiveObject* enemy, Directions dir)
-{
-
 }

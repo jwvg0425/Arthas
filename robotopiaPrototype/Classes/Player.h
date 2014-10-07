@@ -1,4 +1,10 @@
-﻿#pragma once
+﻿//Player.h
+//
+//게임 주인공 캐릭터의 조작 및 충돌 처리등을 구현. 
+//
+//작성자 : 남현욱
+//
+#pragma once
 
 #include "InteractiveObject.h"
 
@@ -12,7 +18,10 @@ public:
 
 	OVERRIDE cocos2d::Rect	getRect();
 
-	void update(float dTime);
+	void					update(float dTime);
+
+	int						getHp() const { return m_Hp; }
+	int						getSteam() const { return m_Steam; }
 private:
 	enum State
 	{
@@ -25,6 +34,8 @@ private:
 
 	State		m_State;
 	bool		m_IsRightDirection;
+	int			m_Hp;
+	int			m_Steam;
 
 	void		changeState(State state);
 	void		endAnimation(cocos2d::Ref* sender);

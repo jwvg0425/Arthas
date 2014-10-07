@@ -80,12 +80,12 @@ void KeyStateSentinel::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, co
 	KeyStateManager::m_KeyStates[keyCode] = KS_NONE;
 }
 
-cocos2d::Animation* UtilFunctions::createAnimation(const char* animationName, int startIdx, size_t size, float delay)
+cocos2d::Animation* UtilFunctions::createAnimation(const char* animationName, int startIdx, size_t frameNum, float delay)
 {
 	auto animation = Animation::create();
 	animation->setDelayPerUnit(delay);
 
-	for (size_t i = 0; i < size; ++i)
+	for (size_t i = 0; i < frameNum; ++i)
 	{
 		auto frame = SpriteFrameCache::getInstance()->
 			getSpriteFrameByName(StringUtils::format("%s%d.png", animationName, i + startIdx));

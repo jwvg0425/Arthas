@@ -1,4 +1,10 @@
-﻿#pragma once
+﻿//InteractiveObject.h
+//
+//서로 상호작용하는 오브젝트들의 최상위 클래스. 충돌 처리 및 기본적으로 가져야하는 데이터들을 정의.
+//
+//작성자 : 남현욱
+//
+#pragma once
 
 #include "cocos2d.h"
 #include "Utils.h"

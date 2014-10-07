@@ -1,11 +1,17 @@
-﻿#include "InteractiveObject.h"
+﻿//Monster.h
+//
+// 모든 몬스터들의 최상위 클래스.
+//
+//작성자 : 남현욱
+//
+
+#include "InteractiveObject.h"
 
 class Monster : public InteractiveObject
 {
 public:
 	OVERRIDE bool			init();
-	OVERRIDE void			collisionOccured(InteractiveObject* enemy, Directions dir);
+	ABSTRACT void			collisionOccured(InteractiveObject* enemy, Directions dir) = 0;
 
-	CREATE_FUNC(Monster);
 private:
 };
