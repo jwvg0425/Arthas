@@ -9,9 +9,16 @@ bool AimingMissile::init()
 	{
 		return false;
 	}
-	
+	m_Type = OT_AIMING_MISSILE;
 
-	//this->addChild(Sprite);
+	m_MainSprite = Sprite::create();
+	auto animation = UtilFunctions::createAnimation("AimingMissile", 1, 8, 0.1);
+	m_Animations[0] = animation;
+	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
+
+	this->addChild(m_MainSprite);
+
+	
 	this->scheduleUpdate();
 }
 
