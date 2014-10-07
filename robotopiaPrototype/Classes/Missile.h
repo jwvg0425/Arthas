@@ -13,5 +13,5 @@ public:
 protected:
 	bool    m_IsPlayerMissile;
 	float	m_Degree;
-	float	m_Vx, m_Vy;
+	
 };

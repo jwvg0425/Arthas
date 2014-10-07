@@ -29,13 +29,13 @@ void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Poi
 
 	if (distance != 0)
 	{
-		m_Vx = ((myPos.x - targetPos.x) / distance) * velocity;
-		m_Vy = ((myPos.x - targetPos.x) / distance) * velocity;
+		m_Velocity.x = ((myPos.x - targetPos.x) / distance) * velocity;
+		m_Velocity.y = ((myPos.x - targetPos.x) / distance) * velocity;
 	}
 	else
 	{
-		m_Vx = velocity;
-		m_Vy = 0;
+		m_Velocity.x = velocity;
+		m_Velocity.y = 0;
 	}
 }
 
@@ -43,8 +43,8 @@ void AimingMissile::update(float dTime)
 {
 	Point pos = this->getPosition();
 
-	pos.x += m_Vx;
-	pos.y += m_Vy;
+	pos.x += m_Velocity.x;
+	pos.y += m_Velocity.y;
 
 	this->setPosition(pos);
 }
