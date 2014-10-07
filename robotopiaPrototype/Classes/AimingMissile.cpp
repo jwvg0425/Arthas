@@ -9,7 +9,7 @@ bool AimingMissile::init()
 	{
 		return false;
 	}
-	m_Type = OT_AIMING_MISSILE;
+//	m_Type = OT_AIMING_MISSILE;
 
 	m_MainSprite = Sprite::create();
 	auto animation = UtilFunctions::createAnimation("AimingMissile", 1, 8, 0.1);
@@ -20,12 +20,15 @@ bool AimingMissile::init()
 
 	
 	this->scheduleUpdate();
+
+	return true;
 }
 
 
 
 void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Point myPos, Point targetPos)
 {
+	
 
 	if (velocity < 0)
 	{
