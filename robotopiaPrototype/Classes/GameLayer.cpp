@@ -4,6 +4,7 @@
 #include "RushMonster.h"
 #include "Villager.h"
 #include "LinearMissile.h"
+#include "AimingMissile.h"
 
 USING_NS_CC;
 
@@ -76,7 +77,6 @@ bool GameLayer::initWorldFromData( char* data )
 InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 {
 	InteractiveObject* object;
-	Point anchorPoint;
 	GameLayer::ZOrder zOrder;
 	switch( type )
 	{
@@ -86,40 +86,36 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = Player::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			m_Player = ( Player* )object;
-			anchorPoint = Point( 0.5f , 0.5f );
-
 			break;
 		case OT_FLOOR:
 			object = LandFloor::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
-			anchorPoint = Point::ZERO;
 			break;
 		case OT_BLOCK:
 			object = LandBlock::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
-			anchorPoint = Point::ZERO;
 
 			break;
  		case OT_LINEAR_MISSILE:
 			object = LinearMissile::create();
  			zOrder = GameLayer::ZOrder::GAME_OBJECT;
-			anchorPoint = Point( 0.5f , 0.5f );
-
 			break;
 		case OT_MISSILE:
 			return nullptr;
+		case OT_AIMING_MISSILE:
+			object = AimingMissile::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
 		case OT_MONSTER:
 			return nullptr;
 		case OT_RUSH_MONSTER:
 			object = RushMonster::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
-			anchorPoint = Point( 0.5f , 0.5f );
 
 			break;
 		case OT_VILLAGER:
 			object = Villager::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
-			anchorPoint = Point( 0.5f , 0.5f );
 			break;
 		default:
 			return nullptr;
