@@ -14,6 +14,7 @@ public:
 
 private:
 	const Player* m_Player;
-
+	int m_WinWidth, m_WinHeight;
+	cocos2d::Vector<cocos2d::Sprite*> m_STEs;
 
 };
