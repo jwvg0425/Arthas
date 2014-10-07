@@ -11,9 +11,13 @@ bool LinearMissile::init()
 	{
 		return false;
 	}
+
+	m_Type = OT_LINEAR_MISSILE;
+	
 	m_MainSprite = Sprite::create();
 	auto animation = UtilFunctions::createAnimation("LinearMissile0.png", 0, 10, 0.1);
 	m_Animations[0] = animation;
+	
 
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
 
@@ -32,17 +36,16 @@ void LinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_PLAYER:
 		if (!m_IsPlayerMissile)
 		{
-			m_MainSprite->setVisible(false);
 			//몬스터가 플레이어 맞춘 효과 넣고 
 			m_IsDestroyed = true;
 		}
 		break;
 	case OT_FLOOR:
-		m_MainSprite->setVisible(false);
+	
 		m_IsDestroyed = true;
 		break;
 	case OT_BLOCK:
-		m_MainSprite->setVisible(false);
+	
 		m_IsDestroyed = true;
 		break;
 	case OT_MISSILE:
@@ -50,7 +53,7 @@ void LinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_MONSTER:
 		if (m_IsPlayerMissile)
 		{
-			m_MainSprite->setVisible(false);
+		
 			//플레이어가 몬스터 맞춘 효과 넣고
 			m_IsDestroyed = true;
 		}
@@ -58,13 +61,12 @@ void LinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_RUSH_MONSTER:
 		if (m_IsPlayerMissile)
 		{
-			m_MainSprite->setVisible(false);
 			//플레이어가 몬스터 맞춘 효과 넣고
 			m_IsDestroyed = true;
 		}
 		break;
 	case OT_VILLAGER:
-		m_MainSprite->setVisible(false);
+	
 		m_IsDestroyed = true;
 		break;
 	default:
