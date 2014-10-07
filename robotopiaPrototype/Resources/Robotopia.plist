@@ -4,97 +4,6 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>AimimgMissile2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{304,482},{18,12}}</string>
-                <key>offset</key>
-                <string>{0,1}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,1},{18,12}}</string>
-                <key>sourceSize</key>
-                <string>{18,16}</string>
-            </dict>
-            <key>AimimgMissile3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{100,484},{16,12}}</string>
-                <key>offset</key>
-                <string>{-1,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{16,12}}</string>
-                <key>sourceSize</key>
-                <string>{18,16}</string>
-            </dict>
-            <key>AimimgMissile4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{318,482},{18,12}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{18,12}}</string>
-                <key>sourceSize</key>
-                <string>{18,16}</string>
-            </dict>
-            <key>AimimgMissile5.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{288,482},{18,14}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,1},{18,14}}</string>
-                <key>sourceSize</key>
-                <string>{18,16}</string>
-            </dict>
-            <key>AimimgMissile6.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{189,488},{18,12}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{18,12}}</string>
-                <key>sourceSize</key>
-                <string>{18,16}</string>
-            </dict>
-            <key>AimimgMissile7.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{209,488},{17,12}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{17,12}}</string>
-                <key>sourceSize</key>
-                <string>{17,16}</string>
-            </dict>
-            <key>AimimgMissile8.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{332,483},{17,12}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{17,12}}</string>
-                <key>sourceSize</key>
-                <string>{17,16}</string>
-            </dict>
             <key>AimingMissile1.png</key>
             <dict>
                 <key>frame</key>
@@ -107,6 +16,97 @@
                 <string>{{2,1},{16,14}}</string>
                 <key>sourceSize</key>
                 <string>{18,16}</string>
+            </dict>
+            <key>AimingMissile2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{304,482},{18,12}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{18,12}}</string>
+                <key>sourceSize</key>
+                <string>{18,16}</string>
+            </dict>
+            <key>AimingMissile3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{100,484},{16,12}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{16,12}}</string>
+                <key>sourceSize</key>
+                <string>{18,16}</string>
+            </dict>
+            <key>AimingMissile4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{318,482},{18,12}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{18,12}}</string>
+                <key>sourceSize</key>
+                <string>{18,16}</string>
+            </dict>
+            <key>AimingMissile5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{288,482},{18,14}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{18,14}}</string>
+                <key>sourceSize</key>
+                <string>{18,16}</string>
+            </dict>
+            <key>AimingMissile6.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{189,488},{18,12}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{18,12}}</string>
+                <key>sourceSize</key>
+                <string>{18,16}</string>
+            </dict>
+            <key>AimingMissile7.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{209,488},{17,12}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{17,12}}</string>
+                <key>sourceSize</key>
+                <string>{17,16}</string>
+            </dict>
+            <key>AimingMissile8.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{332,483},{17,12}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{17,12}}</string>
+                <key>sourceSize</key>
+                <string>{17,16}</string>
             </dict>
             <key>LinearMissile0.png</key>
             <dict>
@@ -729,7 +729,7 @@
             <key>size</key>
             <string>{443,502}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:20ee8e9651b03a50502c5529dad85758:5516b6edef3a17c461036b6185700a20:40387c8163e24ac93b5bab61b171c8fd$</string>
+            <string>$TexturePacker:SmartUpdate:c63e19b96d3b4784df359de62362b623:e2e2f08f4ccd4653a868e8d534da2504:40387c8163e24ac93b5bab61b171c8fd$</string>
             <key>textureFileName</key>
             <string>Robotopia.png</string>
         </dict>
