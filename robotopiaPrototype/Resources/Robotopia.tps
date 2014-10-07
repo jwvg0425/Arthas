@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.2</string>
         <key>fileName</key>
-        <string>C:/Users/namhyeonuk/Desktop/남현욱/nhn next/개경프/git project/Arthas/robotopiaPrototype/Resources/Robotopia.tps</string>
+        <string>C:/Users/SY/Desktop/robotopiaPrototype/Resources/Robotopia.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -235,6 +235,14 @@
             <filename>rushMonster_stand2.png</filename>
             <filename>rushMonster_stand3.png</filename>
             <filename>rushMonster_stand4.png</filename>
+            <filename>../../그림들/AimimgMissile8.png</filename>
+            <filename>../../그림들/AimingMissile1.png</filename>
+            <filename>../../그림들/AimimgMissile2.png</filename>
+            <filename>../../그림들/AimimgMissile3.png</filename>
+            <filename>../../그림들/AimimgMissile4.png</filename>
+            <filename>../../그림들/AimimgMissile5.png</filename>
+            <filename>../../그림들/AimimgMissile6.png</filename>
+            <filename>../../그림들/AimimgMissile7.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
