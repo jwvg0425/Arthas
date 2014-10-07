@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.2</string>
         <key>fileName</key>
-        <string>C:/Users/SY/Desktop/robotopiaPrototype/Resources/Robotopia.tps</string>
+        <string>C:/Users/ozt/Desktop/ozt/git/robotopiaPrototype/Resources/Robotopia.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -188,8 +188,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>FloorLand.png</filename>
-            <filename>FloorLandPiece.png</filename>
             <filename>player_attack1.png</filename>
             <filename>player_attack2.png</filename>
             <filename>player_attack3.png</filename>
@@ -208,18 +206,22 @@
             <filename>player_walk6.png</filename>
             <filename>player_walk7.png</filename>
             <filename>player_walk8.png</filename>
-            <filename>FrontBackground.png</filename>
-            <filename>BackBackground.png</filename>
-            <filename>../../그림들/LinearMissile0.png</filename>
-            <filename>../../그림들/LinearMissile1.png</filename>
-            <filename>../../그림들/LinearMissile2.png</filename>
-            <filename>../../그림들/LinearMissile7.png</filename>
-            <filename>../../그림들/LinearMissile8.png</filename>
-            <filename>../../그림들/LinearMissile9.png</filename>
-            <filename>../../그림들/LinearMissile3.png</filename>
-            <filename>../../그림들/LinearMissile4.png</filename>
-            <filename>../../그림들/LinearMissile5.png</filename>
-            <filename>../../그림들/LinearMissile6.png</filename>
+            <filename>background.png</filename>
+            <filename>block.png</filename>
+            <filename>blockPiece.png</filename>
+            <filename>floor.png</filename>
+            <filename>floorPiece.png</filename>
+            <filename>Villager.png</filename>
+            <filename>LinearMissile0.png</filename>
+            <filename>LinearMissile1.png</filename>
+            <filename>LinearMissile2.png</filename>
+            <filename>LinearMissile3.png</filename>
+            <filename>LinearMissile4.png</filename>
+            <filename>LinearMissile5.png</filename>
+            <filename>LinearMissile6.png</filename>
+            <filename>LinearMissile7.png</filename>
+            <filename>LinearMissile8.png</filename>
+            <filename>LinearMissile9.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

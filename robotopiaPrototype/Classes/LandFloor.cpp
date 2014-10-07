@@ -16,7 +16,6 @@ bool LandFloor::init()
 	m_PieceSprite->setAnchorPoint( Point::ZERO );
 	this->addChild( m_PieceSprite , 0);
 
-	m_LandType = LT_FLOOR;
 	m_Type = OT_FLOOR;
 	m_Width = m_MainSprite->getContentSize().width;
 	m_Height = m_MainSprite->getContentSize().height;

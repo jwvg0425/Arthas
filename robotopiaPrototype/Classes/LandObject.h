@@ -16,5 +16,4 @@ protected:
 		LZ_MAIN,
 	};
 	cocos2d::Sprite*		m_PieceSprite;
-	LandType				m_LandType;
 };

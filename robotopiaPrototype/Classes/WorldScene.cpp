@@ -17,8 +17,8 @@ bool WorldScene::init()
 	m_BackgroundLayer = BackgroundLayer::create();
 	m_GameLayer->setAnchorPoint( Point::ZERO );
 	m_BackgroundLayer->setPosition( Point::ZERO );
-	this->addChild( m_GameLayer , WorldScene::ZOrder::GAMELAYER );
-	this->addChild( m_BackgroundLayer , WorldScene::ZOrder::BACKGROUND );
+	this->addChild( m_GameLayer , WorldScene::ZOrder::GAMELAYER, TAG_GAME_LAYER );
+	this->addChild( m_BackgroundLayer , WorldScene::ZOrder::BACKGROUND , "TAG_BACKGROUND_LAYER");
 
 	return true;
 }

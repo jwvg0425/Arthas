@@ -17,16 +17,16 @@ bool GameLayer::init()
 	{
 		return false;
 	}
+	KeyStateManager::receiveKeyboardData( this );
 	m_WinRect.size = Director::getInstance()->getVisibleSize();
 	m_WinRect.origin = Director::getInstance()->getVisibleOrigin();
 	initWorldFromData( MAPDATA );
-	KeyStateManager::receiveKeyboardData( this );
 	this->scheduleUpdate();
 
 	addMovingBackground();
 
 	m_Player = Player::create();
-	m_Player->setAnchorPoint( Point( 0.6 , 0.6 ) );
+	m_Player->setAnchorPoint( Point( 0.6f , 0.6f ) );
 	m_Player->setPosition(Point(100 , 300));
 	this->addChild( m_Player , GameLayer::ZOrder::GAME_OBJECT);
 	m_InteractiveObjects.push_back( m_Player );
@@ -62,8 +62,7 @@ bool GameLayer::initWorldFromData( char* data )
 		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
 		{
 			value = atoi( rawValue );
-			m_MapData[m_BoxWidthNum*yIdx + xIdx] = value;
-
+			m_MapData[m_BoxWidthNum*yIdx + xIdx] = (ObjectType)value;
 			rawValue = strtok( nullptr , " \n" );
 		}
 	}
@@ -72,34 +71,23 @@ bool GameLayer::initWorldFromData( char* data )
 	{
 		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
 		{
-			Sprite* sprite = nullptr;
-			switch( m_MapData[yIdx*m_BoxWidthNum + xIdx] )
-			{
-				case 0:
-					break;
-				case 1:
-					addLandObject( LandType::LT_FLOOR , xIdx , yIdx );
-					break;
-				case 2:
-					addLandObject( LandType::LT_BLOCK , xIdx , yIdx );
-					break;
-			}
+			addObjectByMapdata( xIdx , yIdx );
 		}
 	}
 	return true;
 }
 
 
-void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
+void GameLayer::addObjectByMapdata( ObjectType type , int xIdx , int yIdx )
 {
-	if( type == LandType::LT_FLOOR )
+	if( type == ObjectType::OT_FLOOR )
 	{
 		auto floor = LandFloor::create();
 		floor->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
 		m_InteractiveObjects.push_back( floor );
 		this->addChild( floor , GameLayer::ZOrder::LAND_OBJECT );
 	}
-	if( type == LandType::LT_BLOCK )
+	if( type == ObjectType::OT_BLOCK )
 	{
 		auto block = LandBlock::create();
 		block->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
@@ -107,6 +95,11 @@ void GameLayer::addLandObject( LandType type , int xIdx , int yIdx )
 		this->addChild( block , GameLayer::ZOrder::LAND_OBJECT );
 	}
 
+}
+
+void GameLayer::addObjectByMapdata( int xIdx , int yIdx )
+{
+	addObjectByMapdata( m_MapData[yIdx*m_BoxWidthNum + xIdx] , xIdx , yIdx );
 }
 
 void GameLayer::update( float dTime )
@@ -181,3 +174,28 @@ void GameLayer::addMovingBackground()
 		}
 	}
 }
+
+cocos2d::Vec2 GameLayer::PositionToIdxOfMapData( cocos2d::Point position )
+{
+	Vec2 curPosIdx = Vec2(-1 , -1); 
+	if( m_MapRect.containsPoint( position ) )
+	{
+		curPosIdx.x = position.x / m_BoxSize.width;
+		curPosIdx.y = position.y / m_BoxSize.height;
+	}
+	_ASSERT( curPosIdx == Vec2( -1 , -1 ) ); //맵안에 있지 않은 위치
+	return curPosIdx;
+}
+
+ObjectType GameLayer::getMapData( int xIdx , int yIdx )
+{
+	return m_MapData[yIdx*m_BoxHeightNum + xIdx];
+}
+
+ObjectType GameLayer::getMapData( cocos2d::Point position )
+{
+	int xIdx = PositionToIdxOfMapData( position ).x;
+	int yIdx = PositionToIdxOfMapData( position ).y;
+	return getMapData( xIdx , yIdx );
+}
+

@@ -16,7 +16,6 @@ bool LandBlock::init()
 	m_PieceSprite->setAnchorPoint( Point::ZERO );
 	this->addChild( m_PieceSprite , 0 );
 
-	m_LandType = LT_BLOCK;
 	m_Type = OT_BLOCK;
 	m_Width = m_MainSprite->getContentSize().width;
 	m_Height = m_MainSprite->getContentSize().height;
