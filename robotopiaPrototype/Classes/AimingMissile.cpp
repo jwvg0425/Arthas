@@ -9,10 +9,10 @@ bool AimingMissile::init()
 	{
 		return false;
 	}
-//	m_Type = OT_AIMING_MISSILE;
+	m_Type = OT_AIMING_MISSILE;
 
 	m_MainSprite = Sprite::create();
-	auto animation = UtilFunctions::createAnimation("AimingMissile", 1, 8, 0.1);
+	auto animation = UtilFunctions::createAnimation("AimingMissile", 1, 8, 0.1f);
 	m_Animations[0] = animation;
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
 
@@ -28,24 +28,23 @@ bool AimingMissile::init()
 
 void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Point myPos, Point targetPos)
 {
-	
-
-	if (velocity < 0)
-	{
-		m_MainSprite->setFlippedX(true);
-	}
-
 	float distance = sqrt((myPos.x - targetPos.x)*(myPos.x - targetPos.x) + (myPos.y - targetPos.y) * (myPos.y - targetPos.y));
 
 	if (distance != 0)
 	{
-		m_Velocity.x = ((myPos.x - targetPos.x) / distance) * velocity;
-		m_Velocity.y = ((myPos.x - targetPos.x) / distance) * velocity;
+		m_Velocity.x = ((targetPos.x - myPos.x) / distance) * velocity;
+		m_Velocity.y = ((targetPos.y - myPos.y) / distance) * velocity;
+	
 	}
 	else
 	{
 		m_Velocity.x = velocity;
 		m_Velocity.y = 0;
+	}
+
+	if (m_Velocity.x > 0)
+	{
+		m_MainSprite->setFlippedX(true);
 	}
 }
 
@@ -83,6 +82,9 @@ void AimingMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 		m_IsDestroyed = true;
 		break;
 	case OT_MISSILE:
+		break;
+	case OT_LINEAR_MISSILE:
+		
 		break;
 	case OT_MONSTER:
 		if (m_IsPlayerMissile)
