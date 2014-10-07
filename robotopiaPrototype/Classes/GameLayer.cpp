@@ -7,14 +7,6 @@
 
 USING_NS_CC;
 
-Scene* GameLayer::createScene()
-{
-	auto scene = Scene::create();
-	auto layer = GameLayer::create();
-	scene->addChild(layer);
-	return scene;
-}
-
 bool GameLayer::init()
 {
 	if ( !Layer::init() )
@@ -29,10 +21,7 @@ bool GameLayer::init()
 
 	addMovingBackground();
 
-	m_Player = Player::create();
-	m_Player->setAnchorPoint( Point( 0.6f , 0.6f ) );
-	m_Player->setPosition(Point(100 , 300));
-	this->addChild( m_Player , GameLayer::ZOrder::GAME_OBJECT);
+	//m_Player = (Player*)addObject( OT_PLAYER , Point(100 , 300));
 	m_InteractiveObjects.push_back( m_Player );
 
 	return true;
@@ -86,25 +75,33 @@ bool GameLayer::initWorldFromData( char* data )
 InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 {
 	InteractiveObject* object;
+	Point anchorPoint;
 	GameLayer::ZOrder zOrder;
 	switch( type )
 	{
 		case OT_NONE:
 			return nullptr;
 		case OT_PLAYER:
-			return nullptr;
+			object = Player::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			anchorPoint = Point(0.5f, 0.5f);
+			m_Player = ( Player* )object;
+			break;
 		case OT_FLOOR:
 			object = LandFloor::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			anchorPoint = Point( 0.5f , 0.5f );
 			break;
 		case OT_BLOCK:
 			object = LandBlock::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			anchorPoint = Point( 0.5f , 0.5f );
 			break;
-// 		case OT_LINEAR_MISSILE:
-// 			object = LinearMissile::create();
-// 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
-// 			break;
+ 		case OT_LINEAR_MISSILE:
+			object = LinearMissile::create();
+ 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			anchorPoint = Point( 0.5f , 0.5f );
+			break;
 		case OT_MISSILE:
 			return nullptr;
 		case OT_MONSTER:
@@ -112,14 +109,17 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_RUSH_MONSTER:
 			object = RushMonster::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			anchorPoint = Point( 0.5f , 0.5f );
 			break;
 		case OT_VILLAGER:
 			object = Villager::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			anchorPoint = Point( 0.5f , 0.5f );
 			break;
 		default:
 			return nullptr;
 	}
+	object->setAnchorPoint( anchorPoint );
 	object->setPosition( position );
 	m_InteractiveObjects.push_back( object );
 	this->addChild( object , zOrder );

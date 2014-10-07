@@ -9,5 +9,4 @@ public:
 
 private:
 	cocos2d::Sprite*	m_UnmoveableBackground;
-
 };
