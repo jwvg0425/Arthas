@@ -1,4 +1,6 @@
 ﻿#include "RushMonster.h"
+#include "GameLayer.h"
+#include "AimingMissile.h"
 
 USING_NS_CC;
 
@@ -117,6 +119,15 @@ void RushMonster::update(float dTime)
 			changeState(RM_STAND);
 			m_Velocity.x = 0;
 		}
+	}
+
+	if (KeyStateManager::getKeyState(KC_ATTACK) == KS_HOLD)
+	{
+		auto gameLayer = (GameLayer*)this->getParent();
+
+		auto missile = (AimingMissile*)gameLayer->addObject(OT_AIMING_MISSILE, this->getPosition());
+
+		missile->setMoveAttribute(false, 200, this->getPosition(), gameLayer->getPlayer()->getPosition());
 	}
 
 	m_Velocity.y -= GRAVITY*dTime;

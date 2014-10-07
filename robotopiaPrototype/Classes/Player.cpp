@@ -1,5 +1,6 @@
 ﻿#include "Player.h"
 #include "GameLayer.h"
+#include "AimingMissile.h"
 #include "LinearMissile.h"
 
 USING_NS_CC;
@@ -51,6 +52,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			m_IsFlying = false;
 			m_Velocity.y = 0;
 		}
+		m_PrevCollideDirections |= dir;
 		break;
 	case OT_BLOCK:
 		if (dir & DIR_DOWN)
@@ -66,6 +68,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		{
 			m_Velocity.y = 0;
 		}
+		m_PrevCollideDirections |= dir;
 		break;
 	}
 }
@@ -73,7 +76,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 void Player::update(float dTime)
 {
 	Point pos = this->getPosition();
-
+	m_PrevCollideDirections = DIR_NONE;
 
 	//좌표 변경 처리
 	pos.x += m_Velocity.x*dTime;
@@ -141,10 +144,6 @@ void Player::update(float dTime)
 				m_Velocity.x = 0;
 			}
 		}
-
-		if (m_State == PS_ATTACK)
-		{
-		}
 	}
 
 	m_Velocity.y -= GRAVITY*dTime;
@@ -177,6 +176,7 @@ void Player::endAnimation(cocos2d::Ref* sender)
 		auto gameLayer = (GameLayer*)this->getParent();
 
 		auto object = (LinearMissile*)gameLayer->addObject(OT_LINEAR_MISSILE, this->getPosition());
+		Point pos = this->getPosition();
 
 		if (m_IsRightDirection)
 		{	
