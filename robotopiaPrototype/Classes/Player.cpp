@@ -141,6 +141,10 @@ void Player::update(float dTime)
 				m_Velocity.x = 0;
 			}
 		}
+
+		if (m_State == PS_ATTACK)
+		{
+		}
 	}
 
 	m_Velocity.y -= GRAVITY*dTime;

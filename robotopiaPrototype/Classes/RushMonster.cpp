@@ -14,7 +14,7 @@ bool RushMonster::init()
 	m_Animations[RM_STAND] = UtilFunctions::createAnimation("rushMonster_stand", 1, 4, 0.1f);
 	m_Animations[RM_MOVE] = UtilFunctions::createAnimation("rushMonster_move", 1, 4, 0.1f);
 	m_Animations[RM_RUSH] = UtilFunctions::createAnimation("rushMonster_rush", 1, 4, 0.1f);
-
+	
 	for (int i = 0; i < RM_STATE_NUM; i++)
 	{
 		m_Animations[i]->retain();
@@ -26,8 +26,9 @@ bool RushMonster::init()
 
 	changeState(RM_STAND);
 
-	m_DelayTime = rand() % 5000 + 3000;
-	m_MoveSpeed = 300;
+	m_DelayTime = rand() % 3 + 4;
+	m_MoveSpeed = 30;
+	m_IsOnGravity = true;
 
 	this->scheduleUpdate();
 
@@ -93,13 +94,15 @@ void RushMonster::update(float dTime)
 	pos.x += m_Velocity.x*dTime;
 	pos.y += m_Velocity.y*dTime;
 
+	this->setPosition(pos);
+
 	if (m_DelayTime < 0)
 	{
 		if (m_State == RM_STAND)
 		{
 			m_IsRightDirection = rand() % 2;
-			m_MainSprite->setFlippedX(!m_IsRightDirection);
-			m_DelayTime = rand() % 300 + 400;
+			m_MainSprite->setFlippedX(m_IsRightDirection);
+			m_DelayTime = 2;
 			m_Velocity.x = m_MoveSpeed;
 			if (!m_IsRightDirection)
 			{
@@ -108,8 +111,9 @@ void RushMonster::update(float dTime)
 
 			changeState(RM_MOVE);
 		}
-		if (m_State == RM_MOVE)
+		else if (m_State == RM_MOVE)
 		{
+			m_DelayTime = 4 + rand() % 3;
 			changeState(RM_STAND);
 			m_Velocity.x = 0;
 		}
@@ -117,4 +121,12 @@ void RushMonster::update(float dTime)
 
 	m_Velocity.y -= GRAVITY*dTime;
 	m_IsFlying = true;
+}
+
+cocos2d::Rect RushMonster::getRect()
+{
+	m_Width = m_MainSprite->getContentSize().width;
+	m_Height = m_MainSprite->getContentSize().height;
+
+	return InteractiveObject::getRect();
 }

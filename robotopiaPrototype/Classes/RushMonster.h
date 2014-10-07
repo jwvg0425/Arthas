@@ -9,6 +9,8 @@ public:
 
 	CREATE_FUNC(RushMonster);
 
+	OVERRIDE cocos2d::Rect	getRect();
+
 private:
 	enum State
 	{

@@ -46,6 +46,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 	myVertAfterRect.origin.y += this->getVelocity().y*dTime;
 	enemyVertAfterRect.origin.y += enemy->getVelocity().y*dTime;
 
+
 	//일단 충돌이 일어나는지 여부부터 확인
 	if (myAfterRect.intersectsRect(enemyAfterRect))
 	{
@@ -137,7 +138,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		}
 	}
 
-	if (collisionDir != DIR_NONE)
+	if (collisionDir != DIR_NONE && !enemy->isOnGravity())
 	{
 		Point changePos = this->getPosition();
 		Point pos = this->getPosition();
@@ -201,8 +202,17 @@ cocos2d::Rect InteractiveObject::getRect()
 {
 	Point pos = this->getPosition();
 	Point Anchor = this->getAnchorPoint();
+	float width =  m_MainSprite->getContentSize().width;
+	float height = m_MainSprite->getContentSize().height;
 
-	return Rect(pos.x - Anchor.x*m_Width, pos.y - Anchor.y*m_Height, m_Width, m_Height);
+	if (m_MainSprite == nullptr)
+	{
+		return Rect(pos.x - Anchor.x*m_Width, pos.y - Anchor.y*m_Height, m_Width, m_Height);
+	}
+	else
+	{
+		return Rect(pos.x - Anchor.x*width, pos.y - Anchor.y*height, width, height);
+	}
 }
 
 cocos2d::Vec2 InteractiveObject::getVelocity() const
