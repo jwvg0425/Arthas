@@ -31,6 +31,9 @@
     <Filter Include="Classes\InteractiveObject\Missle">
       <UniqueIdentifier>{b757040d-808b-4ada-9bbb-34d9fccee41e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\InteractiveObject\Character\Monster">
+      <UniqueIdentifier>{51092c70-7f24-42ba-b2e3-7c61b9b7a398}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,11 +69,29 @@
     <ClCompile Include="..\Classes\LandBlock.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Monster.cpp">
-      <Filter>Classes\InteractiveObject\Character</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>Classes\InteractiveObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LinearMissile.cpp">
+      <Filter>Classes\InteractiveObject\Missle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Missile.cpp">
+      <Filter>Classes\InteractiveObject\Missle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Monster.cpp">
+      <Filter>Classes\InteractiveObject\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RushMonster.cpp">
+      <Filter>Classes\InteractiveObject\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Villager.cpp">
+      <Filter>Classes\InteractiveObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UILayer.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AimingMissile.cpp">
+      <Filter>Classes\InteractiveObject\Missle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,11 +128,29 @@
     <ClInclude Include="..\Classes\LandBlock.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Monster.h">
-      <Filter>Classes\InteractiveObject\Character</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>Classes\InteractiveObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LinearMissile.h">
+      <Filter>Classes\InteractiveObject\Missle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Missile.h">
+      <Filter>Classes\InteractiveObject\Missle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monster.h">
+      <Filter>Classes\InteractiveObject\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RushMonster.h">
+      <Filter>Classes\InteractiveObject\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Villager.h">
+      <Filter>Classes\InteractiveObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UILayer.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AimingMissile.h">
+      <Filter>Classes\InteractiveObject\Missle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

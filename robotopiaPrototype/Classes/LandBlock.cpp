@@ -10,7 +10,6 @@ bool LandBlock::init()
 	}
 
 	m_MainSprite = Sprite::createWithSpriteFrameName( "block.png" );
-	//m_MainSprite->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite , 10 );
 	m_PieceSprite = Sprite::createWithSpriteFrameName( "blockPiece.png" );
 	float bufferX = (m_PieceSprite->getContentSize().width - m_MainSprite->getContentSize().width)* 0.5;
