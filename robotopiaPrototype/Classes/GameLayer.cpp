@@ -5,9 +5,9 @@
 #include "Villager.h"
 #include "LinearMissile.h"
 #include "AimingMissile.h"
+#include "LandGateway.h"
 
 USING_NS_CC;
-
 
 bool GameLayer::init()
 {
@@ -23,14 +23,17 @@ bool GameLayer::init()
 
 	addMovingBackground();
 
-	//m_Player = (Player*)addObject( OT_PLAYER , Point(100 , 300));
-	m_InteractiveObjects.push_back( m_Player );
-
 	return true;
 }
 
 bool GameLayer::initWorldFromData( char* data )
 {
+	for( auto object : m_InteractiveObjects )
+	{
+		this->removeChild( object );
+	}
+	m_InteractiveObjects.clear();
+	m_Player = nullptr;
 	//월드 데이터를 본래는 리소스 메니저에게 키값을 넘겨서 받아와야 한다.
 	//받아야 하는 데이터들 BoxSize MapSize MapData(값)
 	UserDefault::getInstance()->setIntegerForKey( "mapWidth" , 48 );
@@ -116,6 +119,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_VILLAGER:
 			object = Villager::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+		case OT_GATEWAY:
+			object = LandGateway::create();
+			zOrder = GameLayer::ZOrder::LAND_OBJECT;
 			break;
 		default:
 			return nullptr;
@@ -247,6 +254,11 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point 
 		collectObjects.push_back( object );
 	}
 	return collectObjects;
+}
+
+void GameLayer::gotoNextWorld()
+{
+	initWorldFromData( MAPDATA2 );
 }
 
 
