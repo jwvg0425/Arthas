@@ -30,8 +30,26 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 	Directions collisionDir = DIR_NONE;
 
-	Rect myAfterRect = this->getRect();
-	Rect enemyAfterRect = enemy->getRect();
+	Rect myRect = this->getRect();
+	Rect enemyRect = enemy->getRect();
+
+	//이미 충돌이 일어난 경우 한 프레임 전으로 돌려서 해결한다.
+	if (!(myRect.origin.x + myRect.size.width <= enemyRect.origin.x ||
+		myRect.origin.y + myRect.size.height <= enemyRect.origin.y ||
+		myRect.origin.x >= enemyRect.origin.x + enemyRect.size.width ||
+		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
+	{
+		myRect.origin.x -= this->getVelocity().x*dTime;
+		enemyRect.origin.x -= enemy->getVelocity().x*dTime; 
+
+		myRect.origin.y -= this->getVelocity().y*dTime;
+		enemyRect.origin.y -= enemy->getVelocity().y*dTime;
+	}
+
+
+
+	Rect myAfterRect = myRect;
+	Rect enemyAfterRect = enemyRect;
 
 	myAfterRect.origin.x += this->getVelocity().x*dTime;
 	enemyAfterRect.origin.x += enemy->getVelocity().x*dTime;
@@ -41,19 +59,18 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 	enemyAfterRect.origin.y += enemy->getVelocity().y*dTime;
 
 
-
 	//일단 충돌이 일어나는지 여부부터 확인
 	if (myAfterRect.intersectsRect(enemyAfterRect))
 	{
 		//아래쪽 면 검사
-		float gap = this->getRect().origin.y - (enemy->getRect().origin.y + enemy->getRect().size.height);
+		float gap = myRect.origin.y - (enemyRect.origin.y + enemyRect.size.height);
 		float afterGap = myAfterRect.origin.y - (enemyAfterRect.origin.y + enemyAfterRect.size.height);
 
-		if (gap*afterGap < 0)
+		if (gap*afterGap <= 0 )
 		{
-			float length = abs(this->getRect().origin.y + this->getRect().size.height / 2
-				- (enemy->getRect().origin.y + enemy->getRect().size.height / 2))
-				- this->getRect().size.height / 2 - enemy->getRect().size.height / 2;
+			float length = abs(myRect.origin.y + myRect.size.height / 2
+				- (enemyRect.origin.y + enemyRect.size.height / 2))
+				- myRect.size.height / 2 - enemyRect.size.height / 2;
 
 			float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
 
@@ -67,14 +84,14 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		}
 
 		//위쪽 면 검사
-		gap = this->getRect().origin.y + this->getRect().size.height - enemy->getRect().origin.y;
+		gap = myRect.origin.y + myRect.size.height - enemyRect.origin.y;
 		afterGap = myAfterRect.origin.y + myAfterRect.size.height - enemyAfterRect.origin.y;
 
-		if (gap*afterGap < 0)
+		if (gap*afterGap <= 0)
 		{
-			float length = abs(this->getRect().origin.y + this->getRect().size.height / 2
-				- (enemy->getRect().origin.y + enemy->getRect().size.height / 2))
-				- this->getRect().size.height / 2 - enemy->getRect().size.height / 2;
+			float length = abs(myRect.origin.y + myRect.size.height / 2
+				- (enemyRect.origin.y + enemyRect.size.height / 2))
+				- myRect.size.height / 2 - enemyRect.size.height / 2;
 
 			float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
 
@@ -89,14 +106,14 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 		//왼쪽면
 
-		gap = this->getRect().origin.x - (enemy->getRect().origin.x + enemy->getRect().size.width);
+		gap = myRect.origin.x - (enemyRect.origin.x + enemyRect.size.width);
 		afterGap = myAfterRect.origin.x - (enemyAfterRect.origin.x + enemyAfterRect.size.width);
 
-		if (gap*afterGap < 0)
+		if (gap*afterGap <= 0)
 		{
-			float length = abs(this->getRect().origin.x + this->getRect().size.width / 2
-				- (enemy->getRect().origin.x + enemy->getRect().size.width / 2))
-				- this->getRect().size.width / 2 - enemy->getRect().size.width / 2;
+			float length = abs(myRect.origin.x + myRect.size.width / 2
+				- (enemyRect.origin.x + enemyRect.size.width / 2))
+				- myRect.size.width / 2 - enemyRect.size.width / 2;
 
 			float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
 
@@ -112,14 +129,14 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		//오른쪽 면
 
 
-		gap = this->getRect().origin.x + this->getRect().size.width - enemy->getRect().origin.x;
+		gap = myRect.origin.x + myRect.size.width - enemyRect.origin.x;
 		afterGap = myAfterRect.origin.x + myAfterRect.size.width - enemyAfterRect.origin.x;
 
-		if (gap*afterGap < 0)
+		if (gap*afterGap <= 0)
 		{
-			float length = abs(this->getRect().origin.x + this->getRect().size.width / 2
-				- (enemy->getRect().origin.x + enemy->getRect().size.width / 2))
-				- this->getRect().size.width / 2 - enemy->getRect().size.width / 2;
+			float length = abs(myRect.origin.x + myRect.size.width / 2
+				- (enemyRect.origin.x + enemyRect.size.width / 2))
+				- myRect.size.width / 2 - enemyRect.size.width / 2;
 
 			float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
 
@@ -149,60 +166,16 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			changePos.y = pos.y + vertTime*this->getVelocity().y;
 		}
 
-		if (collisionDir & DIR_LEFT &&this->getVelocity().x != 0)
+		if (vertTime == 0)
 		{
-			changePos.x += m_MoveSpeed * 0.0001;
+			collisionDir &= ~DIR_LEFT;
+			collisionDir &= ~DIR_RIGHT;
 		}
 
-		if (collisionDir & DIR_RIGHT && this->getVelocity().x != 0)
+		if (horzTime == 0)
 		{
-			changePos.x -= m_MoveSpeed * 0.0001;
-		}
-
-		if (collisionDir & DIR_DOWN && this->isOnGravity())
-		{
-			changePos.y += GRAVITY*0.0001;
-		}
-
-		if (collisionDir & DIR_DOWN || collisionDir & DIR_UP)
-		{
-			if (collisionDir & DIR_LEFT && changePos.y == pos.y)
-			{
-				collisionDir &= ~DIR_LEFT;
-			}
-
-			if (collisionDir & DIR_RIGHT && changePos.y == pos.y)
-			{
-				collisionDir &= ~DIR_RIGHT;
-			}
-		}
-
-		if (collisionDir & DIR_RIGHT || collisionDir & DIR_LEFT)
-		{
-			if (collisionDir & DIR_DOWN && changePos.x == pos.x)
-			{
-				collisionDir &= ~DIR_DOWN;
-			}
-			if (collisionDir & DIR_UP && changePos.x == pos.x)
-			{
-				collisionDir &= ~DIR_UP;
-			}
-		}
-		
-
-		if (this->getType() == OT_PLAYER)
-		{
-			CCLOG("dir : %d -> %d", rowDir, collisionDir);
-		}
-		
-		if (collisionDir & DIR_DOWN || collisionDir & DIR_UP)
-		{
-			changePos.x = pos.x;
-		}
-
-		if (collisionDir & DIR_RIGHT || collisionDir & DIR_LEFT)
-		{	
-			changePos.y = pos.y;
+			collisionDir &= ~DIR_UP;
+			collisionDir &= ~DIR_DOWN;
 		}
 
 		this->setPosition(changePos);

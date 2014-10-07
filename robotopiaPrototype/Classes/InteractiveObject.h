@@ -34,5 +34,4 @@ protected:
 	bool									m_IsFlying;
 	float									m_MoveSpeed;
 	bool									m_IsDestroyed;
-	Directions								m_PrevCollideDirections;
 };
