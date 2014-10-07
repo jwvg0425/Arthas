@@ -50,9 +50,60 @@ void AimingMissile::update(float dTime)
 {
 	Point pos = this->getPosition();
 
-	pos.x += m_Velocity.x;
-	pos.y += m_Velocity.y;
+	pos.x += m_Velocity.x * dTime;
+	pos.y += m_Velocity.y * dTime;
 
 	this->setPosition(pos);
+}
+
+void AimingMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
+{
+	m_IsPlayerMissile = IsPlayerMissile();
+
+	//case는 누구랑 부딪혔는지를 말함
+
+	switch (enemy->getType())
+	{
+	case OT_PLAYER:
+		if (!m_IsPlayerMissile)
+		{
+			//몬스터가 플레이어 맞춘 효과 넣고 
+			m_IsDestroyed = true;
+		}
+		break;
+	case OT_FLOOR:
+
+		m_IsDestroyed = true;
+		break;
+	case OT_BLOCK:
+
+		m_IsDestroyed = true;
+		break;
+	case OT_MISSILE:
+		break;
+	case OT_MONSTER:
+		if (m_IsPlayerMissile)
+		{
+
+			//플레이어가 몬스터 맞춘 효과 넣고
+			m_IsDestroyed = true;
+		}
+		break;
+	case OT_RUSH_MONSTER:
+		if (m_IsPlayerMissile)
+		{
+			//플레이어가 몬스터 맞춘 효과 넣고
+			m_IsDestroyed = true;
+		}
+		break;
+	case OT_VILLAGER:
+
+		m_IsDestroyed = true;
+		break;
+	default:
+		break;
+	}
+
+	return;
 }
 
