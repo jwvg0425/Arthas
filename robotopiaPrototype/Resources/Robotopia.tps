@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.2</string>
         <key>fileName</key>
-        <string>C:/Users/ozt/Desktop/ozt/git/robotopiaPrototype/Resources/Robotopia.tps</string>
+        <string>C:/Users/namhyeonuk/Desktop/남현욱/nhn next/개경프/git project/Arthas/robotopiaPrototype/Resources/Robotopia.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -222,6 +222,19 @@
             <filename>LinearMissile7.png</filename>
             <filename>LinearMissile8.png</filename>
             <filename>LinearMissile9.png</filename>
+            <filename>rushMonster_move1.png</filename>
+            <filename>rushMonster_move2.png</filename>
+            <filename>rushMonster_move3.png</filename>
+            <filename>rushMonster_move4.png</filename>
+            <filename>rushMonster_move5.png</filename>
+            <filename>rushMonster_rush1.png</filename>
+            <filename>rushMonster_rush2.png</filename>
+            <filename>rushMonster_rush3.png</filename>
+            <filename>rushMonster_rush4.png</filename>
+            <filename>rushMonster_stand1.png</filename>
+            <filename>rushMonster_stand2.png</filename>
+            <filename>rushMonster_stand3.png</filename>
+            <filename>rushMonster_stand4.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
