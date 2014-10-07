@@ -14,6 +14,5 @@ public:
 	CREATE_FUNC(LinearMissile);
 
 private:
-	float	m_Degree;
-	float	m_Vx, m_Vy;
+	
 };

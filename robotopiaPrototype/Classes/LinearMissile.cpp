@@ -81,6 +81,10 @@ void LinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 
 void LinearMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, float degree)
 {
+	if (velocity < 0)
+	{
+		m_MainSprite->setFlippedX(true);
+	}
 	m_Degree = degree;
 	m_Vx = cos(PIE / 180 * degree)*velocity;
 	m_Vy = sin(PIE / 180 * degree)*abs(velocity);

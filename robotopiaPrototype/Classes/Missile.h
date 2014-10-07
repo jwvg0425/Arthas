@@ -11,5 +11,7 @@ public:
 	ABSTRACT void	collisionOccured(InteractiveObject* enemy, Directions dir) = 0;
 	
 protected:
-	bool m_IsPlayerMissile;
+	bool    m_IsPlayerMissile;
+	float	m_Degree;
+	float	m_Vx, m_Vy;
 };
