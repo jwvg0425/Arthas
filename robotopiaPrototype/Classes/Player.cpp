@@ -1,4 +1,6 @@
 ﻿#include "Player.h"
+#include "GameLayer.h"
+#include "LinearMissile.h"
 
 USING_NS_CC;
 
@@ -168,6 +170,18 @@ void Player::endAnimation(cocos2d::Ref* sender)
 {
 	if (m_State == PS_ATTACK)
 	{
+		auto gameLayer = (GameLayer*)this->getParent();
+
+		auto object = (LinearMissile*)gameLayer->addObject(OT_LINEAR_MISSILE, this->getPosition());
+
+		if (m_IsRightDirection)
+		{	
+			object->setMoveAttribute(true, 200, 0);
+		}
+		else
+		{
+			object->setMoveAttribute(true, -200, 0);
+		}
 		changeState(PS_STAND);
 	}
 }

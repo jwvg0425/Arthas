@@ -4,7 +4,7 @@
 //
 //작성자 : 남현욱
 //
-
+#pragma once
 #include "InteractiveObject.h"
 
 class Monster : public InteractiveObject

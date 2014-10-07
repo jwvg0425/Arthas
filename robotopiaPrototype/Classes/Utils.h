@@ -12,7 +12,7 @@
 #define ABSTRACT virtual
 #define OVERRIDE virtual
 #define GRAVITY 980
-#define TAG_GAME_LAYER "GameLayer"
+#define TAG_GAME_LAYER 1
 
 enum ObjectType
 {
@@ -21,6 +21,7 @@ enum ObjectType
 	OT_FLOOR,
 	OT_BLOCK,
 	OT_MISSILE,
+	OT_LINEAR_MISSILE,
 	OT_MONSTER,
 	OT_RUSH_MONSTER,
 	OT_VILLAGER,

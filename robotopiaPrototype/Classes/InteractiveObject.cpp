@@ -166,7 +166,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			changePos.y += GRAVITY*0.0001;
 		}
 
-		if (collisionDir & DIR_DOWN)
+		if (collisionDir & DIR_DOWN || collisionDir & DIR_UP)
 		{
 			if (collisionDir & DIR_LEFT && changePos.y == pos.y)
 			{
@@ -184,6 +184,10 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			if (collisionDir & DIR_DOWN && changePos.x == pos.x)
 			{
 				collisionDir &= ~DIR_DOWN;
+			}
+			if (collisionDir & DIR_UP && changePos.x == pos.x)
+			{
+				collisionDir &= ~DIR_UP;
 			}
 		}
 

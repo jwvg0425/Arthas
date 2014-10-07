@@ -15,11 +15,12 @@ bool LinearMissile::init()
 	m_Type = OT_LINEAR_MISSILE;
 	
 	m_MainSprite = Sprite::create();
-	auto animation = UtilFunctions::createAnimation("LinearMissile0.png", 0, 10, 0.1);
+	auto animation = UtilFunctions::createAnimation("LinearMissile", 0, 10, 0.1);
 	m_Animations[0] = animation;
 	
 
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
+	this->addChild(m_MainSprite);
 
 	this->scheduleUpdate();
 	return true;
@@ -88,8 +89,8 @@ void LinearMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, flo
 void LinearMissile::update(float dTime)
 {
 	Point pos = this->getPosition();
-	pos.x = m_Vx;
-	pos.y = m_Vy;
+	pos.x += m_Vx*dTime;
+	pos.y += m_Vy*dTime;
 
 	this->setPosition(pos);
 }
