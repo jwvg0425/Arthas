@@ -6,6 +6,7 @@ class LandObject : public InteractiveObject
 {
 public:
 	OVERRIDE bool			init();
+	//OVERRIDE cocos2d::Rect	getRect();
 	virtual void			collisionOccured(InteractiveObject* enemy , Directions dir , OUT bool * isRemoving) {};
 	ObjectType				getType() const { return m_Type; };
 

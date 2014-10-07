@@ -10,10 +10,10 @@ bool LandFloor::init()
 	}
 
 	m_MainSprite = Sprite::createWithSpriteFrameName( "floor.png" );
-	m_MainSprite->setAnchorPoint( Point::ZERO );
+	this->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite, 10 );
 	m_PieceSprite = Sprite::createWithSpriteFrameName( "floorPiece.png" );
-	m_PieceSprite->setAnchorPoint( Point::ZERO );
+	this->setAnchorPoint( Point::ZERO );
 	this->addChild( m_PieceSprite , 0);
 
 	m_Type = OT_FLOOR;

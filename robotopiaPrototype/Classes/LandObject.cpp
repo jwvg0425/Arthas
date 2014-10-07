@@ -9,7 +9,9 @@ bool LandObject::init()
 		return false;
 	}
 	m_IsOnGravity = false;
-	m_PieceSprite = Sprite::create();
+	m_PieceSprite = nullptr;
 	return true;
 }
+
+
 

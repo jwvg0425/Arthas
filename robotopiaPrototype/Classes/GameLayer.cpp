@@ -7,6 +7,7 @@
 
 USING_NS_CC;
 
+
 bool GameLayer::init()
 {
 	if ( !Layer::init() )
@@ -84,23 +85,26 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_PLAYER:
 			object = Player::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
-			anchorPoint = Point(0.5f, 0.5f);
 			m_Player = ( Player* )object;
+			anchorPoint = Point( 0.5f , 0.5f );
+
 			break;
 		case OT_FLOOR:
 			object = LandFloor::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
-			anchorPoint = Point( 0.5f , 0.5f );
+			anchorPoint = Point::ZERO;
 			break;
 		case OT_BLOCK:
 			object = LandBlock::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
-			anchorPoint = Point( 0.5f , 0.5f );
+			anchorPoint = Point::ZERO;
+
 			break;
  		case OT_LINEAR_MISSILE:
 			object = LinearMissile::create();
  			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			anchorPoint = Point( 0.5f , 0.5f );
+
 			break;
 		case OT_MISSILE:
 			return nullptr;
@@ -110,6 +114,7 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = RushMonster::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			anchorPoint = Point( 0.5f , 0.5f );
+
 			break;
 		case OT_VILLAGER:
 			object = Villager::create();
@@ -119,7 +124,7 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		default:
 			return nullptr;
 	}
-	object->setAnchorPoint( anchorPoint );
+	object->setAnchorPoint( Point(0.5,0.5) );
 	object->setPosition( position );
 	m_InteractiveObjects.push_back( object );
 	this->addChild( object , zOrder );
