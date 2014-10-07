@@ -37,9 +37,9 @@ public:
 	OVERRIDE void					update(float dTime);
 	bool							initWorldFromData(char* data);
 
-	InteractiveObject*				addObject( ObjectType type , cocos2d::Point position );
-	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
-	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
+	void							addObject( ObjectType type , cocos2d::Point position );
+	void							addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
+	void							addObjectByMapdata( int xIdx , int yIdx );
 	void							addMovingBackground();
 
 	void							collisionCheck(float dTime);
@@ -48,8 +48,8 @@ public:
 	const Player*					getPlayer() {return m_Player; }
 	ObjectType						getMapData( cocos2d::Point position );
 	ObjectType						getMapData( int xIdx , int yIdx );
-	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point position ); //위치에 어떤 객체가 있는지를 리턴
-	cocos2d::Vec2					positionToIdxOfMapData( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
+	std::vector<InteractiveObject*>	getInformationByPosition( cocos2d::Point position ); //위치에 어떤 객체가 있는지를 리턴
+	cocos2d::Vec2					PositionToIdxOfMapData( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 
 	cocos2d::Rect					getMapRect() {return m_MapRect; }
 	cocos2d::Rect					getWinRect() {return m_WinRect; }

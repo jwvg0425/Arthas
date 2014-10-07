@@ -83,16 +83,16 @@ bool GameLayer::initWorldFromData( char* data )
 }
 
 //타입별 객체를 월드 위치좌표에 추가해준다.
-InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
+void GameLayer::addObject( ObjectType type , Point position )
 {
 	InteractiveObject* object;
 	GameLayer::ZOrder zOrder;
 	switch( type )
 	{
 		case OT_NONE:
-			return nullptr;
+			return;
 		case OT_PLAYER:
-			return nullptr;
+			return;
 		case OT_FLOOR:
 			object = LandFloor::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
@@ -106,9 +106,9 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 // 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 // 			break;
 		case OT_MISSILE:
-			return nullptr;
+			return;
 		case OT_MONSTER:
-			return nullptr;
+			return;
 		case OT_RUSH_MONSTER:
 			object = RushMonster::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
@@ -118,25 +118,23 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
 		default:
-			return nullptr;
+			return;
 	}
 	object->setPosition( position );
 	m_InteractiveObjects.push_back( object );
 	this->addChild( object , zOrder );
-	
-	return object;
 }
 
 //맵데이터를 보고 객체를 추가한다. 인덱스 활용
-InteractiveObject*	GameLayer::addObjectByMapdata( ObjectType type , int xIdx , int yIdx )
+void GameLayer::addObjectByMapdata( ObjectType type , int xIdx , int yIdx )
 {
-	return addObject( type , Point(xIdx*m_BoxSize.width , yIdx*m_BoxSize.height ));
+	addObject( type , Point(xIdx*m_BoxSize.width , yIdx*m_BoxSize.height ));
 }
 
 //맵데이터를 보고 객체를 추가한다. 인덱스만 받아도 충분
-InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
+void GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 {
-	return addObjectByMapdata( m_MapData[yIdx*m_BoxWidthNum + xIdx] , xIdx , yIdx );
+	addObjectByMapdata( m_MapData[yIdx*m_BoxWidthNum + xIdx] , xIdx , yIdx );
 }
 
 void GameLayer::update( float dTime )
@@ -212,7 +210,7 @@ void GameLayer::addMovingBackground()
 	}
 }
 
-cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
+cocos2d::Vec2 GameLayer::PositionToIdxOfMapData( cocos2d::Point position )
 {
 	Vec2 curPosIdx = Vec2(-1 , -1); 
 	if( m_MapRect.containsPoint( position ) )
@@ -231,12 +229,12 @@ ObjectType GameLayer::getMapData( int xIdx , int yIdx )
 
 ObjectType GameLayer::getMapData( cocos2d::Point position )
 {
-	int xIdx = positionToIdxOfMapData( position ).x;
-	int yIdx = positionToIdxOfMapData( position ).y;
+	int xIdx = PositionToIdxOfMapData( position ).x;
+	int yIdx = PositionToIdxOfMapData( position ).y;
 	return getMapData( xIdx , yIdx );
 }
 
-std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point position )
+std::vector<InteractiveObject*> GameLayer::getInformationByPosition( cocos2d::Point position )
 {
 	std::vector<InteractiveObject*> collectObjects;
 
