@@ -18,6 +18,12 @@ bool Player::init()
 	m_Animations[PS_ATTACK] = UtilFunctions::createAnimation("player_attack", 1, 5, 0.05f);
 	m_IsRightDirection = true;
 
+	m_MaxHp = 100;
+	m_Hp = m_MaxHp;
+
+	m_MaxSteam = 100;
+	m_Steam = m_MaxSteam;
+
 	for (int i = 0; i < PS_STATE_NUM; i++)
 	{
 		m_Animations[i]->retain();

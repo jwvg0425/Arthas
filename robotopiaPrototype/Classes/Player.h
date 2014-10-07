@@ -22,6 +22,8 @@ public:
 
 	int						getHp() const { return m_Hp; }
 	int						getSteam() const { return m_Steam; }
+	int						getMaxHp() const { return m_MaxHp; }
+	int						getMaxSteam() const { return m_MaxSteam; }
 private:
 	enum State
 	{
@@ -36,6 +38,8 @@ private:
 	bool		m_IsRightDirection;
 	int			m_Hp;
 	int			m_Steam;
+	int			m_MaxHp;
+	int			m_MaxSteam;
 
 	void		changeState(State state);
 	void		endAnimation(cocos2d::Ref* sender);
