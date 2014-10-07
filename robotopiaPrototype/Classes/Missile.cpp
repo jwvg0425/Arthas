@@ -9,7 +9,7 @@ bool Missile::init()
 	}
 
 	//타입 추가 되면 여기 활성화
-	//m_Type = OT_MISSILE;
+	m_Type = OT_MISSILE;
 
 
 	return true;
