@@ -8,7 +8,7 @@ class WorldScene : public cocos2d::Scene
 public:
 	static cocos2d::Scene*	createScene();
 	virtual bool			init();
-
+	GameLayer*				getGameLayer() {return m_GameLayer; }
 	CREATE_FUNC( WorldScene );
 
 private:

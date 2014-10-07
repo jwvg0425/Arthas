@@ -1,6 +1,10 @@
 #include "GameLayer.h"
 #include "LandFloor.h"
 #include "LandBlock.h"
+#include "RushMonster.h"
+#include "Villager.h"
+#include "LinearMissile.h"
+
 USING_NS_CC;
 
 Scene* GameLayer::createScene()
@@ -53,8 +57,8 @@ bool GameLayer::initWorldFromData( char* data )
 	char* rawValue;
 	char rawData[MAX_DATA_SIZE];
 
+	//rawData를 mapData로 파싱
 	strcpy( rawData , m_MapRawData.c_str() );
-
 	rawValue = strtok( rawData , " \n" );
 	int value;
 	for( int yIdx = m_BoxHeightNum - 1; yIdx >= 0; yIdx-- )
@@ -67,6 +71,7 @@ bool GameLayer::initWorldFromData( char* data )
 		}
 	}
 
+	//mapData에 입력된 객체들 트리에 추가
 	for( int yIdx = 0; yIdx < m_BoxHeightNum; yIdx++ )
 	{
 		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
@@ -77,26 +82,56 @@ bool GameLayer::initWorldFromData( char* data )
 	return true;
 }
 
-
-void GameLayer::addObjectByMapdata( ObjectType type , int xIdx , int yIdx )
+//타입별 객체를 월드 위치좌표에 추가해준다.
+void GameLayer::addObject( ObjectType type , Point position )
 {
-	if( type == ObjectType::OT_FLOOR )
+	InteractiveObject* object;
+	GameLayer::ZOrder zOrder;
+	switch( type )
 	{
-		auto floor = LandFloor::create();
-		floor->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
-		m_InteractiveObjects.push_back( floor );
-		this->addChild( floor , GameLayer::ZOrder::LAND_OBJECT );
+		case OT_NONE:
+			return;
+		case OT_PLAYER:
+			return;
+		case OT_FLOOR:
+			object = LandFloor::create();
+			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			break;
+		case OT_BLOCK:
+			object = LandBlock::create();
+			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			break;
+// 		case OT_LINEAR_MISSILE:
+// 			object = LinearMissile::create();
+// 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+// 			break;
+		case OT_MISSILE:
+			return;
+		case OT_MONSTER:
+			return;
+		case OT_RUSH_MONSTER:
+			object = RushMonster::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+		case OT_VILLAGER:
+			object = Villager::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+		default:
+			return;
 	}
-	if( type == ObjectType::OT_BLOCK )
-	{
-		auto block = LandBlock::create();
-		block->setPosition( Point( xIdx * m_BoxSize.width , yIdx * m_BoxSize.height ) );
-		m_InteractiveObjects.push_back( block );
-		this->addChild( block , GameLayer::ZOrder::LAND_OBJECT );
-	}
-
+	object->setPosition( position );
+	m_InteractiveObjects.push_back( object );
+	this->addChild( object , zOrder );
 }
 
+//맵데이터를 보고 객체를 추가한다. 인덱스 활용
+void GameLayer::addObjectByMapdata( ObjectType type , int xIdx , int yIdx )
+{
+	addObject( type , Point(xIdx*m_BoxSize.width , yIdx*m_BoxSize.height ));
+}
+
+//맵데이터를 보고 객체를 추가한다. 인덱스만 받아도 충분
 void GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 {
 	addObjectByMapdata( m_MapData[yIdx*m_BoxWidthNum + xIdx] , xIdx , yIdx );
@@ -168,8 +203,8 @@ void GameLayer::addMovingBackground()
 		for( int xIdx = 0; xIdx <= xSpriteNum; ++xIdx )
 		{
 			backgroundSprite = Sprite::createWithSpriteFrameName( "background.png" );
-			backgroundSprite->setPosition( xIdx*spriteSize.width, yIdx*spriteSize.height );
 			backgroundSprite->setAnchorPoint( Point::ZERO );
+			backgroundSprite->setPosition( xIdx*(spriteSize.width-10), yIdx*(spriteSize.height-10) );
 			this->addChild( backgroundSprite , GameLayer::ZOrder::BACKGROUND);
 		}
 	}
@@ -198,4 +233,17 @@ ObjectType GameLayer::getMapData( cocos2d::Point position )
 	int yIdx = PositionToIdxOfMapData( position ).y;
 	return getMapData( xIdx , yIdx );
 }
+
+std::vector<InteractiveObject*> GameLayer::getInformationByPosition( cocos2d::Point position )
+{
+	std::vector<InteractiveObject*> collectObjects;
+
+	for( auto object : m_InteractiveObjects )
+	{
+		object->getRect().containsPoint( position );
+		collectObjects.push_back( object );
+	}
+	return collectObjects;
+}
+
 
